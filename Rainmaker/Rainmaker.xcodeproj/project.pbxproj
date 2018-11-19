@@ -12,9 +12,12 @@
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
 		292D7454219F925400414217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D7452219F925400414217 /* LaunchScreen.storyboard */; };
+		3D31ACB4903358DBA23EE191 /* Pods_Rainmaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rainmaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20C0835644452D0E2B85263B /* Pods-Rainmaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.debug.xcconfig"; sourceTree = "<group>"; };
 		292D7446219F925000414217 /* Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rainmaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		292D7449219F925000414217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		292D744B219F925000414217 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		292D7450219F925400414217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		292D7453219F925400414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		292D7455219F925400414217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D31ACB4903358DBA23EE191 /* Pods_Rainmaker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04033486B90F883E556381FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		292D743D219F925000414217 = {
 			isa = PBXGroup;
 			children = (
 				292D7448219F925000414217 /* Rainmaker */,
 				292D7447219F925000414217 /* Products */,
+				AF212B8FA3C858DFB3D7A223 /* Pods */,
+				04033486B90F883E556381FF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +79,15 @@
 			path = Rainmaker;
 			sourceTree = "<group>";
 		};
+		AF212B8FA3C858DFB3D7A223 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20C0835644452D0E2B85263B /* Pods-Rainmaker.debug.xcconfig */,
+				AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 292D7458219F925400414217 /* Build configuration list for PBXNativeTarget "Rainmaker" */;
 			buildPhases = (
+				0DB2E4E3888DBDEBBEEE4299 /* [CP] Check Pods Manifest.lock */,
 				292D7442219F925000414217 /* Sources */,
 				292D7443219F925000414217 /* Frameworks */,
 				292D7444219F925000414217 /* Resources */,
+				22C76F1CA2A3FD92080E655A /* [CP] Embed Pods Frameworks */,
+				FB82810546E121F2C8926FB9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0DB2E4E3888DBDEBBEEE4299 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rainmaker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		22C76F1CA2A3FD92080E655A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB82810546E121F2C8926FB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		292D7442219F925000414217 /* Sources */ = {
@@ -280,6 +382,7 @@
 		};
 		292D7459219F925400414217 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C0835644452D0E2B85263B /* Pods-Rainmaker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +401,7 @@
 		};
 		292D745A219F925400414217 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
