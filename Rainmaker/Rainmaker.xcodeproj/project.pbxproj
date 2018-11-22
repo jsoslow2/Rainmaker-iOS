@@ -12,6 +12,7 @@
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
 		292D7454219F925400414217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D7452219F925400414217 /* LaunchScreen.storyboard */; };
+		29D73F4521A704C900C87EC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */; };
 		3D31ACB4903358DBA23EE191 /* Pods_Rainmaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		292D7450219F925400414217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		292D7453219F925400414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		292D7455219F925400414217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,13 +72,78 @@
 			isa = PBXGroup;
 			children = (
 				292D7449219F925000414217 /* AppDelegate.swift */,
-				292D744B219F925000414217 /* ViewController.swift */,
-				292D744D219F925000414217 /* Main.storyboard */,
+				29D73F4F21A7495100C87EC3 /* Controllers */,
+				29D73F4E21A7492400C87EC3 /* Views */,
+				29D73F4D21A7491C00C87EC3 /* Supporting Files */,
+				29D73F4C21A7491200C87EC3 /* Storyboards */,
+				29D73F4B21A7490400C87EC3 /* Services */,
+				29D73F4921A748EF00C87EC3 /* Helpers */,
+				29D73F4621A748AA00C87EC3 /* Models */,
+				29D73F4721A748B800C87EC3 /* Extensions */,
 				292D7450219F925400414217 /* Assets.xcassets */,
-				292D7452219F925400414217 /* LaunchScreen.storyboard */,
-				292D7455219F925400414217 /* Info.plist */,
 			);
 			path = Rainmaker;
+			sourceTree = "<group>";
+		};
+		29D73F4621A748AA00C87EC3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		29D73F4721A748B800C87EC3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		29D73F4921A748EF00C87EC3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		29D73F4B21A7490400C87EC3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		29D73F4C21A7491200C87EC3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				292D744D219F925000414217 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		29D73F4D21A7491C00C87EC3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				292D7455219F925400414217 /* Info.plist */,
+				29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29D73F4E21A7492400C87EC3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		29D73F4F21A7495100C87EC3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				292D744B219F925000414217 /* ViewController.swift */,
+				292D7452219F925400414217 /* LaunchScreen.storyboard */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		AF212B8FA3C858DFB3D7A223 /* Pods */ = {
@@ -150,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				292D7454219F925400414217 /* LaunchScreen.storyboard in Resources */,
+				29D73F4521A704C900C87EC3 /* GoogleService-Info.plist in Resources */,
 				292D7451219F925400414217 /* Assets.xcassets in Resources */,
 				292D744F219F925000414217 /* Main.storyboard in Resources */,
 			);
@@ -387,12 +455,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JHAXB5UV33;
-				INFOPLIST_FILE = Rainmaker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rainmaker/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jack-soslow.Rainmaker";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jsoslow.Rainmaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -406,12 +474,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JHAXB5UV33;
-				INFOPLIST_FILE = Rainmaker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Rainmaker/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jack-soslow.Rainmaker";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jsoslow.Rainmaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
