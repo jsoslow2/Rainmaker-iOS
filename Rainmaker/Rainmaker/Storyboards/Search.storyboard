@@ -45,6 +45,9 @@
                                                             <state key="normal">
                                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="firstBetButtonTapped:" destination="6cf-i8-2fk" eventType="touchUpInside" id="zGn-kj-Oca"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZu-jG-Nfr">
                                                             <rect key="frame" x="150" y="0.0" width="125" height="30"/>
@@ -52,6 +55,9 @@
                                                             <state key="normal">
                                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="secondBetButtonTapped:" destination="6cf-i8-2fk" eventType="touchUpInside" id="zQF-aD-yk2"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>

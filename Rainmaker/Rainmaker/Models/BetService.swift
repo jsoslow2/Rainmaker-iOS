@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 
 struct BetService {
     
@@ -30,6 +31,26 @@ struct BetService {
             
             completion(bets)
         }
+        
+    }
+    
+    static func bet(withBetKey: String, chosenBet: Int, completion: @escaping (Bool) -> Void) {
+        
+        //decrease your bet dollars
+        //post this bet on your profile feed
+        //post this bet on your friends feed
+        
+        //for now, post this on your home feed!!!
+        //let userID = Auth.auth().currentUser!.uid
+        let userID = "fakeUSERID"
+        let ref = Database.database().reference().child("HomeFeed").child(userID).child(withBetKey)
+        
+        var updatedData = [String: Any]()
+        
+        updatedData["chosenBet"] = chosenBet
+        updatedData["friendKey"] = userID
+        
+        ref.updateChildValues(updatedData)
         
     }
     

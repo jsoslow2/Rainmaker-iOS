@@ -26,7 +26,25 @@ class SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController: UITableViewDataSource {
+extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {
+    func didTapBetButton(which button: Int, on cell: SearchTableViewCell) {
+        
+        guard let bets = bets, let indexPath = self.tableView.indexPath(for: cell)
+            else { return }
+        
+        let bet = bets[indexPath.row]
+        
+        BetService.bet(withBetKey: bet.betKey!, chosenBet: button) { (bool) in
+            if !bool {
+                print("FAILED in updating bet feed in searchviewcontroller")
+            }
+        }
+            
+        
+    }
+    
+   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let bets = bets {
@@ -39,6 +57,8 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchViewCell")! as! SearchTableViewCell
+
+        cell.delegate = self
         
         guard let bets = bets else { return cell}
         
@@ -52,11 +72,5 @@ extension SearchViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
-    
-    
-    
-    
     
 }
