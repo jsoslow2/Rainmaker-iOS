@@ -17,11 +17,11 @@ typealias FIRUser = FirebaseAuth.User
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var signUpButton: UIButton!
     
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
-        signUpButton.layer.cornerRadius = 20
+        loginButton.layer.cornerRadius = 20
         super.viewDidLoad()
     }
     
@@ -29,8 +29,6 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func signUp(_ sender: Any) {
-    }
     
     @IBAction func logIn(_ sender: Any) {
         // 1
@@ -49,6 +47,11 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: FUIAuthDelegate {
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return false }
+    
+    
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         if let error = error {
             assertionFailure("Error signing in: \(error.localizedDescription)")
@@ -66,13 +69,25 @@ extension LoginViewController: FUIAuthDelegate {
         userRef.observeSingleEvent(of: .value, with: { (snapshot) in
             // 1
             if let user = User(snapshot: snapshot) {
-                print("Welcome back, \(user.username).")
+                User.setCurrent(user)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: .main)
+                if let initialViewController = storyboard.instantiateInitialViewController() {
+                    self.shouldPerformSegue(withIdentifier: "toCreateUsername", sender: self)
+                    self.view.window?.rootViewController = initialViewController
+                    self.view.window?.makeKeyAndVisible()
+                    print(initialViewController)
+                    
+                }
             } else {
-                print("New user!")
+                self.performSegue(withIdentifier: "toCreateUsername", sender: self)
             }
         })
         
         print("handle user signup / login")
+        
+        
     }
 }
+
 
