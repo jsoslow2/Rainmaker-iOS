@@ -34,12 +34,43 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         
         let bet = bets[indexPath.row]
         
-        BetService.bet(withBetKey: bet.betKey!, chosenBet: button) { (bool) in
-            if !bool {
-                print("FAILED in updating bet feed in searchviewcontroller")
-            }
-        }
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to place this bet?", preferredStyle: .alert)
+        
+        let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             
+            //if ok, you do the bet
+            BetService.bet(withBetKey: bet.betKey!, chosenBet: button) { (bool) in
+                if !bool {
+                    self.present(dialogMessage2, animated: true, completion: nil)
+                } else {
+                    print("bet successful!")
+                }
+            }
+            
+        })
+        
+        let ok2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            
+        })
+        
+        // Create Cancel button with action handlder
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+        }
+        
+        //Add OK and Cancel button to dialog message
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        dialogMessage2.addAction(ok2)
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+        
+        
+        
+        
         
     }
     

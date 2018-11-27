@@ -43,15 +43,54 @@ struct BetService {
         //for now, post this on your home feed!!!
         //let userID = Auth.auth().currentUser!.uid
         let userID = "fakeUSERID"
-        let ref = Database.database().reference().child("HomeFeed").child(userID).child(withBetKey)
+        let ref = Database.database().reference().child("HomeFeed").child(userID)
+      
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChild(withBetKey) {
+                //bet is already made
+                completion(false)
+            } else {
+                
+                var updatedData = [String: Any]()
+                
+                updatedData["chosenBet"] = chosenBet
+                updatedData["friendKey"] = userID
+                
+                ref.child(withBetKey).updateChildValues(updatedData)
+                completion(true)
+            }
+        }
+        
+        
+    }
+    
+    static func changeBetMoney(withAmount: Int, completion: @escaping(Bool) -> Void) {
+        
+        let userID = "fakeUSERID"
+        let ref = Database.database().reference().child("Users").child(userID)
         
         var updatedData = [String: Any]()
         
-        updatedData["chosenBet"] = chosenBet
-        updatedData["friendKey"] = userID
+        updatedData["currentMoney"] = withAmount
         
         ref.updateChildValues(updatedData)
         
+        
+    }
+    
+    static func getCurrentMoney(completion: @escaping(Int?) -> Void) {
+        let userID = "fakeUSERID"
+        let ref = Database.database().reference().child("Users").child(userID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+                let currentMoney = dict["currentMoney"] as? Int
+                else { completion(nil); return }
+            
+            completion(currentMoney)
+            
+        }
     }
     
     
