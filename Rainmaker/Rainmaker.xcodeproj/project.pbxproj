@@ -15,6 +15,10 @@
 		29D73F5321A83FCB00C87EC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */; };
 		29D73F5521A8472C00C87EC3 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D73F5421A8472C00C87EC3 /* Login.storyboard */; };
 		29D73F5921A9A4BB00C87EC3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F5821A9A4BB00C87EC3 /* User.swift */; };
+		29D73F5F21AC813100C87EC3 /* CreateUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */; };
+		29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6021AC8BB200C87EC3 /* UserService.swift */; };
+		29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6221ADE79D00C87EC3 /* Constants.swift */; };
+		29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */; };
 		3D31ACB4903358DBA23EE191 /* Pods_Rainmaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */; };
 		F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */; };
 		F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */; };
@@ -41,6 +45,10 @@
 		29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		29D73F5421A8472C00C87EC3 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		29D73F5821A9A4BB00C87EC3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUsernameViewController.swift; sourceTree = "<group>"; };
+		29D73F6021AC8BB200C87EC3 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		29D73F6221ADE79D00C87EC3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
 		AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.release.xcconfig"; sourceTree = "<group>"; };
 		F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +130,7 @@
 		29D73F4721A748B800C87EC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -136,7 +145,11 @@
 		29D73F4B21A7490400C87EC3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+
 				F0D7A9F321AB3C850069EF16 /* BetService.swift */,
+
+				29D73F6021AC8BB200C87EC3 /* UserService.swift */,
+
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -158,6 +171,7 @@
 			children = (
 				292D7455219F925400414217 /* Info.plist */,
 				29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */,
+				29D73F6221ADE79D00C87EC3 /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -175,9 +189,13 @@
 			isa = PBXGroup;
 			children = (
 				29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */,
+
 				F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */,
 				F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */,
 				F0D7A9E821AB0ED00069EF16 /* ProfileViewController.swift */,
+
+				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
+
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -351,6 +369,11 @@
 				F0D7A9F821AB40780069EF16 /* SearchTableViewCell.swift in Sources */,
 				29D73F5921A9A4BB00C87EC3 /* User.swift in Sources */,
 				29D73F5321A83FCB00C87EC3 /* LoginViewController.swift in Sources */,
+				29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */,
+				29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */,
+				292D744C219F925000414217 /* ViewController.swift in Sources */,
+				29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */,
+				29D73F5F21AC813100C87EC3 /* CreateUsernameViewController.swift in Sources */,
 				292D744A219F925000414217 /* AppDelegate.swift in Sources */,
 				F0D7A9F221AB35F80069EF16 /* Bet.swift in Sources */,
 				F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */,
