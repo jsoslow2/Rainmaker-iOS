@@ -12,6 +12,7 @@ import FirebaseAuth
 
 struct BetService {
     
+    //will be displayed in search tab
     static func getAvailableBets(completion: @escaping ([Bet]) -> Void) {
         
         let ref = Database.database().reference().root.child("Bets")
@@ -34,31 +35,61 @@ struct BetService {
         
     }
     
-    static func bet(withBetKey: String, chosenBet: Int, completion: @escaping (Bool) -> Void) {
+    static func bet(withBetKey: String, chosenBet: Int, withBetAmount: Int, completion: @escaping (Bool) -> Void) {
+        let userID = Auth.auth().currentUser!.uid
         
-        //decrease your bet dollars
         //post this bet on your profile feed
-        //post this bet on your friends feed
-        
-        //for now, post this on your home feed!!!
-        //let userID = Auth.auth().currentUser!.uid
-        let userID = "fakeUSERID"
-        let ref = Database.database().reference().child("HomeFeed").child(userID)
+        let ref = Database.database().reference().child("Profile").child(userID).child("currentBets")
       
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.hasChild(withBetKey) {
                 //bet is already made
                 completion(false)
+                return
             } else {
+                //increase your bet count
+                
+                let betCountRef = Database.database().reference().child("users").child(User.current.uid)
+                
+                User.numberOfBets = User.numberOfBets + 1
+                
+                var newNumberOfBets = [String : Int]()
+                newNumberOfBets["numberOfBets"] = User.numberOfBets
+                
+                betCountRef.updateChildValues(newNumberOfBets)
+                
+                //decrease your bet dollars
+                User.currentMoney = User.currentMoney - withBetAmount
+                
+                BetService.changeBetMoney(withAmount: User.currentMoney) { (bool) in
+                    if !bool {
+                        print("failed in changing bet money")
+                    }
+                }
                 
                 var updatedData = [String: Any]()
                 
                 updatedData["chosenBet"] = chosenBet
-                updatedData["friendKey"] = userID
+                updatedData["uidOfBettor"] = userID
+                updatedData["betAmount"] = withBetAmount
                 
                 ref.child(withBetKey).updateChildValues(updatedData)
-                completion(true)
+                
+                //post this bet on public feed
+                let ref2 = Database.database().reference().child("PublicHomeFeed")
+                ref2.observeSingleEvent(of: .value) { (snapshot) in
+                    
+                    var updatedData = [String: Any]()
+                    
+                    updatedData["chosenBet"] = chosenBet
+                    updatedData["uidOfBettor"] = userID
+                    updatedData["betAmount"] = withBetAmount
+                    
+                    ref2.child(withBetKey).updateChildValues(updatedData)
+                    completion(true)
+                    
+                }
             }
         }
         
@@ -67,8 +98,8 @@ struct BetService {
     
     static func changeBetMoney(withAmount: Int, completion: @escaping(Bool) -> Void) {
         
-        let userID = "fakeUSERID"
-        let ref = Database.database().reference().child("Users").child(userID)
+        let userID = Auth.auth().currentUser!.uid
+        let ref = Database.database().reference().child("users").child(userID)
         
         var updatedData = [String: Any]()
         
@@ -80,8 +111,8 @@ struct BetService {
     }
     
     static func getCurrentMoney(completion: @escaping(Int?) -> Void) {
-        let userID = "fakeUSERID"
-        let ref = Database.database().reference().child("Users").child(userID)
+        let userID = Auth.auth().currentUser!.uid
+        let ref = Database.database().reference().child("users").child(userID)
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String : Any],
@@ -90,6 +121,40 @@ struct BetService {
             
             completion(currentMoney)
             
+        }
+    }
+    
+    static func getUsersActiveBets(userID: String, completion: @escaping([ProfileBet]) -> Void) {
+        let profileRef = Database.database().reference().child("Profile").child(userID).child("currentBets")
+        
+        profileRef.observeSingleEvent(of: .value) { (snapshot) in
+            
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else {completion([]); return}
+            
+            let bets: [ProfileBet] = snapshot.reversed().compactMap {
+                guard let bet = ProfileBet(snapshot: $0)
+                    else {return nil}
+                
+                return bet
+            }
+            
+            completion(bets)
+            
+        }
+    }
+    
+    static func getInfoOfBet(betKey: String, completion: @escaping(String, String) -> Void) {
+        
+        let ref = Database.database().reference().child("Bets").child(betKey)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+                let betQuestion = dict["betQuestion"] as? String,
+                let typeOfGame = dict["typeOfGame"] as? String
+                else {completion("", ""); return}
+            
+            completion(betQuestion, typeOfGame)
         }
     }
     

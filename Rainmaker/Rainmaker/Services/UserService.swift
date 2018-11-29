@@ -24,7 +24,10 @@ struct UserService {
     }
     
     static func create(_ firUser: FIRUser, usernameText: String, completion: @escaping (User?) -> Void) {
-        let userAttrs = ["username": usernameText]
+        var userAttrs = [String : Any]()
+            
+        userAttrs["username"] = usernameText
+        userAttrs["currentMoney"] = 100
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
         ref.setValue(userAttrs) { (error, ref) in
@@ -38,5 +41,21 @@ struct UserService {
                 completion(user)
             })
         }
+        
+    }
+    
+    static func getNumberOfBets(userUID: String, completion: @escaping(Int) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+                let numberOfBets = dict["numberOfBets"] as? Int
+                else {completion(-1); return}
+            
+            completion(numberOfBets)
+            
+        }
+        
+        
     }
 }

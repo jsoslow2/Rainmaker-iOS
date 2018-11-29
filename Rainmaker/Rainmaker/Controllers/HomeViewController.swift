@@ -15,7 +15,25 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        BetService.getCurrentMoney { (money) in
+            if let money = money {
+                User.currentMoney = money
+            }
+        }
         
+        UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
+            User.numberOfBets = num
+        }
+        
+        //load profile info now 
+        BetService.getUsersActiveBets(userID: User.current.uid) { (bets) in
+            User.activeBets = bets
+        }
+        
+        UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
+            print(num)
+        }
+      
     }
     
 

@@ -64,4 +64,11 @@ class User: Codable {
         _current = user
     }
     
+    static var currentMoney: Int = -1
+    static var numberOfBets: Int = 0
+    
+    static var activeBets: [ProfileBet]?
+    
+    
+    
 }
