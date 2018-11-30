@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         }
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
-            print(num)
+            User.numberOfBets = num
         }
       
     }

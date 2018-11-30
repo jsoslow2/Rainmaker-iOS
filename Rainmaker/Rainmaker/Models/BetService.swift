@@ -124,6 +124,7 @@ struct BetService {
         }
     }
     
+    //profile
     static func getUsersActiveBets(userID: String, completion: @escaping([ProfileBet]) -> Void) {
         let profileRef = Database.database().reference().child("Profile").child(userID).child("currentBets")
         
