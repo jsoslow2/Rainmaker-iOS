@@ -116,7 +116,7 @@
         <scene sceneID="xJv-ng-u4i">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kh7-sV-mSt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="BxO-Ci-mWX"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="SearchOnClick" id="BxO-Ci-mWX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rt6-bs-eK2">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -137,4 +137,8 @@
             <point key="canvasLocation" x="316" y="-261.57635467980299"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SearchOnClick" width="24" height="24"/>
+        <image name="search" width="30" height="30"/>
+    </resources>
 </document>

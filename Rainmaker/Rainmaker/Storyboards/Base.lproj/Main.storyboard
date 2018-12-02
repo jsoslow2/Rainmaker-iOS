@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Leaderbords-->
         <scene sceneID="rDh-3U-RSW">
             <objects>
                 <viewController id="sic-1Y-B7i" sceneMemberID="viewController">
@@ -20,13 +20,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iCw-TL-9fE"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="ZKT-HB-XuH"/>
+                    <tabBarItem key="tabBarItem" title="Leaderbords" image="Leaderboards" id="ZKT-HB-XuH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAD-qb-Q7Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1121" y="-924"/>
         </scene>
-        <!--Item-->
+        <!--Notifications-->
         <scene sceneID="myr-Zo-Xll">
             <objects>
                 <viewController id="Dd9-gw-oZE" sceneMemberID="viewController">
@@ -36,7 +36,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tGr-RU-2pp"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="LMm-7z-QCA"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="bell" id="LMm-7z-QCA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yL5-pO-gda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,7 +52,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="oLh-Ee-eKW"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="mGk-mb-abV"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile" id="mGk-mb-abV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cp-T3-wz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -66,7 +66,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.35777854919433594" green="0.72812825441360474" blue="0.55316621065139771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.96606882442548359" green="0.98526729060913709" blue="0.97825125130025703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.42104446887969971" green="0.80018657445907593" blue="0.59861850738525391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="pcF-qo-9ff" kind="relationship" relationship="viewControllers" id="SVr-dL-tjn"/>
@@ -84,7 +85,7 @@
         <scene sceneID="Nt6-NJ-g2f">
             <objects>
                 <viewControllerPlaceholder storyboardName="HomeScreen" id="pcF-qo-9ff" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="U84-QT-SR4"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="homeOnClick" id="U84-QT-SR4"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6A-MU-bvF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,11 +95,20 @@
         <scene sceneID="GLt-Tt-g71">
             <objects>
                 <viewControllerPlaceholder storyboardName="Search" id="5oK-Sz-GwX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JkI-MX-CMH"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="SearchOnClick" id="JkI-MX-CMH"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7w-eb-pyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="316" y="-261"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Leaderboards" width="30" height="30"/>
+        <image name="Profile" width="30" height="30"/>
+        <image name="SearchOnClick" width="24" height="24"/>
+        <image name="bell" width="30" height="30"/>
+        <image name="home" width="30" height="30"/>
+        <image name="homeOnClick" width="24" height="24"/>
+        <image name="search" width="30" height="30"/>
+    </resources>
 </document>

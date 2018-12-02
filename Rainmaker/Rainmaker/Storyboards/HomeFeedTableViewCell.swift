@@ -23,6 +23,11 @@ class HomeFeedTableViewCell: UITableViewCell {
         // Initialization code
         leftButton.layer.cornerRadius = 10
         rightButton.layer.cornerRadius = 10
+        
+        //circular profile photo
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -36,7 +36,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         
         let bet = bets[indexPath.row]
         
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to place this bet?", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $10 on PENN?", preferredStyle: .alert)
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         
@@ -48,7 +48,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
                 if !bool {
                     self.present(dialogMessage2, animated: true, completion: nil)
                 } else {
-                    //print("bet successful!")
+                    
                 }
             }
             
