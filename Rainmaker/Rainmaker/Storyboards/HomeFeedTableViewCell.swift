@@ -16,12 +16,13 @@ class HomeFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var betTitle: UILabel!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
-    @IBOutlet weak var heartButton: UIButton!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        leftButton.layer.cornerRadius = 10
+        rightButton.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
