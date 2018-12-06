@@ -58,4 +58,19 @@ struct UserService {
         
         
     }
+    
+    static func getUsername(userUID: String, completion: @escaping(String) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+                let username = dict["username"] as? String
+                else {completion(""); return}
+            
+            completion(username)
+            
+        }
+        
+        
+    }
 }

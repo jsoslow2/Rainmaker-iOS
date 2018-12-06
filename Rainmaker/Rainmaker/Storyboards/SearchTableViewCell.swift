@@ -23,9 +23,14 @@ class SearchTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
         // Initialization code
         firstBetOption.layer.cornerRadius = 10
         secondBetOption.layer.cornerRadius = 10
+        
+        firstBetOption.backgroundColor = .clear
+        secondBetOption.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

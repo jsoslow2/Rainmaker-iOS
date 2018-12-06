@@ -12,16 +12,36 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
-    var bets = User.activeBets
+    var bets : [ProfileBet]?
     let userID = Auth.auth().currentUser!.uid
+    var username: String?
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var totalBetsLabel: UILabel!
+    @IBOutlet weak var totalMoney: UILabel!
+    @IBOutlet weak var profilePic: UIImageView!
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
+        
+        profilePic.layer.cornerRadius = profilePic.layer.bounds.height / 2
+        profilePic.clipsToBounds = true
+        
+        
+        let px = 1 / UIScreen.main.scale
+        let frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: px)
+        let line = UIView(frame: frame)
+        self.tableView.tableHeaderView = line
+        line.backgroundColor = self.tableView.separatorColor
+        
+       
         
         BetService.getCurrentMoney { (money) in
             if let money = money {
@@ -29,11 +49,22 @@ class ProfileViewController: UIViewController {
             }
         }
         
+        UserService.getUsername(userUID: userID) { (theName) in
+            self.username = theName
+
+            self.name.text = self.username
+        }
+        
+        totalBetsLabel.text = String(User.numberOfBets)
+        totalMoney.text = "$" + String(User.currentMoney)
+        
+        
+        
+        
+        
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
                 self.bets = allBets
                 self.tableView.reloadData()
-                print(allBets)
-                print(self.userID)
             }
         }
     
@@ -47,7 +78,6 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let bets = bets {
-            print(bets.count)
             return bets.count
         } else {
             return 0
@@ -63,11 +93,9 @@ extension ProfileViewController: UITableViewDataSource {
         let bet = bets[indexPath.row]
         
         cell.betQuestion.text = bet.betQuestion
-        cell.betAmount.text = String(bet.betAmount)
+        cell.betAmount.text = "$" + String(bet.betAmount)
         cell.typeOfGame.text = bet.typeOfGame
 
-        print(bet.betQuestion)
-        print(bet.typeOfGame)
         return cell
     }
     
