@@ -17,12 +17,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        BetService.getAvailableBets { (bets) in
-            self.bets = bets
+        BetService.getAvailableBets { (allBets) in
+            self.bets = allBets
             self.tableView.reloadData()
         }
         
-
     }
     
 
@@ -70,10 +69,6 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         // Present dialog message to user
         self.present(dialogMessage, animated: true, completion: nil)
         
-        
-        
-        
-        
     }
     
    
@@ -93,7 +88,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
 
         cell.delegate = self
         
-        guard let bets = bets else { return cell}
+        guard let bets = bets else {return cell}
         
         let bet = bets[indexPath.row]
         
@@ -103,6 +98,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         cell.secondBetOption.setTitle(bet.secondBetOption, for: .normal)
         cell.typeOfGame.text = bet.typeOfGame
         
+        print(bet)
         return cell
     }
     

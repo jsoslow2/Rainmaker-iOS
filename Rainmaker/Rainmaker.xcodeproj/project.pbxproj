@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29130C4721B835AF002E4B2D /* ProfileBetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */; };
+		29130C4921B83C68002E4B2D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C4821B83C68002E4B2D /* ProfileViewController.swift */; };
 		292D744A219F925000414217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292D7449219F925000414217 /* AppDelegate.swift */; };
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
@@ -23,7 +25,6 @@
 		F03B53D821AF259D00F5306D /* ProfileBet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B53D721AF259D00F5306D /* ProfileBet.swift */; };
 		F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */; };
 		F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */; };
-		F0D7A9E921AB0ED00069EF16 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E821AB0ED00069EF16 /* ProfileViewController.swift */; };
 		F0D7A9EC21AB109C0069EF16 /* HomeScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0D7A9EB21AB109C0069EF16 /* HomeScreen.storyboard */; };
 		F0D7A9EE21AB338D0069EF16 /* HomeFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9ED21AB338D0069EF16 /* HomeFeedTableViewCell.swift */; };
 		F0D7A9F021AB344C0069EF16 /* HomePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9EF21AB344C0069EF16 /* HomePost.swift */; };
@@ -36,6 +37,8 @@
 /* Begin PBXFileReference section */
 		1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rainmaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20C0835644452D0E2B85263B /* Pods-Rainmaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.debug.xcconfig"; sourceTree = "<group>"; };
+		29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBetTableViewCell.swift; sourceTree = "<group>"; };
+		29130C4821B83C68002E4B2D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		292D7446219F925000414217 /* Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rainmaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		292D7449219F925000414217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		292D744E219F925000414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,7 +57,6 @@
 		F03B53D721AF259D00F5306D /* ProfileBet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBet.swift; sourceTree = "<group>"; };
 		F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		F0D7A9E821AB0ED00069EF16 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F0D7A9EB21AB109C0069EF16 /* HomeScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeScreen.storyboard; sourceTree = "<group>"; };
 		F0D7A9ED21AB338D0069EF16 /* HomeFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeFeedTableViewCell.swift; path = Rainmaker/Storyboards/HomeFeedTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		F0D7A9EF21AB344C0069EF16 /* HomePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePost.swift; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 				29D73F4D21A7491C00C87EC3 /* Supporting Files */,
 				29D73F4C21A7491200C87EC3 /* Storyboards */,
 				29D73F4B21A7490400C87EC3 /* Services */,
-				29D73F4921A748EF00C87EC3 /* Helpers */,
 				29D73F4621A748AA00C87EC3 /* Models */,
 				29D73F4721A748B800C87EC3 /* Extensions */,
 				292D7450219F925400414217 /* Assets.xcassets */,
@@ -136,13 +137,6 @@
 				29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		29D73F4921A748EF00C87EC3 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		29D73F4B21A7490400C87EC3 /* Services */ = {
@@ -181,6 +175,7 @@
 			children = (
 				F0D7A9F721AB40780069EF16 /* SearchTableViewCell.swift */,
 				F0D7A9ED21AB338D0069EF16 /* HomeFeedTableViewCell.swift */,
+				29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,8 +186,8 @@
 				29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */,
 				F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */,
 				F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */,
-				F0D7A9E821AB0ED00069EF16 /* ProfileViewController.swift */,
 				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
+				29130C4821B83C68002E4B2D /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -360,12 +355,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0D7A9F021AB344C0069EF16 /* HomePost.swift in Sources */,
-				F0D7A9E921AB0ED00069EF16 /* ProfileViewController.swift in Sources */,
 				F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */,
 				F0D7A9EE21AB338D0069EF16 /* HomeFeedTableViewCell.swift in Sources */,
+				29130C4721B835AF002E4B2D /* ProfileBetTableViewCell.swift in Sources */,
 				F0D7A9F821AB40780069EF16 /* SearchTableViewCell.swift in Sources */,
 				29D73F5921A9A4BB00C87EC3 /* User.swift in Sources */,
 				29D73F5321A83FCB00C87EC3 /* LoginViewController.swift in Sources */,
+				29130C4921B83C68002E4B2D /* ProfileViewController.swift in Sources */,
 				F03B53D821AF259D00F5306D /* ProfileBet.swift in Sources */,
 				29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */,
 				29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */,

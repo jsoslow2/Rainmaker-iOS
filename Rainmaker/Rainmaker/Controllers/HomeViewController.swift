@@ -6,6 +6,9 @@
 //  Copyright © 2018 Jack Soslow. All rights reserved.
 //
 
+
+//TODO Redo Homepage
+
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -15,6 +18,7 @@ class HomeViewController: UIViewController {
     var viewWillAppearCount = 0
 
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +27,7 @@ class HomeViewController: UIViewController {
                 User.currentMoney = money
             }
         }
+        
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
             User.numberOfBets = num
@@ -33,10 +38,11 @@ class HomeViewController: UIViewController {
             User.activeBets = bets
         }
         
+        
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
             print(num)
         }
-      
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +102,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.betTitle.text = "Who will win the game?"
             cell.leftButton.setTitle("PENN", for: .normal)
             cell.rightButton.setTitle("PRINCETON", for: .normal)
+            cell.leftButton.backgroundColor = .green
             cell.subLabel.text = "Ivy League"
             
             let boldedName = attributedText(withString: "Jack Soslow bet the PENN", boldString: "Jack Soslow", font: UIFont.init(name: "Avenir Book", size: CGFloat.init(integerLiteral: 17))!)
@@ -145,6 +152,7 @@ extension HomeViewController: UITableViewDataSource {
             return cell
         }
 
+        print(cell)
         return cell;
     }
     

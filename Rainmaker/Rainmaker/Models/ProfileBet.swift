@@ -32,17 +32,12 @@ class ProfileBet {
         guard let dict = snapshot.value as? [String : Any],
             let betAmount = dict["betAmount"] as? Int,
             let chosenBet = dict["chosenBet"] as? Int,
-            let friendKey = dict["friendKey"] as? String
+            let friendKey = dict["uidOfBettor"] as? String
             else { return nil }
         self.betKey = snapshot.key
         self.chosenBet = chosenBet
         self.betAmount = betAmount
         self.uidOfBettor = friendKey
-        
-        BetService.getInfoOfBet(betKey: betKey) { (betQuestion, typeOfGame) in
-            self.betQuestion = betQuestion
-            self.typeOfGame = typeOfGame
-        }
         
     }
 }

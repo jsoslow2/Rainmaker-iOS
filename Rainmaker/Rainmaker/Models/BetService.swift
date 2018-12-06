@@ -17,6 +17,7 @@ struct BetService {
         
         let ref = Database.database().reference().root.child("Bets")
         
+        
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
                 else {
@@ -29,11 +30,11 @@ struct BetService {
                 
                 return bet
             }
-            
             completion(bets)
         }
-        
     }
+    
+    
     
     static func bet(withBetKey: String, chosenBet: Int, withBetAmount: Int, completion: @escaping (Bool) -> Void) {
         let userID = Auth.auth().currentUser!.uid
@@ -125,21 +126,33 @@ struct BetService {
     }
     
     static func getUsersActiveBets(userID: String, completion: @escaping([ProfileBet]) -> Void) {
+        let group = DispatchGroup()
         let profileRef = Database.database().reference().child("Profile").child(userID).child("currentBets")
-        
         profileRef.observeSingleEvent(of: .value) { (snapshot) in
             
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
                 else {completion([]); return}
+            print(snapshot)
             
-            let bets: [ProfileBet] = snapshot.reversed().compactMap {
-                guard let bet = ProfileBet(snapshot: $0)
-                    else {return nil}
-                
-                return bet
+
+            
+            var bets = [ProfileBet]()
+            for snap in snapshot {
+                let bet = ProfileBet(snapshot: snap)
+                group.enter()
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame) in
+                    bet?.betQuestion = betQuestion
+                    bet?.typeOfGame = typeOfGame
+                    group.leave()
+                })
+                bets.append(bet!)
             }
             
-            completion(bets)
+            group.notify(queue: .main, execute: {
+                completion(bets)
+            })
+            
+            
             
         }
     }
@@ -155,6 +168,20 @@ struct BetService {
                 else {completion("", ""); return}
             
             completion(betQuestion, typeOfGame)
+        }
+    }
+    
+    
+    static func getBetQuestion(betKey: String, completion: @escaping(String?) -> Void) {
+        let ref = Database.database().reference().child("Bets").child(betKey)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+                let betQuestion = dict["betQuestion"] as? String
+                else { completion(nil); return }
+            
+            completion(betQuestion)
+            
         }
     }
     

@@ -43,20 +43,68 @@
             <point key="canvasLocation" x="1121" y="-203"/>
         </scene>
         <!--Profile-->
-        <scene sceneID="dCn-Ci-fED">
+        <scene sceneID="DRo-cO-Cfh">
             <objects>
-                <viewController id="Io7-JC-l2V" customClass="ProfileViewController" customModule="Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f8J-pC-ANl">
+                <viewController id="8sB-cm-ZDr" customClass="ProfileViewController" customModule="Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XER-YG-yWT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Snh-oZ-c1C">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileBetCell" rowHeight="97" id="xG3-Z4-RDC" customClass="ProfileBetTableViewCell" customModule="Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="97"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xG3-Z4-RDC" id="Jkm-sX-6Bc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="96.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toJ-f6-fWp">
+                                                    <rect key="frame" x="29" y="11" width="174" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1m-PO-Rmx">
+                                                    <rect key="frame" x="29" y="56" width="156" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHO-Cs-oIt">
+                                                    <rect key="frame" x="318" y="11" width="42" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="betAmount" destination="eHO-Cs-oIt" id="04d-Dl-Rdo"/>
+                                            <outlet property="betQuestion" destination="i1m-PO-Rmx" id="XjH-6c-Q6i"/>
+                                            <outlet property="typeOfGame" destination="toJ-f6-fWp" id="00e-1X-exG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="oLh-Ee-eKW"/>
+                        <viewLayoutGuide key="safeArea" id="wEX-8A-joR"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="Profile" id="mGk-mb-abV"/>
+                    <navigationItem key="navigationItem" title="Profile" id="OwN-nS-LBR"/>
+                    <connections>
+                        <outlet property="tableView" destination="Snh-oZ-c1C" id="MAh-Ke-iju"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Cp-T3-wz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WYL-0p-HNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1882" y="-558"/>
+            <point key="canvasLocation" x="3068" y="-527.58620689655174"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Bmq-3h-pMD">
@@ -74,7 +122,7 @@
                         <segue destination="5oK-Sz-GwX" kind="relationship" relationship="viewControllers" id="7Cd-eV-gq4"/>
                         <segue destination="sic-1Y-B7i" kind="relationship" relationship="viewControllers" id="sSK-nv-SC1"/>
                         <segue destination="Dd9-gw-oZE" kind="relationship" relationship="viewControllers" id="kvz-6S-6gD"/>
-                        <segue destination="Io7-JC-l2V" kind="relationship" relationship="viewControllers" id="orr-Gj-qxd"/>
+                        <segue destination="8fT-2b-Sdt" kind="relationship" relationship="viewControllers" id="KeP-EQ-Uce"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3C-UW-eoq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -100,6 +148,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7w-eb-pyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="316" y="-261"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="cA6-bh-UR7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8fT-2b-Sdt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile" id="CKg-bQ-ugp"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OEU-OX-0Mu">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1843137255" green="0.78823529410000004" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8sB-cm-ZDr" kind="relationship" relationship="rootViewController" id="ZQx-F0-BkR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uOD-Xx-svG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2125.5999999999999" y="-527.58620689655174"/>
         </scene>
     </scenes>
     <resources>
