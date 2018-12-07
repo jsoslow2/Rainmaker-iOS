@@ -2,7 +2,7 @@
 //  SearchTableViewCell.swift
 //  Rainmaker
 //
-//  Created by Eugene Enclona on 25/11/2018.
+//  Created by Jack Soslow on 25/11/2018.
 //  Copyright © 2018 Jack Soslow. All rights reserved.
 //
 
@@ -24,14 +24,20 @@ class SearchTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
         // Initialization code
+        let mintGreen = (UIColor(red: 0.184, green: 0.788, blue: 0.588, alpha: 1.0))
+
         firstBetOption.layer.cornerRadius = 10
         secondBetOption.layer.cornerRadius = 10
         
-        firstBetOption.backgroundColor = .clear
-        secondBetOption.layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-    }
+//        firstBetOption.backgroundColor = .clear
+//        firstBetOption.layer.borderWidth = 1
+//        firstBetOption.layer.borderColor = mintGreen.cgColor
+//        
+//        secondBetOption.backgroundColor = .clear
+//        secondBetOption.layer.borderWidth = 1
+//        secondBetOption.layer.borderColor = mintGreen.cgColor
+           }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

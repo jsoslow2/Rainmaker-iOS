@@ -2,8 +2,7 @@
 //  HomeViewController.swift
 //  Rainmaker
 //
-//  Created by Eugene Enclona on 25/11/2018.
-//  Copyright © 2018 Jack Soslow. All rights reserved.
+//  Created by Jack Soslow on 25/11/2018.
 //
 
 
@@ -14,20 +13,20 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var homePosts: [HomePost]?
-    var hasBetOnSearch = false
-    var viewWillAppearCount = 0
+
 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self as? UITableViewDelegate
+        tableView.dataSource = self
         
         BetService.getCurrentMoney { (money) in
             if let money = money {
                 User.currentMoney = money
             }
         }
-        
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
             User.numberOfBets = num
@@ -43,129 +42,70 @@ class HomeViewController: UIViewController {
             print(num)
         }
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        viewWillAppearCount = viewWillAppearCount + 1
-        
-        if viewWillAppearCount == 2 {
-            hasBetOnSearch = true
-            
-            self.navigationItem.leftBarButtonItem?.title = "+$90"
-            tableView.reloadData()
-            
-          
+        //LOAD THE DATA
+        BetService.getHomeFeedBets { (homepost) in
+            self.homePosts = homepost
+            self.tableView.reloadData()
         }
+        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        homePosts = homePosts?.reversed()
         
-        return 5
-        
-        /*
-        if let homePosts = homePosts {
+        if let homePosts = homePosts?.reversed() {
             return homePosts.count
         } else {
             return 0
         }
-         */
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var row = indexPath.row
-        if hasBetOnSearch {
-            row = row - 1
-        }
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeFeedCell")! as! HomeFeedTableViewCell
+
+        guard let homePosts = homePosts else {return cell}
         
-        switch row {
-            
-        case -1:
-            cell.betTitle.text = "Who will win the game?"
-            cell.leftButton.setTitle("PENN", for: .normal)
-            cell.rightButton.setTitle("PRINCETON", for: .normal)
-            cell.leftButton.backgroundColor = .green
-            cell.subLabel.text = "Ivy League"
-            
-            let boldedName = attributedText(withString: "Jack Soslow bet the PENN", boldString: "Jack Soslow", font: UIFont.init(name: "Avenir Book", size: CGFloat.init(integerLiteral: 17))!)
-            
-            cell.topLabel.attributedText = boldedName
-            
-            cell.profilePicture.image = UIImage(named: "Jack")!
-            
-        case 0:
-            cell.betTitle.text = "Who will win the game?"
-            cell.leftButton.setTitle("Eagles", for: .normal)
-            cell.rightButton.setTitle("Giants", for: .normal)
-            cell.subLabel.text = "NFL - Eagles v Giants"
-            
-            let boldedName = attributedText(withString: "Andrew Ciatto bet the Eagles", boldString: "Andrew Ciatto", font: UIFont.init(name: "Avenir Book", size: CGFloat.init(integerLiteral: 17))!)
-            
-            cell.topLabel.attributedText = boldedName
-            
-            cell.profilePicture.image = UIImage(named: "Andrew")!
-            
-        case 1:
-            cell.betTitle.text = "Who will win the game?"
-            cell.leftButton.setTitle("Patriots", for: .normal)
-            cell.rightButton.setTitle("Jets", for: .normal)
-            cell.subLabel.text = "NFL - Patrios v Jets"
-            
-            let boldedName = attributedText(withString: "RJ Bora bet the Patriots", boldString: "RJ Bora", font: UIFont.init(name: "Avenir Book", size: CGFloat.init(integerLiteral: 17))!)
-            
-            cell.topLabel.attributedText = boldedName
-            
-            cell.profilePicture.image = UIImage(named: "RJ")!
-            
-        case 2:
-            cell.betTitle.text = "Who will win the game?"
-            cell.leftButton.setTitle("Indianapolis", for: .normal)
-            cell.rightButton.setTitle("Jacksonville", for: .normal)
-            cell.subLabel.text = "NFL - Indianapolis v Jacksonville"
-            
-            let boldedName = attributedText(withString: "Tej Singh bet the Jacksonville", boldString: "Tej Singh", font: UIFont.init(name: "Avenir Book", size: CGFloat.init(integerLiteral: 17))!)
-            
-            cell.topLabel.attributedText = boldedName
-            
-            cell.profilePicture.image = UIImage(named: "Tej")!
-            
-        default:
-            cell.isHidden = true
-            return cell
+        let post = homePosts[indexPath.row]
+        
+        
+        func chosenAnswer () -> String {
+            if (post.chosenBet == 0) {
+                return post.firstOption!
+            } else {
+                return post.secondOption!
+            }
         }
+        
+        let titleText = NSAttributedString(string: (post.username! + " bet " + chosenAnswer()))
+        let boldUsername  = post.username!
+        let boldAnswer = chosenAnswer()
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
+        let attributedUsername = NSMutableAttributedString(string:boldUsername, attributes:attrs)
+        let attributedAnswer = NSMutableAttributedString(string:boldAnswer, attributes:attrs)
+        
+        let normalText = " bet "
+        let normalString = NSMutableAttributedString(string:normalText)
+        
+        attributedUsername.append(normalString)
+        attributedUsername.append(attributedAnswer)
+        
+        
+        
+        
+        cell.topLabel.attributedText = attributedUsername
+        cell.subLabel.text = post.typeOfGame
+        cell.betTitle.text = post.betQuestion
+        cell.profilePicture.image = post.image
+        cell.leftButton.setTitle(post.firstOption, for: .normal)
+        cell.rightButton.setTitle(post.secondOption, for: .normal)
+        
+        
 
-        print(cell)
-        return cell;
+        return cell
     }
-    
-
-    //used for bolding some parts of string
-    func attributedText(withString string: String, boldString: String, font: UIFont) -> NSAttributedString {
-        let attributedString = NSMutableAttributedString(string: string,
-                                                         attributes: [NSAttributedString.Key.font: font])
-        let boldFontAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: font.pointSize)]
-        let range = (string as NSString).range(of: boldString)
-        attributedString.addAttributes(boldFontAttribute, range: range)
-        return attributedString
-    }
-    
-    
 }
+

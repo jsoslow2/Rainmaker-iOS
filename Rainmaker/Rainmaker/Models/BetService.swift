@@ -2,7 +2,7 @@
 //  BetService.swift
 //  Rainmaker
 //
-//  Created by Eugene Enclona on 25/11/2018.
+//  Created by Jack Soslow on 25/11/2018.
 //  Copyright © 2018 Jack Soslow. All rights reserved.
 //
 
@@ -140,7 +140,7 @@ struct BetService {
             for snap in snapshot {
                 let bet = ProfileBet(snapshot: snap)
                 group.enter()
-                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame) in
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption) in
                     bet?.betQuestion = betQuestion
                     bet?.typeOfGame = typeOfGame
                     group.leave()
@@ -152,38 +152,63 @@ struct BetService {
                 completion(bets)
             })
             
-            
-            
         }
     }
     
-    static func getInfoOfBet(betKey: String, completion: @escaping(String, String) -> Void) {
+    
+    static func getInfoOfBet(betKey: String, completion: @escaping(String, String, String, String) -> Void) {
         
         let ref = Database.database().reference().child("Bets").child(betKey)
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String : Any],
                 let betQuestion = dict["betQuestion"] as? String,
-                let typeOfGame = dict["typeOfGame"] as? String
-                else {completion("", ""); return}
+                let typeOfGame = dict["typeOfGame"] as? String,
+                let firstBetOption = dict["firstBetOption"] as? String,
+                let secondBetOption = dict["secondBetOption"] as? String
+                else {completion("", "", "", ""); return}
             
-            completion(betQuestion, typeOfGame)
+            completion(betQuestion, typeOfGame, firstBetOption, secondBetOption)
         }
     }
     
-    
-    static func getBetQuestion(betKey: String, completion: @escaping(String?) -> Void) {
-        let ref = Database.database().reference().child("Bets").child(betKey)
-        
-        ref.observeSingleEvent(of: .value) { (snapshot) in
-            guard let dict = snapshot.value as? [String : Any],
-                let betQuestion = dict["betQuestion"] as? String
-                else { completion(nil); return }
+    static func getHomeFeedBets(completion: @escaping([HomePost]) -> Void) {
+        let group = DispatchGroup()
+        let profileRef = Database.database().reference().child("PublicHomeFeed")
+        profileRef.observeSingleEvent(of: .value) { (snapshot) in
             
-            completion(betQuestion)
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else {completion([]); return}
+            print(snapshot)
+            
+            
+            
+            var bets = [HomePost]()
+            for snap in snapshot {
+                print(snap)
+                let bet = HomePost(snapshot: snap)
+                group.enter()
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption) in
+                    bet?.betQuestion = betQuestion
+                    bet?.typeOfGame = typeOfGame
+                    bet?.firstOption = firstBetOption
+                    bet?.secondOption = secondBetOption
+                    
+                    UserService.getUsername(userUID: bet!.UID , completion: { (username) in
+                            bet?.username = username
+                        group.leave()
+                    })
+                })
+                bets.append(bet!)
+            }
+            
+            group.notify(queue: .main, execute: {
+                completion(bets)
+            })
             
         }
     }
+    
     
     
 }

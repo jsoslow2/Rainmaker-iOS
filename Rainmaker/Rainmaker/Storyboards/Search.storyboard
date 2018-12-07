@@ -18,30 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="169" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-yW-8Bg">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-yW-8Bg">
                                 <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchViewCell" rowHeight="169" id="6cf-i8-2fk" customClass="SearchTableViewCell" customModule="Rainmaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="169"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchViewCell" rowHeight="141" id="6cf-i8-2fk" customClass="SearchTableViewCell" customModule="Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="141"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6cf-i8-2fk" id="ejf-f7-R7E">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="168.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-fm-fKX">
-                                                    <rect key="frame" x="167" y="53.666666666666664" width="41.333333333333343" height="23.333333333333336"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="qRa-kU-JmH">
-                                                    <rect key="frame" x="20" y="108.66666666666669" width="335" height="50"/>
+                                                    <rect key="frame" x="20" y="67" width="335" height="50"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRS-xn-Gce">
                                                             <rect key="frame" x="0.0" y="0.0" width="155" height="50"/>
-                                                            <color key="backgroundColor" red="0.86515177536736887" green="0.86515177536736887" blue="0.86515177536736887" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.94446649620000001" green="0.94446649620000001" blue="0.94446649620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="ecS-e3-No7"/>
                                                             </constraints>
@@ -56,7 +50,7 @@
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZu-jG-Nfr">
                                                             <rect key="frame" x="180" y="0.0" width="155" height="50"/>
-                                                            <color key="backgroundColor" red="0.86515177536736887" green="0.86515177536736887" blue="0.86515177536736887" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.94446649620000001" green="0.94446649620000001" blue="0.94446649620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                             <state key="normal">
                                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -70,22 +64,28 @@
                                                         <constraint firstItem="pZu-jG-Nfr" firstAttribute="width" secondItem="YRS-xn-Gce" secondAttribute="width" id="3RA-Qa-LRl"/>
                                                     </constraints>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBW-Od-Uc4">
-                                                    <rect key="frame" x="14.999999999999998" y="15.000000000000002" width="29.333333333333329" height="16.666666666666671"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-fm-fKX">
+                                                    <rect key="frame" x="20.000000000000004" y="21" width="35.333333333333343" height="19.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBW-Od-Uc4">
+                                                    <rect key="frame" x="20" y="42" width="29.333333333333329" height="17"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qRa-kU-JmH" firstAttribute="centerX" secondItem="ejf-f7-R7E" secondAttribute="centerX" id="1bs-eO-el2"/>
-                                                <constraint firstAttribute="bottom" secondItem="qRa-kU-JmH" secondAttribute="bottom" constant="10" id="Jy8-mk-ORG"/>
-                                                <constraint firstItem="6qG-fm-fKX" firstAttribute="centerX" secondItem="ejf-f7-R7E" secondAttribute="centerX" id="Xl5-Jo-cMD"/>
-                                                <constraint firstItem="dBW-Od-Uc4" firstAttribute="top" secondItem="ejf-f7-R7E" secondAttribute="top" constant="15" id="hRt-ql-no9"/>
+                                                <constraint firstItem="6qG-fm-fKX" firstAttribute="top" secondItem="ejf-f7-R7E" secondAttribute="topMargin" constant="10" id="5cA-XW-gvt"/>
+                                                <constraint firstItem="qRa-kU-JmH" firstAttribute="top" secondItem="dBW-Od-Uc4" secondAttribute="bottom" constant="13" id="5mH-hJ-3h6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="qRa-kU-JmH" secondAttribute="bottom" constant="13" id="C8K-iG-Uyt"/>
+                                                <constraint firstItem="qRa-kU-JmH" firstAttribute="leading" secondItem="dBW-Od-Uc4" secondAttribute="leading" id="Hta-UN-4ad"/>
+                                                <constraint firstItem="dBW-Od-Uc4" firstAttribute="top" secondItem="6qG-fm-fKX" secondAttribute="bottom" constant="5" id="aU3-d2-WN7"/>
+                                                <constraint firstItem="qRa-kU-JmH" firstAttribute="leading" secondItem="6qG-fm-fKX" secondAttribute="leading" id="dDD-77-w59"/>
                                                 <constraint firstAttribute="trailing" secondItem="qRa-kU-JmH" secondAttribute="trailing" constant="20" id="iZb-hb-qkn"/>
-                                                <constraint firstItem="6qG-fm-fKX" firstAttribute="top" secondItem="dBW-Od-Uc4" secondAttribute="bottom" constant="22.000000000000156" id="mdJ-ui-cgN"/>
                                                 <constraint firstItem="qRa-kU-JmH" firstAttribute="leading" secondItem="ejf-f7-R7E" secondAttribute="leading" constant="20" id="pSi-vq-5hF"/>
-                                                <constraint firstItem="dBW-Od-Uc4" firstAttribute="leading" secondItem="ejf-f7-R7E" secondAttribute="leading" constant="15" id="yZm-au-Ooi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

@@ -2,8 +2,7 @@
 //  SearchViewController.swift
 //  Rainmaker
 //
-//  Created by Eugene Enclona on 25/11/2018.
-//  Copyright © 2018 Jack Soslow. All rights reserved.
+//  Created by Jack Soslow on 25/11/2018.
 //
 
 import UIKit
@@ -23,8 +22,6 @@ class SearchViewController: UIViewController {
         }
         
     }
-    
-
 }
 
 extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {

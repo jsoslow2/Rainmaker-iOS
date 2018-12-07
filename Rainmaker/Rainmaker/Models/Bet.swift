@@ -2,7 +2,7 @@
 //  Bet.swift
 //  Rainmaker
 //
-//  Created by Eugene Enclona on 25/11/2018.
+//  Created by Jack Soslow on 25/11/2018.
 //  Copyright © 2018 Jack Soslow. All rights reserved.
 //
 
