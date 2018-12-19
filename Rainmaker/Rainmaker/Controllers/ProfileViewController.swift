@@ -67,18 +67,32 @@ class ProfileViewController: UIViewController {
                 self.bets = allBets
                 self.tableView.reloadData()
             }
+        
+        
         }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource {
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //cool table animation
+        animateTable()
+        
+        print("test")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let bets = bets {
+        bets = bets?.reversed()
+        
+        if let bets = bets?.reversed() {
             return bets.count
         } else {
             return 0
@@ -98,6 +112,25 @@ extension ProfileViewController: UITableViewDataSource {
         cell.typeOfGame.text = bet.typeOfGame
 
         return cell
+    }
+    
+    func animateTable() {
+        tableView.reloadData()
+        let cells = tableView.visibleCells
+        
+        let tableViewHeight = tableView.bounds.size.height
+        
+        for cell in cells {
+            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+        }
+        
+        var delayCounter = 0
+        for cell in cells {
+            UIView.animate(withDuration: 1.25, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
     }
     
 }

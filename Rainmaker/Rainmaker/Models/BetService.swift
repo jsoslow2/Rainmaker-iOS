@@ -132,7 +132,6 @@ struct BetService {
             
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
                 else {completion([]); return}
-            print(snapshot)
             
 
             
