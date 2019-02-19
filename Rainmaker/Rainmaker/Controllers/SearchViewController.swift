@@ -60,8 +60,14 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         
         //Add OK and Cancel button to dialog message
         dialogMessage.addAction(ok)
+        let rainmakerGreen = UIColor(displayP3Red: 0.184, green: 0.788, blue: 0.588, alpha: 1.0)
+        ok.setValue(rainmakerGreen, forKey: "titleTextColor")
         dialogMessage.addAction(cancel)
+        cancel.setValue(UIColor.gray, forKey: "titleTextColor")
+        
+        dialogMessage.preferredAction = ok
         dialogMessage2.addAction(ok2)
+        
         
         // Present dialog message to user
         self.present(dialogMessage, animated: true, completion: nil)
