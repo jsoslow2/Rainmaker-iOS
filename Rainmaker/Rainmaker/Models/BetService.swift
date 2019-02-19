@@ -78,7 +78,7 @@ struct BetService {
                 ref.child(withBetKey).updateChildValues(updatedData)
                 
                 //post this bet on public feed
-                let ref2 = Database.database().reference().child("PublicHomeFeed")
+                let ref2 = Database.database().reference().child("HomeFeed")
                 ref2.observeSingleEvent(of: .value) { (snapshot) in
                     
                     var updatedData = [String: Any]()
@@ -86,8 +86,11 @@ struct BetService {
                     updatedData["chosenBet"] = chosenBet
                     updatedData["uidOfBettor"] = userID
                     updatedData["betAmount"] = withBetAmount
+                    updatedData["betKey"] = withBetKey
                     
-                    ref2.child(withBetKey).updateChildValues(updatedData)
+                    var UIDBetCombo = String(userID) + String(withBetKey)
+                    
+                    ref2.child(UIDBetCombo).updateChildValues(updatedData)
                     completion(true)
                     
                 }
@@ -173,7 +176,7 @@ struct BetService {
     
     static func getHomeFeedBets(completion: @escaping([HomePost]) -> Void) {
         let group = DispatchGroup()
-        let profileRef = Database.database().reference().child("PublicHomeFeed")
+        let profileRef = Database.database().reference().child("HomeFeed")
         profileRef.observeSingleEvent(of: .value) { (snapshot) in
             
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]

@@ -57,9 +57,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        homePosts = homePosts?.reversed()
         
-        if let homePosts = homePosts?.reversed() {
+        if let homePosts = homePosts {
             return homePosts.count
         } else {
             return 0

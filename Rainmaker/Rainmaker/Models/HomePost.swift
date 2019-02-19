@@ -38,7 +38,7 @@ class HomePost {
         guard let dict = snapshot.value as? [String : Any],
             let chosenBet = dict["chosenBet"] as? Int,
             let UID = dict["uidOfBettor"] as? String,
-            let betKey = snapshot.key as? String
+            let betKey = dict["betKey"] as? String
             else { return nil }
         
         self.chosenBet = chosenBet
