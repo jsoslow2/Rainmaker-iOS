@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     
     var homePosts: [HomePost]?
 
-
+    @IBOutlet weak var moneyButton: UIBarButtonItem!
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -26,6 +27,8 @@ class HomeViewController: UIViewController {
             if let money = money {
                 User.currentMoney = money
             }
+            
+            self.moneyButton.title = "$" + String(User.currentMoney)
         }
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in

@@ -151,6 +151,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="moneyButton" destination="uHI-VE-EUN" id="e3v-Ew-ebF"/>
                         <outlet property="tableView" destination="Qda-Tl-V34" id="nsO-dZ-pNZ"/>
                     </connections>
                 </viewController>
