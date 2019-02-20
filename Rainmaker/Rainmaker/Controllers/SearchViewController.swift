@@ -32,12 +32,20 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         
         let bet = bets[indexPath.row]
         
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + bet.firstBetOption + " ?", preferredStyle: .alert)
+        func chosenOption () -> String {
+            if button == 0 {
+                return bet.firstBetOption
+            } else {
+                return bet.secondBetOption
+            }
+        }
+        
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + chosenOption() + " ?", preferredStyle: .alert)
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         
         // Create OK button with action handler
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+        let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
             
             //if ok, you do the bet
             BetService.bet(withBetKey: bet.betKey!, chosenBet: button, withBetAmount: 5) { (bool) in
@@ -83,7 +91,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         } else {
             return 0
         }
-        
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
