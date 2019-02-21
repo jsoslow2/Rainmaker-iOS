@@ -55,7 +55,66 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate {
+    
+    func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell) {
+                
+        guard let bets = homePosts, let indexPath = self.tableView.indexPath(for: cell)
+            else { return }
+        
+        let bet = bets[indexPath.row]
+        
+        func chosenOption () -> String {
+            if button == 0 {
+                return bet.firstOption!
+            } else {
+                return bet.secondOption!
+            }
+        }
+        
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + chosenOption() + " ?", preferredStyle: .alert)
+        
+        let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
+            
+            //if ok, you do the bet
+            BetService.bet(withBetKey: bet.betKey, chosenBet: button, withBetAmount: 5) { (bool) in
+                if !bool {
+                    self.present(dialogMessage2, animated: true, completion: nil)
+                } else {
+                    
+                }
+            }
+            
+        })
+        
+        let ok2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            
+        })
+        
+        // Create Cancel button with action handlder
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+        }
+        
+        //Add OK and Cancel button to dialog message
+        dialogMessage.addAction(ok)
+        let rainmakerGreen = UIColor(displayP3Red: 0.184, green: 0.788, blue: 0.588, alpha: 1.0)
+        ok.setValue(rainmakerGreen, forKey: "titleTextColor")
+        dialogMessage.addAction(cancel)
+        cancel.setValue(UIColor.gray, forKey: "titleTextColor")
+        
+        dialogMessage.preferredAction = ok
+        dialogMessage2.addAction(ok2)
+        
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let homePosts = homePosts {
@@ -68,6 +127,8 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeFeedCell")! as! HomeFeedTableViewCell
+        
+        cell.delegate = self
 
         guard let homePosts = homePosts else {return cell}
         

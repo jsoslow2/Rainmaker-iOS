@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HomeFeedTableViewCellDelegate : class {
+    func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell)
+}
+
 class HomeFeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profilePicture: UIImageView!
@@ -17,6 +21,7 @@ class HomeFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     
+    var delegate: HomeFeedTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,5 +40,20 @@ class HomeFeedTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
 
+    @IBAction func firstBetButtonTapped(_ sender: UIButton) {
+        delegate!.didTapBetButton(which: 0, on: self)
+       
+    }
+    
+    
+    @IBAction func secondBetButtonTapped(_ sender: UIButton) {
+        delegate!.didTapBetButton(which: 1, on: self)
+    }
+    
+    
+    
+    
+    
 }

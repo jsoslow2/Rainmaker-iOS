@@ -92,6 +92,9 @@
                                                             <state key="normal" title="Button">
                                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="firstBetButtonTapped:" destination="ZoO-0b-kUO" eventType="touchUpInside" id="Vfp-mE-NVU"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbl-j5-cdW">
                                                             <rect key="frame" x="180" y="0.0" width="155" height="50"/>
@@ -99,6 +102,9 @@
                                                             <state key="normal" title="Button">
                                                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="secondBetButtonTapped:" destination="ZoO-0b-kUO" eventType="touchUpInside" id="Z8P-lW-70m"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>

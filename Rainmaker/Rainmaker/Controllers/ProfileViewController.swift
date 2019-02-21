@@ -12,6 +12,9 @@ import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
+    
+    
+    
     var bets : [ProfileBet]?
     let userID = Auth.auth().currentUser!.uid
     var username: String?

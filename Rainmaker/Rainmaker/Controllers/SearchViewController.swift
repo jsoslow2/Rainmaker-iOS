@@ -27,6 +27,8 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {
     func didTapBetButton(which button: Int, on cell: SearchTableViewCell) {
         
+        print("boop")
+        
         guard let bets = bets, let indexPath = self.tableView.indexPath(for: cell)
             else { return }
         
