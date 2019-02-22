@@ -153,6 +153,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="bRg-s5-Snu">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="Hi9-OD-mkS" kind="show" id="7N2-ob-esa"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -164,6 +167,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNL-db-cQA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1212" y="-88.669950738916256"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Vaz-QK-x1j">
+            <objects>
+                <viewController id="Hi9-OD-mkS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9yB-wu-Wsm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gnF-Ws-udg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GqX-3w-JX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2256.8000000000002" y="-89.408866995073893"/>
         </scene>
         <!--Home-->
         <scene sceneID="yjJ-B4-7bR">

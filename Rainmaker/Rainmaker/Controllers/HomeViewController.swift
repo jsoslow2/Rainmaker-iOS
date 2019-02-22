@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate {
     
     func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell) {
-                
+        
         guard let bets = homePosts, let indexPath = self.tableView.indexPath(for: cell)
             else { return }
         
