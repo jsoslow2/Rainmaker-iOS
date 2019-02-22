@@ -28,6 +28,7 @@ struct BetService {
                 guard let bet = Bet(snapshot: $0)
                     else {return nil}
                 
+                dump(bet)
                 return bet
             }
             completion(bets)
@@ -142,9 +143,11 @@ struct BetService {
             for snap in snapshot {
                 let bet = ProfileBet(snapshot: snap)
                 group.enter()
-                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption) in
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer) in
                     bet?.betQuestion = betQuestion
                     bet?.typeOfGame = typeOfGame
+                    bet?.isActive = isActive
+                    bet?.rightAnswer = rightAnswer
                     group.leave()
                 })
                 bets.append(bet!)
@@ -158,7 +161,7 @@ struct BetService {
     }
     
     
-    static func getInfoOfBet(betKey: String, completion: @escaping(String, String, String, String) -> Void) {
+    static func getInfoOfBet(betKey: String, completion: @escaping(String, String, String, String, Int, Int) -> Void) {
         
         let ref = Database.database().reference().child("Bets").child(betKey)
         
@@ -167,10 +170,12 @@ struct BetService {
                 let betQuestion = dict["betQuestion"] as? String,
                 let typeOfGame = dict["typeOfGame"] as? String,
                 let firstBetOption = dict["firstBetOption"] as? String,
-                let secondBetOption = dict["secondBetOption"] as? String
-                else {completion("", "", "", ""); return}
+                let secondBetOption = dict["secondBetOption"] as? String,
+                let isActive = dict["isActive"] as? Int,
+                let rightAnswer = dict["rightAnswer"] as? Int
+                else {completion("", "", "", "", 0, 0); return}
             
-            completion(betQuestion, typeOfGame, firstBetOption, secondBetOption)
+            completion(betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer)
         }
     }
     
@@ -190,11 +195,13 @@ struct BetService {
                 print(snap)
                 let bet = HomePost(snapshot: snap)
                 group.enter()
-                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption) in
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer) in
                     bet?.betQuestion = betQuestion
                     bet?.typeOfGame = typeOfGame
                     bet?.firstOption = firstBetOption
                     bet?.secondOption = secondBetOption
+                    bet?.isActive = isActive
+                    bet?.rightAnswer = rightAnswer
                     
                     UserService.getUsername(userUID: bet!.UID , completion: { (username) in
                             bet?.username = username

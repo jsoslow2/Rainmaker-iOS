@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //allocate delegate and datasource
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
@@ -113,6 +114,17 @@ extension ProfileViewController: UITableViewDataSource {
         cell.betQuestion.text = bet.betQuestion
         cell.betAmount.text = "$" + String(bet.betAmount)
         cell.typeOfGame.text = bet.typeOfGame
+        
+        if bet.rightAnswer == bet.chosenBet {
+            cell.winLoss.text = "W"
+        } else if bet.isActive == 1 {
+            cell.winLoss.text = "NA"
+            cell.winLoss.textColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+        } else {
+            cell.winLoss.text = "L"
+            cell.winLoss.textColor = #colorLiteral(red: 1, green: 0.356, blue: 0.192, alpha: 1)
+        }
+        
 
         return cell
     }

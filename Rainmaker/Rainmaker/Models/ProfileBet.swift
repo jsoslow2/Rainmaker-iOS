@@ -17,6 +17,8 @@ class ProfileBet {
     var chosenBet: Int
     var betAmount: Int
     var uidOfBettor: String
+    var isActive : Int?
+    var rightAnswer : Int?
     
     init(betKey: String, typeOfGame: String, betQuestion: String, chosenBet: Int, betAmount: Int, uidOfBettor: String) {
         self.betKey = betKey

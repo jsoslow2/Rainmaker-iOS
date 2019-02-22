@@ -16,13 +16,16 @@ class Bet {
     var betQuestion: String
     var firstBetOption: String
     var secondBetOption: String
+    var isActive : Int
+    var rightAnswer : Int
     
-    init(typeOfGame: String, betQuestion: String, firstBetOption: String, secondBetOption: String) {
+    init(typeOfGame: String, betQuestion: String, firstBetOption: String, secondBetOption: String, isActive : Int, rightAnswer : Int) {
         self.typeOfGame = typeOfGame
         self.betQuestion = betQuestion
         self.firstBetOption = firstBetOption
         self.secondBetOption = secondBetOption
-        
+        self.isActive = isActive
+        self.rightAnswer = rightAnswer
     }
     
     init?(snapshot: DataSnapshot) {
@@ -30,7 +33,9 @@ class Bet {
             let typeOfGame = dict["typeOfGame"] as? String,
             let betQuestion = dict["betQuestion"] as? String,
             let firstBetOption = dict["firstBetOption"] as? String,
-            let secondBetOption = dict["secondBetOption"] as? String
+            let secondBetOption = dict["secondBetOption"] as? String,
+            let isActive = dict["isActive"] as? Int,
+            let rightAnswer = dict["rightAnswer"] as? Int
             else { return nil }
         
         self.betKey = snapshot.key
@@ -38,7 +43,8 @@ class Bet {
         self.betQuestion = betQuestion
         self.firstBetOption = firstBetOption
         self.secondBetOption = secondBetOption
-        
+        self.isActive = isActive
+        self.rightAnswer = rightAnswer
     }
     
 }

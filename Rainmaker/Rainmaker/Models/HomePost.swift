@@ -21,6 +21,8 @@ class HomePost {
     var username: String?
     var firstOption: String?
     var secondOption: String?
+    var isActive : Int?
+    var rightAnswer : Int?
     
     init(chosenBet: Int, betKey: String, image: UIImage, betQuestion: String?, typeOfGame: String?, UID: String, username: String, firstOption: String, secondOption: String) {
         self.chosenBet = chosenBet

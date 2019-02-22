@@ -14,6 +14,7 @@ class ProfileBetTableViewCell: UITableViewCell {
     @IBOutlet weak var typeOfGame: UILabel!
     @IBOutlet weak var betQuestion: UILabel!
     @IBOutlet weak var betAmount: UILabel!
+    @IBOutlet weak var winLoss: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
