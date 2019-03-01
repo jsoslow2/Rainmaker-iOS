@@ -10,6 +10,33 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Other User Profile View Controller-->
+        <scene sceneID="WZQ-KV-MIT">
+            <objects>
+                <viewController id="xFY-Le-zhK" customClass="OtherUserProfileViewController" customModule="Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e4J-qp-gFB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF1-Xj-7zH">
+                                <rect key="frame" x="16" y="255" width="357" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Ax1-Uw-i92"/>
+                    </view>
+                    <connections>
+                        <outlet property="testLabel" destination="wF1-Xj-7zH" id="caR-kh-oRE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="71g-8A-Kbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1212" y="-770.68965517241384"/>
+        </scene>
         <!--Rainmaker-->
         <scene sceneID="uQ1-FJ-IbH">
             <objects>
@@ -33,7 +60,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7oZ-CR-1kf">
                                                     <rect key="frame" x="20" y="16" width="335" height="50"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qMo-a7-UwM">
+                                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qMo-a7-UwM">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="qMo-a7-UwM" secondAttribute="height" multiplier="1:1" id="Pmf-Ii-eU6"/>
@@ -43,7 +70,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fEc-oj-F5O">
                                                             <rect key="frame" x="60" y="0.0" width="275" height="50"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVm-2f-eFg">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVm-2f-eFg">
                                                                     <rect key="frame" x="0.0" y="0.0" width="275" height="32.333333333333336"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                     <nil key="textColor"/>
@@ -162,6 +189,7 @@
                     <connections>
                         <outlet property="moneyButton" destination="uHI-VE-EUN" id="e3v-Ew-ebF"/>
                         <outlet property="tableView" destination="Qda-Tl-V34" id="nsO-dZ-pNZ"/>
+                        <segue destination="xFY-Le-zhK" kind="show" identifier="toOtherUserProfile" id="gyD-Oh-DUO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNL-db-cQA" userLabel="First Responder" sceneMemberID="firstResponder"/>

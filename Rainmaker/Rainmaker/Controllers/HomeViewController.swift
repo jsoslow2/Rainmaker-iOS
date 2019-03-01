@@ -13,6 +13,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var homePosts: [HomePost]?
+    var passingUID: String?
 
     @IBOutlet weak var moneyButton: UIBarButtonItem!
     
@@ -55,7 +56,8 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate {
+extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate, UIGestureRecognizerDelegate {
+    
     
     func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell) {
         
@@ -143,6 +145,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
             }
         }
         
+        
+        
+        
         let titleText = NSAttributedString(string: (post.username! + " bet " + chosenAnswer()))
         let boldUsername  = post.username!
         let boldAnswer = chosenAnswer()
@@ -156,7 +161,8 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         attributedUsername.append(normalString)
         attributedUsername.append(attributedAnswer)
         
-        
+        cell.betKey = post.betKey
+        cell.userID = post.UID
         
         
         cell.topLabel.attributedText = attributedUsername
@@ -170,5 +176,24 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
 
         return cell
     }
+    
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // get a reference to the second view controller
+        let destinationVC = segue.destination as! OtherUserProfileViewController
+        
+        // set a variable in the second view controller with the data to pass
+         destinationVC.testText = passingUID!
+    }
+    
+    @objc func goToProfile(on cell: HomeFeedTableViewCell) {
+        // Segue to the second view controller
+        passingUID = cell.userID
+        self.performSegue(withIdentifier: "toOtherUserProfile", sender: self)
+    }
+    
+
+    
 }
 

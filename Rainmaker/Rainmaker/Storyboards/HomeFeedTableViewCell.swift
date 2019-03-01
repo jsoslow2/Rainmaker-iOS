@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeFeedTableViewCellDelegate : class {
     func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell)
+    func goToProfile(on cell: HomeFeedTableViewCell)
 }
 
 class HomeFeedTableViewCell: UITableViewCell {
@@ -20,6 +21,8 @@ class HomeFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var betTitle: UILabel!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
+    var betKey: String?
+    var userID: String?
     
     var delegate: HomeFeedTableViewCellDelegate?
     
@@ -33,12 +36,21 @@ class HomeFeedTableViewCell: UITableViewCell {
         profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
         profilePicture.clipsToBounds = true
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(HomeFeedTableViewCell.goToProfile(sender:)))
+        addGestureRecognizer(tapGesture)
+        
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @objc func goToProfile(sender: UITapGestureRecognizer) {
+        delegate?.goToProfile(on: self)
     }
     
 
@@ -51,8 +63,6 @@ class HomeFeedTableViewCell: UITableViewCell {
     @IBAction func secondBetButtonTapped(_ sender: UIButton) {
         delegate!.didTapBetButton(which: 1, on: self)
     }
-    
-    
     
     
     
