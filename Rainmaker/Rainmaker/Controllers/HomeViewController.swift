@@ -184,7 +184,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         let destinationVC = segue.destination as! OtherUserProfileViewController
         
         // set a variable in the second view controller with the data to pass
-         destinationVC.testText = passingUID!
+         destinationVC.transferText = passingUID!
     }
     
     @objc func goToProfile(on cell: HomeFeedTableViewCell) {
