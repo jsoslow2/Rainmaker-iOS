@@ -70,7 +70,52 @@ struct UserService {
             completion(username)
             
         }
-        
-        
     }
+    
+    static func getBets(userUID: String, completion: @escaping(Int) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+            let numberOfBets = dict["numberOfBets"] as? Int
+                else {completion(0); return}
+            
+            completion(numberOfBets) 
+        }
+    }
+    
+    static func getMoney(userUID: String, completion: @escaping(Int) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String : Any],
+                let currentMoney = dict["currentMoney"] as? Int
+                else {completion(0); return}
+            
+            completion(currentMoney)
+        }
+    }
+    
+    
+    
+    static func getAllUsers(completion: @escaping([String]) -> Void) {
+        let ref = Database.database().reference().child("users")
+        
+        var allUsernames : [String] = []
+        
+        
+
+            ref.observeSingleEvent(of: .value) { (snapshot) in
+                
+                for snap in snapshot.children.allObjects {
+                    let i = snap as? DataSnapshot
+                    let dict = i?.value as? [String: Any]
+                    let username = dict?["username"] as? String
+                    allUsernames.append(username!)
+                }
+                completion(allUsernames)
+            }
+        }
 }
+
+

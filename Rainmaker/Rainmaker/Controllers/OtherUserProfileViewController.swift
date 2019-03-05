@@ -50,9 +50,15 @@ class OtherUserProfileViewController: UIViewController {
             self.username.text = theName
         }))
         
-        //set the total bets and current money labels
-        ///TODO
+        //set the total bets
+        UserService.getBets(userUID: userID) { (totalBets) in
+            self.totalBetsLabel.text = String(totalBets)
+        }
         
+        //set the current money
+        UserService.getMoney(userUID: userID) { (currentMoney) in
+            self.totalMoney.text = "$" + String(currentMoney)
+        }
         
         //Load the Data
         BetService.getUsersActiveBets(userID: userID) { (allBets) in

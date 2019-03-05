@@ -32,6 +32,10 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserService.getAllUsers { (boop) in
+            print("")
+        }
+        
         //allocate delegate and datasource
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self

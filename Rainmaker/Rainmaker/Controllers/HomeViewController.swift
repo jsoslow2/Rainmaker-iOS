@@ -180,11 +180,15 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
     // This function is called before the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // get a reference to the second view controller
-        let destinationVC = segue.destination as! OtherUserProfileViewController
         
-        // set a variable in the second view controller with the data to pass
-         destinationVC.transferText = passingUID!
+        if segue.identifier == "toOtherUserProfile" {
+            let destinationVC = segue.destination as! OtherUserProfileViewController
+            
+            // set a variable in the second view controller with the data to pass
+            destinationVC.transferText = passingUID!
+        }
+
+
     }
     
     @objc func goToProfile(on cell: HomeFeedTableViewCell) {
