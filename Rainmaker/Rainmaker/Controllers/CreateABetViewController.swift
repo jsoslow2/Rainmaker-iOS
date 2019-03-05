@@ -16,8 +16,9 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var searchActive = false
-    var usernames : [String] = []
     var filtered : [String] = []
+    var usernames : [String] = []
+    var allUsers : [UsableUser] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +28,13 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.delegate = self as UISearchBarDelegate
         
         
-        UserService.getAllUsers { (allUsers) in
-            self.usernames = allUsers
+        UserService.getAllUsersData { (allUsers) in
+            self.allUsers = allUsers
             self.tableView.reloadData()
-            print(self.usernames)
+            print(self.allUsers)
         }
         
-        
+
     }
     
     
@@ -41,11 +42,6 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         super.didReceiveMemoryWarning()
     }
     
-    func loadData() {
-        UserService.getAllUsers { (allUsers) in
-            self.usernames = allUsers
-        }
-    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
@@ -80,23 +76,30 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(usernames)
-        if(searchActive) {
-            return filtered.count
-        }
-        return usernames.count;
+        return allUsers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "createABetCell") as! CreateABetTableViewCell;
         
-        let username = usernames[indexPath.row]
+        let group = DispatchGroup()
+        let user = allUsers[indexPath.row]
         
-        cell.profilePic.image = #imageLiteral(resourceName: "default copy")
-        cell.username.text = username
-        cell.subLabel.text = "this is a sublabel"
-        return cell
+        group.enter()
+        var numberOfBets = ""
+        
+        if user.numberOfBets != nil {
+            numberOfBets = "Has made " + String(user.numberOfBets!) + " bets"
+        } else {
+            numberOfBets = "The user has made no bets"
+        }
+        
+        
+        cell.profilePic.image = user.profilePic
+        cell.username.text = user.username
+        cell.subLabel.text = numberOfBets
 
+        return cell
     }
     
 }

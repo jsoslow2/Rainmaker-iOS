@@ -116,6 +116,25 @@ struct UserService {
                 completion(allUsernames)
             }
         }
+    
+    
+    static func getAllUsersData(completion: @escaping([UsableUser]) -> Void) {
+        let ref = Database.database().reference().child("users")
+        
+        var allUsers : [UsableUser] = []
+        
+        
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            
+            for snap in snapshot.children.allObjects {
+                let i = snap as? DataSnapshot
+                let user = UsableUser(uid: i!.key, snapshot: i!)
+                allUsers.append(user!)
+            }
+            completion(allUsers)
+        }
+    }
 }
 
 
