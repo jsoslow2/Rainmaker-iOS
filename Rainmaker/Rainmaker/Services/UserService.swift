@@ -103,8 +103,6 @@ struct UserService {
         
         var allUsernames : [String] = []
         
-        
-
             ref.observeSingleEvent(of: .value) { (snapshot) in
                 
                 for snap in snapshot.children.allObjects {
@@ -122,8 +120,6 @@ struct UserService {
         let ref = Database.database().reference().child("users")
         
         var allUsers : [UsableUser] = []
-        
-        
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
             

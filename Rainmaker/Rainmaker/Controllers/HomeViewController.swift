@@ -148,7 +148,6 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         
         
         
-        let titleText = NSAttributedString(string: (post.username! + " bet " + chosenAnswer()))
         let boldUsername  = post.username!
         let boldAnswer = chosenAnswer()
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -194,6 +193,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     @objc func goToProfile(on cell: HomeFeedTableViewCell) {
         // Segue to the second view controller
         passingUID = cell.userID
+        print("going to profile")
         self.performSegue(withIdentifier: "toOtherUserProfile", sender: self)
     }
     

@@ -18,6 +18,8 @@
 		29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */; };
 		29D160D0222B784600604D71 /* CreateABetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CF222B784600604D71 /* CreateABetViewController.swift */; };
 		29D160D2222F311500604D71 /* UsableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160D1222F311500604D71 /* UsableUser.swift */; };
+		29D160D42230D5F300604D71 /* CompleteCreateABetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160D32230D5F300604D71 /* CompleteCreateABetViewController.swift */; };
+		29D160D722349C3500604D71 /* ConfirmCreateABetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160D622349C3500604D71 /* ConfirmCreateABetViewController.swift */; };
 		29D73F4521A704C900C87EC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */; };
 		29D73F5321A83FCB00C87EC3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */; };
 		29D73F5521A8472C00C87EC3 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D73F5421A8472C00C87EC3 /* Login.storyboard */; };
@@ -55,6 +57,8 @@
 		29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateABetTableViewCell.swift; sourceTree = "<group>"; };
 		29D160CF222B784600604D71 /* CreateABetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateABetViewController.swift; sourceTree = "<group>"; };
 		29D160D1222F311500604D71 /* UsableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsableUser.swift; sourceTree = "<group>"; };
+		29D160D32230D5F300604D71 /* CompleteCreateABetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCreateABetViewController.swift; sourceTree = "<group>"; };
+		29D160D622349C3500604D71 /* ConfirmCreateABetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCreateABetViewController.swift; sourceTree = "<group>"; };
 		29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		29D73F5421A8472C00C87EC3 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -130,6 +134,16 @@
 			path = Rainmaker;
 			sourceTree = "<group>";
 		};
+		29D160D5223496D000604D71 /* Create A Bet Flow */ = {
+			isa = PBXGroup;
+			children = (
+				29D160CF222B784600604D71 /* CreateABetViewController.swift */,
+				29D160D32230D5F300604D71 /* CompleteCreateABetViewController.swift */,
+				29D160D622349C3500604D71 /* ConfirmCreateABetViewController.swift */,
+			);
+			path = "Create A Bet Flow";
+			sourceTree = "<group>";
+		};
 		29D73F4621A748AA00C87EC3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +216,7 @@
 				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
 				29130C4821B83C68002E4B2D /* ProfileViewController.swift */,
 				29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */,
-				29D160CF222B784600604D71 /* CreateABetViewController.swift */,
+				29D160D5223496D000604D71 /* Create A Bet Flow */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -374,6 +388,7 @@
 				F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */,
 				F0D7A9EE21AB338D0069EF16 /* HomeFeedTableViewCell.swift in Sources */,
 				29D160D0222B784600604D71 /* CreateABetViewController.swift in Sources */,
+				29D160D722349C3500604D71 /* ConfirmCreateABetViewController.swift in Sources */,
 				29130C4721B835AF002E4B2D /* ProfileBetTableViewCell.swift in Sources */,
 				F0D7A9F821AB40780069EF16 /* SearchTableViewCell.swift in Sources */,
 				29D73F5921A9A4BB00C87EC3 /* User.swift in Sources */,
@@ -384,6 +399,7 @@
 				29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */,
 				29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */,
 				29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */,
+				29D160D42230D5F300604D71 /* CompleteCreateABetViewController.swift in Sources */,
 				29D73F5F21AC813100C87EC3 /* CreateUsernameViewController.swift in Sources */,
 				292D744A219F925000414217 /* AppDelegate.swift in Sources */,
 				29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */,

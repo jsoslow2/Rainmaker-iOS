@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-class CreateABetViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class CreateABetViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CreateABetTableViewCellDelegate {
+
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +20,10 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     var searchActive = false
     var filtered : [String] = []
     var usernames : [String] = []
-    var allUsers : [UsableUser] = []
+    var allUsers : [UsableUser]?
+    
+    var passingUID : String?
+    var passingUsername : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +36,6 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         UserService.getAllUsersData { (allUsers) in
             self.allUsers = allUsers
             self.tableView.reloadData()
-            print(self.allUsers)
         }
         
 
@@ -75,17 +79,26 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.reloadData()
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allUsers.count
+        if let allUsers = allUsers {
+            return allUsers.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "createABetCell") as! CreateABetTableViewCell;
         
-        let group = DispatchGroup()
-        let user = allUsers[indexPath.row]
+        cell.delegate = self
         
-        group.enter()
+        guard let allUsers = allUsers else {
+            return cell
+        }
+        
+        let user = allUsers[indexPath.row]
+
         var numberOfBets = ""
         
         if user.numberOfBets != nil {
@@ -98,8 +111,33 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         cell.profilePic.image = user.profilePic
         cell.username.text = user.username
         cell.subLabel.text = numberOfBets
+        cell.uid = user.uid
 
         return cell
     }
     
+    //Segue to the complete create a bet view controller passing the username and uid to next view controller
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destinationVC = segue.destination as! CompleteCreateABetViewController
+        
+        destinationVC.uid = passingUID
+        destinationVC.username = passingUsername
+    }
+    
+    
+//    func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
+
+//    }
+    
+    func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
+                passingUID = cell.uid
+                passingUsername = cell.username.text
+                print("next test")
+        
+                self.performSegue(withIdentifier: "toCompleteCreateABet", sender: self)
+    }
+    
 }
+
