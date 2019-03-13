@@ -89,7 +89,7 @@ struct BetService {
                     updatedData["betAmount"] = withBetAmount
                     updatedData["betKey"] = withBetKey
                     
-                    var UIDBetCombo = String(userID) + String(withBetKey)
+                    let UIDBetCombo = String(withBetKey) + String(userID)
                     
                     ref2.child(UIDBetCombo).updateChildValues(updatedData)
                     completion(true)
@@ -99,6 +99,29 @@ struct BetService {
         }
         
         
+    }
+    
+    static func createBet(betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, completion: @escaping(String) -> Void) {
+        
+        let timestamp = Date().millisecondsSince1970
+        let timestampString = String(timestamp)
+
+        
+        let ref = Database.database().reference().child("Bets")
+        
+        var updatedData = [String: Any]()
+        
+        updatedData["betQuestion"] = betQuestion
+        updatedData["firstBetOption"] = firstBetOption
+        updatedData["isActive"] = 1
+        updatedData["rightAnswer"] = -1
+        updatedData["secondBetOption"] = secondBetOption
+        updatedData["typeOfGame"] = "Custom Bet"
+        updatedData["createBet"] = 1
+        updatedData["otherUsername"] = otherUsername
+        
+        ref.child(timestampString).updateChildValues(updatedData)
+        completion(timestampString)
     }
     
     static func changeBetMoney(withAmount: Int, completion: @escaping(Bool) -> Void) {
@@ -143,7 +166,7 @@ struct BetService {
             for snap in snapshot {
                 let bet = ProfileBet(snapshot: snap)
                 group.enter()
-                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer) in
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, otherUsername, createBet) in
                     bet?.betQuestion = betQuestion
                     bet?.typeOfGame = typeOfGame
                     bet?.isActive = isActive
@@ -161,7 +184,7 @@ struct BetService {
     }
     
     
-    static func getInfoOfBet(betKey: String, completion: @escaping(String, String, String, String, Int, Int) -> Void) {
+    static func getInfoOfBet(betKey: String, completion: @escaping(String, String, String, String, Int, Int, String, Int) -> Void) {
         
         let ref = Database.database().reference().child("Bets").child(betKey)
         
@@ -172,10 +195,12 @@ struct BetService {
                 let firstBetOption = dict["firstBetOption"] as? String,
                 let secondBetOption = dict["secondBetOption"] as? String,
                 let isActive = dict["isActive"] as? Int,
-                let rightAnswer = dict["rightAnswer"] as? Int
-                else {completion("", "", "", "", 0, 0); return}
+                let rightAnswer = dict["rightAnswer"] as? Int,
+                let otherUsername = dict["otherUsername"] as? String,
+                let createBet = dict["createBet"] as? Int
+                else {completion("", "", "", "", 0, 0, "", 0); return}
             
-            completion(betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer)
+            completion(betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, otherUsername, createBet)
         }
     }
     
@@ -195,13 +220,15 @@ struct BetService {
                 print(snap)
                 let bet = HomePost(snapshot: snap)
                 group.enter()
-                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer) in
+                BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, otherUsername, createBet) in
                     bet?.betQuestion = betQuestion
                     bet?.typeOfGame = typeOfGame
                     bet?.firstOption = firstBetOption
                     bet?.secondOption = secondBetOption
                     bet?.isActive = isActive
                     bet?.rightAnswer = rightAnswer
+                    bet?.otherUsername = otherUsername
+                    bet?.createBet = createBet
                     
                     UserService.getUsername(userUID: bet!.UID , completion: { (username) in
                             bet?.username = username
@@ -220,4 +247,16 @@ struct BetService {
     
     
     
+}
+
+
+extension Date {
+    var millisecondsSince1970:Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+        //RESOLVED CRASH HERE
+    }
+    
+    init(milliseconds:Int) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
+    }
 }

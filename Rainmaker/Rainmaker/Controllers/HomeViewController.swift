@@ -86,7 +86,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
                 if !bool {
                     self.present(dialogMessage2, animated: true, completion: nil)
                 } else {
-                    
+                    self.tableView.reloadData()
                 }
             }
             
@@ -157,14 +157,26 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         let normalText = " bet "
         let normalString = NSMutableAttributedString(string:normalText)
         
+        let extraText = " with "
+        let extraString = NSMutableAttributedString(string: extraText)
+        
+        let boldOtherUsername = NSMutableAttributedString(string: post.otherUsername!, attributes: attrs)
+        
         attributedUsername.append(normalString)
         attributedUsername.append(attributedAnswer)
         
         cell.betKey = post.betKey
         cell.userID = post.UID
         
-        
-        cell.topLabel.attributedText = attributedUsername
+        if post.createBet == 0 {
+            cell.topLabel.attributedText = attributedUsername
+        } else {
+            
+            attributedUsername.append(extraString)
+            attributedUsername.append(boldOtherUsername)
+            
+            cell.topLabel.attributedText = attributedUsername
+        }
         cell.subLabel.text = post.typeOfGame
         cell.betTitle.text = post.betQuestion
         cell.profilePicture.image = post.image

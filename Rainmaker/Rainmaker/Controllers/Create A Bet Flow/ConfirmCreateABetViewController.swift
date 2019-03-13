@@ -22,6 +22,8 @@ class ConfirmCreateABetViewController : UIViewController {
     var firstBetOption : String?
     var secondBetOption : String?
     var chosenOption : Int?
+    var otherOption : Int?
+    var betID : String?
     
     
     @IBOutlet weak var betTitle: UILabel!
@@ -39,6 +41,8 @@ class ConfirmCreateABetViewController : UIViewController {
         super.viewDidLoad()
         
         confirmBetButton.layer.cornerRadius = 10
+        firstBetButton.layer.cornerRadius = 10
+        secondBetButton.layer.cornerRadius = 10
         
         //Bet title code
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -55,6 +59,19 @@ class ConfirmCreateABetViewController : UIViewController {
         
         betQuestionLabel.text = betQuestion
         
+        
+        
+
+        
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func checkBetTexts () {
         //First Bet Option
         if (firstBetText.text?.isEmpty)! {
             firstBetOption = "Yes"
@@ -68,19 +85,11 @@ class ConfirmCreateABetViewController : UIViewController {
         } else {
             secondBetOption = secondBetText.text
         }
-        
-
-        
-        
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     @IBAction func pickFirstButton(_ sender: Any) {
         chosenOption = 0
+        otherOption = 1
         firstBetButton.backgroundColor = mintGreen
         secondBetButton.backgroundColor = badGrey
     }
@@ -88,6 +97,7 @@ class ConfirmCreateABetViewController : UIViewController {
     
     @IBAction func pickSecondButton(_ sender: Any) {
         chosenOption = 1
+        otherOption = 0
         firstBetButton.backgroundColor = badGrey
         secondBetButton.backgroundColor = mintGreen
     }
@@ -95,6 +105,33 @@ class ConfirmCreateABetViewController : UIViewController {
     
     
     @IBAction func confirmBet(_ sender: Any) {
-        //Implement create a bet function
+        checkBetTexts()
+        // 1. Give Error if you haven't picked a bet option
+        if chosenOption == nil {
+            let dialogMessage2 = UIAlertController(title: "Error", message: "Choose one of the bet options to make the bet", preferredStyle: .alert)
+            let ok2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            })
+            dialogMessage2.addAction(ok2)
+            self.present(dialogMessage2, animated: true, completion: nil)
+        } else {
+            // 2. Create a new bet in Bets tab
+            BetService.createBet(betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!) { (uniqueID) in
+                print("yeet")
+                self.betID = uniqueID
+                
+            }
+            
+            //3. Update users bets
+            BetService.bet(withBetKey: betID!, chosenBet: chosenOption!, withBetAmount: 0) { (Boolean) in
+                if !Boolean {
+                    print("no worky")
+                }
+            }
+            
+            _ = navigationController?.popToRootViewController(animated: true)
+
+            
+            
+        }
     }
 }
