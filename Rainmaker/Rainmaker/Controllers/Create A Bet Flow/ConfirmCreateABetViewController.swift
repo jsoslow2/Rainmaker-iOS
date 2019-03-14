@@ -58,13 +58,6 @@ class ConfirmCreateABetViewController : UIViewController {
         /// End
         
         betQuestionLabel.text = betQuestion
-        
-        
-        
-
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,7 +95,7 @@ class ConfirmCreateABetViewController : UIViewController {
         secondBetButton.backgroundColor = mintGreen
     }
     
-    
+
     
     @IBAction func confirmBet(_ sender: Any) {
         checkBetTexts()
@@ -126,12 +119,17 @@ class ConfirmCreateABetViewController : UIViewController {
                 if !Boolean {
                     print("no worky")
                 }
+                
             }
-            
-            _ = navigationController?.popToRootViewController(animated: true)
-
             
             
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! HomeViewController
+        destinationVC.tableView.reloadData()
+        print("works?")
+    }
+    
 }

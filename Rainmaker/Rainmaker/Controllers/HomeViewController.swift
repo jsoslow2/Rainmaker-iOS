@@ -19,8 +19,29 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    var isLoadingViewController = false
+    
+    
+    //enabling tableview to load when tab bar is switched
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isLoadingViewController = true
+        viewLoadSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isLoadingViewController {
+            isLoadingViewController = false
+        } else {
+            viewLoadSetup()
+        }
+    }
+    
+    func viewLoadSetup() {
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
         
@@ -36,7 +57,7 @@ class HomeViewController: UIViewController {
             User.numberOfBets = num
         }
         
-        //load profile info now 
+        //load profile info now
         BetService.getUsersActiveBets(userID: User.current.uid) { (bets) in
             User.activeBets = bets
         }
@@ -52,6 +73,16 @@ class HomeViewController: UIViewController {
             self.tableView.reloadData()
         }
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
+
+        tableView.reloadData()
+
+    }
+    
+    @objc func loadList(notification: NSNotification){
+        //load data here
+        self.tableView.reloadData()
     }
 
 }
@@ -210,6 +241,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     }
     
 
-    
+    @IBAction func unwindToHome (_ sender: UIStoryboardSegue) {}
+
 }
 
