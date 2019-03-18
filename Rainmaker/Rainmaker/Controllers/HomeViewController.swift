@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
         
         //LOAD THE DATA
         BetService.getHomeFeedBets { (homepost) in
-            self.homePosts = homepost
+            self.homePosts = homepost.reversed()
             self.tableView.reloadData()
         }
         
@@ -149,6 +149,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         
         if let homePosts = homePosts {
             return homePosts.count

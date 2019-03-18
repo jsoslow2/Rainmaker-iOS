@@ -22,8 +22,11 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     var usernames : [String] = []
     var allUsers : [UsableUser]?
     
-    var passingUID : String?
-    var passingUsername : String?
+    var passingUID = ""
+    var passingUsername = ""
+    
+    var currentUser = Auth.auth().currentUser!.uid
+    var currentUsername : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,11 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
         searchBar.delegate = self as UISearchBarDelegate
+        
+        
+        UserService.getUsername(userUID: currentUser) { (theName) in
+            self.currentUsername = theName
+        }
         
         
         UserService.getAllUsersData { (allUsers) in
@@ -132,12 +140,17 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
 //    }
     
     func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
-                passingUID = cell.uid
-                passingUsername = cell.username.text
+                passingUID = cell.uid!
+                passingUsername = cell.username.text!
                 print("next test")
         
                 self.performSegue(withIdentifier: "toCompleteCreateABet", sender: self)
     }
     
+    @IBAction func adminGoToNext(_ sender: Any) {
+        if currentUsername == "jsoslow2" {
+            self.performSegue(withIdentifier: "toCompleteCreateABet", sender: self)
+        }
+    }
 }
 

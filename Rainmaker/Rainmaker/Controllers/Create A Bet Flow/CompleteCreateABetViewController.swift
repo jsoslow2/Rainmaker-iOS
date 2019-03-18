@@ -64,6 +64,13 @@ class CompleteCreateABetViewController : UIViewController, UITextViewDelegate {
         destinationVC.currentUser = currentUser
     }
     
+    @IBAction func adminContinue(_ sender: Any) {
+        if currentUsername == "jsoslow2" {
+            performSegue(withIdentifier: "toConfirmCreateABet", sender: self)
+        }
+    }
+    
+    
     @IBAction func continueToFinalStep(_ sender: Any) {
         if betQuestionField.text.isEmpty || betQuestionField.text == "Type the bet here" {
             //send alert that you need to make a bet

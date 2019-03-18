@@ -52,6 +52,9 @@ struct BetService {
             } else {
                 //increase your bet count
                 
+                let timestamp = Date().millisecondsSince1970
+                let timestampString = String(timestamp)
+                
                 let betCountRef = Database.database().reference().child("users").child(User.current.uid)
                 
                 User.numberOfBets = User.numberOfBets + 1
@@ -82,6 +85,8 @@ struct BetService {
                 let ref2 = Database.database().reference().child("HomeFeed")
                 ref2.observeSingleEvent(of: .value) { (snapshot) in
                     
+
+                    
                     var updatedData = [String: Any]()
                     
                     updatedData["chosenBet"] = chosenBet
@@ -89,7 +94,7 @@ struct BetService {
                     updatedData["betAmount"] = withBetAmount
                     updatedData["betKey"] = withBetKey
                     
-                    let UIDBetCombo = String(withBetKey) + String(userID)
+                    let UIDBetCombo = String(timestampString) + String(userID)
                     
                     ref2.child(UIDBetCombo).updateChildValues(updatedData)
                     completion(true)
@@ -101,7 +106,7 @@ struct BetService {
         
     }
     
-    static func createBet(betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, completion: @escaping(String) -> Void) {
+    static func createBet(betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, subtitle: String, createBet: Int, completion: @escaping(String) -> Void) {
         
         let timestamp = Date().millisecondsSince1970
         let timestampString = String(timestamp)
@@ -116,8 +121,8 @@ struct BetService {
         updatedData["isActive"] = 1
         updatedData["rightAnswer"] = -1
         updatedData["secondBetOption"] = secondBetOption
-        updatedData["typeOfGame"] = "Custom Bet"
-        updatedData["createBet"] = 1
+        updatedData["typeOfGame"] = subtitle
+        updatedData["createBet"] = createBet
         updatedData["otherUsername"] = otherUsername
         
         ref.child(timestampString).updateChildValues(updatedData)
