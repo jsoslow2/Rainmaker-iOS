@@ -17,7 +17,9 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         BetService.getAvailableBets { (allBets) in
-            self.bets = allBets
+            self.bets = allBets.filter({ (bet) -> Bool in
+                bet.isActive == 1
+            })
             self.tableView.reloadData()
         }
         

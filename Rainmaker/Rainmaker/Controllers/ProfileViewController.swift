@@ -81,7 +81,7 @@ class ProfileViewController: UIViewController {
         
         //LOAD THE DATA
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
-                self.bets = allBets
+                self.bets = allBets.reversed()
                 self.tableView.reloadData()
             }
         
@@ -139,6 +139,14 @@ extension ProfileViewController: UITableViewDataSource {
         cell.betQuestion.text = bet.betQuestion
         cell.betAmount.text = "$" + String(bet.betAmount)
         cell.typeOfGame.text = bet.typeOfGame
+        
+        BetService.getInfoOfBet(betKey: bet.betKey) { (a, b, firstBetOption, secondBetOption, c, d, e, f) in
+            if bet.chosenBet == 0 {
+                cell.typeOfGame.text = firstBetOption 
+            } else {
+                cell.typeOfGame.text = secondBetOption
+            }
+        }
         
         if bet.rightAnswer == bet.chosenBet {
             cell.winLoss.text = "W"
