@@ -18,6 +18,8 @@ class ProfileViewController: UIViewController {
     var bets : [ProfileBet]?
     let userID = Auth.auth().currentUser!.uid
     var username: String?
+    var profileImage: UIImage?
+    
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
     @IBOutlet weak var totalMoney: UILabel!
@@ -34,7 +36,11 @@ class ProfileViewController: UIViewController {
         
         UserService.getAllUsers { (boop) in
             print("")
+            
         }
+        
+        profilePic.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleChangeProfilePic)))
+
         
         //allocate delegate and datasource
         tableView.delegate = self as? UITableViewDelegate
@@ -85,6 +91,37 @@ class ProfileViewController: UIViewController {
     
     
     
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func handleChangeProfilePic () {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.allowsEditing = true
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[.editedImage] {
+            profileImage = editedImage as? UIImage
+        } else if let originalImage = info[.originalImage] {
+            profileImage = originalImage as? UIImage
+        }
+        
+        if let finalImage = profileImage {
+            profilePic.image = finalImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("canceled")
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {

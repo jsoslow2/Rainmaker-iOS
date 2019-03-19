@@ -82,7 +82,7 @@ struct BetService {
                 let ref2 = Database.database().reference().child("HomeFeed")
                 ref2.observeSingleEvent(of: .value) { (snapshot) in
                     
-                    var updatedData = [String: Any]()
+                    var updatedData = [String: Any]() 
                     
                     updatedData["chosenBet"] = chosenBet
                     updatedData["uidOfBettor"] = userID
