@@ -96,6 +96,18 @@ struct UserService {
         }
     }
     
+    static func getImageURL(userUID: String, completion: @escaping(String) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any],
+                let imageURL = dict["imageURL"] as? String
+                else {completion(""); return}
+            
+            completion(imageURL)
+        }
+    }
+    
     static func adjustProfilePic(userUID: String, imageURL: String, completion: @escaping(Bool) -> Void) {
         let ref = Database.database().reference().child("users").child(userUID)
         

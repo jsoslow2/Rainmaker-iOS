@@ -16,6 +16,8 @@ class OtherUserProfileViewController: UIViewController {
 
     var bets : [ProfileBet]?
     var userID = ""
+    var imageURL : String?
+    
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
     @IBOutlet weak var totalMoney: UILabel!
@@ -64,6 +66,25 @@ class OtherUserProfileViewController: UIViewController {
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
             self.bets = allBets
             self.tableView.reloadData()
+        }
+        
+        //Load the Propic
+        UserService.getImageURL(userUID: userID) { (imageURL) in
+            self.imageURL = imageURL
+            
+            let url = URL(string: imageURL)
+            let session = URLSession.shared
+            
+            session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.profilePic.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
         }
     }
     

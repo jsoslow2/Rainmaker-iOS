@@ -107,6 +107,23 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
             numberOfBets = "The user has made no bets"
         }
         
+        //load the profile picture
+        UserService.getImageURL(userUID: user.uid) { (imageURL) in
+            let url = URL(string: imageURL)
+            let session = URLSession.shared
+            
+            session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        cell.profilePic.image = UIImage(data: data!)!
+                    }
+                }
+            }).resume()
+        }
+        
         
         cell.profilePic.image = user.profilePic
         cell.username.text = user.username

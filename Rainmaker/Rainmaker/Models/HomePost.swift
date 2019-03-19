@@ -44,11 +44,15 @@ class HomePost {
             let UID = dict["uidOfBettor"] as? String,
             let betKey = dict["betKey"] as? String
             else { return nil }
+
         
         self.chosenBet = chosenBet
         self.betKey = betKey
         self.UID = UID
         self.image = #imageLiteral(resourceName: "default copy")
+        
+        
+       
     }
     
 }

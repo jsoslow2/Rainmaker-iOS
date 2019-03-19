@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
     let userID = Auth.auth().currentUser!.uid
     var username: String?
     var profileImage: UIImage?
+    var imageURL: String?
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
@@ -40,6 +41,7 @@ class ProfileViewController: UIViewController {
             
         }
         
+        //enable tapping on propic
         profilePic.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleChangeProfilePic)))
 
         
@@ -83,6 +85,24 @@ class ProfileViewController: UIViewController {
                 self.tableView.reloadData()
             }
         
+        //load the propic
+        UserService.getImageURL(userUID: userID) { (imageURL) in
+            self.imageURL = imageURL
+            
+            let url = URL(string: imageURL)
+            let session = URLSession.shared
+            
+            session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.profilePic.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
         
         }
     
@@ -96,13 +116,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //cool table animation
-        animateTable()
-        
-        print("test")
-    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         bets = bets?.reversed()
@@ -140,24 +154,8 @@ extension ProfileViewController: UITableViewDataSource {
         return cell
     }
     
-    func animateTable() {
-        tableView.reloadData()
-        let cells = tableView.visibleCells
         
-        let tableViewHeight = tableView.bounds.size.height
-        
-        for cell in cells {
-            cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
-        }
-        
-        var delayCounter = 0
-        for cell in cells {
-            UIView.animate(withDuration: 1.25, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                cell.transform = CGAffineTransform.identity
-            }, completion: nil)
-            delayCounter += 1
-        }
-    }
+
     
 }
 

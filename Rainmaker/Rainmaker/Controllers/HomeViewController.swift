@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
         
         //LOAD THE DATA
         BetService.getHomeFeedBets { (homepost) in
-            self.homePosts = homepost
+            self.homePosts = homepost.reversed()
             self.tableView.reloadData()
         }
         
@@ -208,6 +208,25 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
             
             cell.topLabel.attributedText = attributedUsername
         }
+        
+        //load the profile picture
+        UserService.getImageURL(userUID: post.UID) { (imageURL) in
+            let url = URL(string: imageURL)
+            let session = URLSession.shared
+            
+            session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        cell.profilePicture.image = UIImage(data: data!)
+                    }
+                }
+            }).resume()
+        }
+        
+        
         cell.subLabel.text = post.typeOfGame
         cell.betTitle.text = post.betQuestion
         cell.profilePicture.image = post.image

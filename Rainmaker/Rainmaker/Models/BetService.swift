@@ -40,6 +40,10 @@ struct BetService {
     static func bet(withBetKey: String, chosenBet: Int, withBetAmount: Int, completion: @escaping (Bool) -> Void) {
         let userID = Auth.auth().currentUser!.uid
         
+        //needed for ordering data
+        let timestamp = Date().millisecondsSince1970
+        let timestampString = String(timestamp)
+        
         //post this bet on your profile feed
         let ref = Database.database().reference().child("Profile").child(userID).child("currentBets")
       
@@ -89,7 +93,7 @@ struct BetService {
                     updatedData["betAmount"] = withBetAmount
                     updatedData["betKey"] = withBetKey
                     
-                    let UIDBetCombo = String(withBetKey) + String(userID)
+                    let UIDBetCombo = String(timestampString) + String(userID)
                     
                     ref2.child(UIDBetCombo).updateChildValues(updatedData)
                     completion(true)
