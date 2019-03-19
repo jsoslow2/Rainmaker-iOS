@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -115,12 +116,28 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             profilePic.image = finalImage
         }
         
+        uploadImage()
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("canceled")
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func uploadImage () {
+        let storageRef = Storage.storage().reference().child("\(userID).png")
+        
+        if let uploadData = self.profileImage!.pngData() {
+            storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                
+                if error != nil {
+                    print(error)
+                    return
+                }
+            }
+        }
     }
 }
 
