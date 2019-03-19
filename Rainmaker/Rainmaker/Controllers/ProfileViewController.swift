@@ -94,53 +94,6 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @objc func handleChangeProfilePic () {
-        let picker = UIImagePickerController()
-        
-        picker.delegate = self
-        picker.allowsEditing = true
-        
-        present(picker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let editedImage = info[.editedImage] {
-            profileImage = editedImage as? UIImage
-        } else if let originalImage = info[.originalImage] {
-            profileImage = originalImage as? UIImage
-        }
-        
-        if let finalImage = profileImage {
-            profilePic.image = finalImage
-        }
-        
-        uploadImage()
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("canceled")
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    func uploadImage () {
-        let storageRef = Storage.storage().reference().child("\(userID).png")
-        
-        if let uploadData = self.profileImage!.pngData() {
-            storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-                
-                if error != nil {
-                    print(error)
-                    return
-                }
-            }
-        }
-    }
-}
-
 extension ProfileViewController: UITableViewDataSource {
     
     override func viewDidAppear(_ animated: Bool) {
@@ -208,3 +161,62 @@ extension ProfileViewController: UITableViewDataSource {
     
 }
 
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func handleChangeProfilePic () {
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.allowsEditing = true
+        
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[.editedImage] {
+            profileImage = editedImage as? UIImage
+        } else if let originalImage = info[.originalImage] {
+            profileImage = originalImage as? UIImage
+        }
+        
+        if let finalImage = profileImage {
+            profilePic.image = finalImage
+        }
+        
+        uploadImage()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("canceled")
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func uploadImage () {
+        let storageRef = Storage.storage().reference().child("\(userID).png")
+        
+        if let uploadData = self.profileImage!.pngData() {
+            storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                
+                if error != nil {
+                    print(error)
+                    return
+                }
+                
+                storageRef.downloadURL(completion: { (url, error) in
+                    
+                    if let error = error {
+                        print(error)
+                        print("Oh no an error!")
+                    } else {
+                        UserService.adjustProfilePic(userUID: self.userID, imageURL: (url?.absoluteString)!, completion: { (bool) in
+                            print(bool)
+                            print("woohoo")
+                        })
+                    }
+                })
+            }
+        }
+    }
+}

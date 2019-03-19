@@ -96,6 +96,16 @@ struct UserService {
         }
     }
     
+    static func adjustProfilePic(userUID: String, imageURL: String, completion: @escaping(Bool) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        var newProfilePic = [String : String] ()
+        newProfilePic["imageURL"] = imageURL
+        
+        ref.updateChildValues(newProfilePic)
+        completion(true)
+    }
+    
     
     
     static func getAllUsers(completion: @escaping([String]) -> Void) {
