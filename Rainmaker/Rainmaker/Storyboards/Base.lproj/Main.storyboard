@@ -144,7 +144,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="wEX-8A-joR"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="OwN-nS-LBR"/>
+                    <navigationItem key="navigationItem" title="Profile" id="OwN-nS-LBR">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="keK-uL-flG">
+                            <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
+                            <connections>
+                                <action selector="logOut:" destination="8sB-cm-ZDr" id="Zop-YD-rwc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="name" destination="QnU-19-ooF" id="9tz-2I-OjO"/>
                         <outlet property="profilePic" destination="nuf-BZ-ZfT" id="jFB-jX-ILP"/>

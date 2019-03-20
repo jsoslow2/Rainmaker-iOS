@@ -128,8 +128,6 @@ class ConfirmCreateABetViewController : UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! HomeViewController
-        destinationVC.tableView.reloadData()
-        print("works?")
     }
     
 }

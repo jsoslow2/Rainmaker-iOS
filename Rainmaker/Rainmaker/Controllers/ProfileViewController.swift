@@ -112,6 +112,20 @@ class ProfileViewController: UIViewController {
     
     
     
+    @IBAction func logOut(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let signInVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        self.present(signInVC, animated: true, completion: nil)
+    }
+    
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -142,7 +156,7 @@ extension ProfileViewController: UITableViewDataSource {
         
         BetService.getInfoOfBet(betKey: bet.betKey) { (a, b, firstBetOption, secondBetOption, c, d, e, f) in
             if bet.chosenBet == 0 {
-                cell.typeOfGame.text = firstBetOption 
+                cell.typeOfGame.text = firstBetOption
             } else {
                 cell.typeOfGame.text = secondBetOption
             }
