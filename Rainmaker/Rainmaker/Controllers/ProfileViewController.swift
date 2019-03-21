@@ -13,10 +13,12 @@ import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
-    
+    let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
+    let badGrey = (UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0))
     
     
     var bets : [ProfileBet]?
+    var createdBets : [ConfirmBet]?
     let userID = Auth.auth().currentUser!.uid
     var username: String?
     var profileImage: UIImage?
@@ -26,8 +28,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var totalBetsLabel: UILabel!
     @IBOutlet weak var totalMoney: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var createdBetsButton: UIButton!
+    @IBOutlet weak var activeBetsButton: UIButton!
     
     
+    var tableFilter : Int = 0
     @IBOutlet weak var tableView: UITableView!
     
 
@@ -35,6 +40,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+
         
         UserService.getAllUsers { (boop) in
             print("")
@@ -80,10 +88,19 @@ class ProfileViewController: UIViewController {
         totalMoney.text = "$" + String(User.currentMoney)
         
         //LOAD THE DATA
+        //load active bets
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
                 self.bets = allBets.reversed()
                 self.tableView.reloadData()
             }
+        
+        //load created bets
+        BetService.getUsersCreatedBets(userID: userID) { (createdBets) in
+            self.createdBets = createdBets.reversed()
+            self.tableView.reloadData()
+            print(createdBets)
+        }
+        ////
         
         //load the propic
         UserService.getImageURL(userUID: userID) { (imageURL) in
@@ -124,58 +141,109 @@ class ProfileViewController: UIViewController {
         self.present(signInVC, animated: true, completion: nil)
     }
     
+    @IBAction func createdBets(_ sender: Any) {
+        tableFilter = 0
+        createdBetsButton.backgroundColor = mintGreen
+        activeBetsButton.backgroundColor = badGrey
+        tableView.reloadData()
+        tableView.rowHeight = 120
+    }
+    
+    @IBAction func activeBets(_ sender: Any) {
+        tableFilter = 1
+        createdBetsButton.backgroundColor = badGrey
+        activeBetsButton.backgroundColor = mintGreen
+        tableView.reloadData()
+        tableView.rowHeight = 80
+    }
     
     
 }
 
-extension ProfileViewController: UITableViewDataSource {
+extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDelegate {
     
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        bets = bets?.reversed()
-        
-        if let bets = bets?.reversed() {
-            return bets.count
+        if tableFilter == 0 {
+            //created bets
+            if let createdBets = createdBets {
+                return createdBets.count
+            } else {
+                return 0
+            }
         } else {
-            return 0
+            //active bets
+            if let bets = bets {
+                return bets.count
+            } else {
+                return 0
+            }
         }
+        
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "profileBetCell")! as! ProfileBetTableViewCell
         
-        guard let bets = bets else {return cell}
-        
-        let bet = bets[indexPath.row]
-        
-        cell.betQuestion.text = bet.betQuestion
-        cell.betAmount.text = "$" + String(bet.betAmount)
-        cell.typeOfGame.text = bet.typeOfGame
-        
-        BetService.getInfoOfBet(betKey: bet.betKey) { (a, b, firstBetOption, secondBetOption, c, d, e, f) in
-            if bet.chosenBet == 0 {
-                cell.typeOfGame.text = firstBetOption
-            } else {
-                cell.typeOfGame.text = secondBetOption
-            }
-        }
-        
-        if bet.rightAnswer == bet.chosenBet {
-            cell.winLoss.text = "W"
-        } else if bet.isActive == 1 {
-            cell.winLoss.text = "NA"
-            cell.winLoss.textColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+        if tableFilter == 0 {
+            ///CREATED BETS
+            let cell = tableView.dequeueReusableCell(withIdentifier: "customBetResultConfirmationCell")! as! CustomBetResultConfirmationTableViewCell
+            
+            guard let createdBets = createdBets else {return cell}
+            
+            cell.delegate = self
+            
+            let bet = createdBets[indexPath.row]
+            
+            cell.betQuestion.text = bet.betQuestion!
+            cell.firstOption.setTitle(bet.firstBetOption!, for: .normal)
+            cell.secondOption.setTitle(bet.secondBetOption!, for: .normal)
+            cell.betKey = bet.betKey
+            
+            return cell
+            
         } else {
-            cell.winLoss.text = "L"
-            cell.winLoss.textColor = #colorLiteral(red: 1, green: 0.356, blue: 0.192, alpha: 1)
+            ///ACTIVE BETS
+            let cell = tableView.dequeueReusableCell(withIdentifier: "profileBetCell")! as! ProfileBetTableViewCell
+            
+            guard let bets = bets else {return cell}
+            
+            let bet = bets[indexPath.row]
+            
+            cell.betQuestion.text = bet.betQuestion
+            cell.betAmount.text = "$" + String(bet.betAmount)
+            cell.typeOfGame.text = bet.typeOfGame
+            
+            BetService.getInfoOfBet(betKey: bet.betKey) { (a, b, firstBetOption, secondBetOption, c, d, e, f) in
+                if bet.chosenBet == 0 {
+                    cell.typeOfGame.text = firstBetOption
+                } else {
+                    cell.typeOfGame.text = secondBetOption
+                }
+            }
+            
+            if bet.rightAnswer == bet.chosenBet {
+                cell.winLoss.text = "W"
+            } else if bet.isActive == 1 {
+                cell.winLoss.text = "NA"
+                cell.winLoss.textColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            } else {
+                cell.winLoss.text = "L"
+                cell.winLoss.textColor = #colorLiteral(red: 1, green: 0.356, blue: 0.192, alpha: 1)
+            }
+            
+            
+            return cell
+        }
         }
         
-
-        return cell
+    func resultsConfirmed(which button: Int, on cell: CustomBetResultConfirmationTableViewCell) {
+        BetService.confirmResultsOfBet(betKey: cell.betKey!, userID: userID, rightAnswer: button) { (bool) in
+            print(bool)
+        }
+        print("this function has been called")
     }
-    
         
 
     

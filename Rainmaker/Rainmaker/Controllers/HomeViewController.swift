@@ -82,7 +82,10 @@ class HomeViewController: UIViewController {
     
     @objc func loadList(notification: NSNotification){
         //load data here
-        self.tableView.reloadData()
+        //delay the loading of data by a second lol
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.tableView.reloadData()
+        })
     }
 
 }

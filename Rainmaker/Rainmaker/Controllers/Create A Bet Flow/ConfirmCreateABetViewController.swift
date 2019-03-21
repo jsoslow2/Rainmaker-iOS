@@ -24,6 +24,7 @@ class ConfirmCreateABetViewController : UIViewController {
     var chosenOption : Int?
     var otherOption : Int?
     var betID : String?
+    var typeOfGame: String?
     
     
     @IBOutlet weak var betTitle: UILabel!
@@ -35,7 +36,8 @@ class ConfirmCreateABetViewController : UIViewController {
     @IBOutlet weak var secondBetText: UITextField!
     @IBOutlet weak var confirmBetButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
-
+    @IBOutlet weak var subtitleTextField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +82,14 @@ class ConfirmCreateABetViewController : UIViewController {
         }
     }
     
+    func checkSubtitle () {
+        if (subtitleTextField.text?.isEmpty)! {
+            typeOfGame = "Custom Bet"
+        } else {
+            typeOfGame = subtitleTextField.text!
+        }
+    }
+    
     @IBAction func pickFirstButton(_ sender: Any) {
         chosenOption = 0
         otherOption = 1
@@ -99,8 +109,13 @@ class ConfirmCreateABetViewController : UIViewController {
     
     @IBAction func confirmBet(_ sender: Any) {
         checkBetTexts()
+        checkSubtitle()
         // 1. Give Error if you haven't picked a bet option
-        if chosenOption == nil {
+        if currentUsername == "jsoslow2" && chosenOption == nil {
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 0) { (uniqueID) in
+                self.betID = uniqueID
+            }
+        } else if chosenOption == nil {
             let dialogMessage2 = UIAlertController(title: "Error", message: "Choose one of the bet options to make the bet", preferredStyle: .alert)
             let ok2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             })
@@ -108,7 +123,7 @@ class ConfirmCreateABetViewController : UIViewController {
             self.present(dialogMessage2, animated: true, completion: nil)
         } else {
             // 2. Create a new bet in Bets tab
-            BetService.createBet(betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!) { (uniqueID) in
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 1) { (uniqueID) in
                 print("yeet")
                 self.betID = uniqueID
                 
@@ -119,6 +134,8 @@ class ConfirmCreateABetViewController : UIViewController {
                 if !Boolean {
                     print("no worky")
                 }
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
                 
             }
             

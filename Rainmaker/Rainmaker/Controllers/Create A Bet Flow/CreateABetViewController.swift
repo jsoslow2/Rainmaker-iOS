@@ -25,6 +25,9 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     var passingUID : String?
     var passingUsername : String?
     
+    var currentUsername: String?
+    var currentUID = Auth.auth().currentUser!.uid
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         /* Setup delegates */
@@ -39,6 +42,9 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
             self.tableView.reloadData()
         }
         
+        UserService.getUsername(userUID: currentUID)  { (username) in
+            self.currentUsername = username
+        }
 
     }
     
@@ -116,10 +122,15 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         destinationVC.username = passingUsername
     }
     
+    @IBAction func adminGoToNext(_ sender: Any) {
+        if currentUsername == "jsoslow2" {
+            passingUID = ""
+            passingUsername = ""
+            self.performSegue(withIdentifier: "toCompleteCreateABet", sender: self)
+        }
+    }
     
-//    func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
 
-//    }
     
     func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
                 passingUID = cell.uid

@@ -105,7 +105,7 @@ struct BetService {
         
     }
     
-    static func createBet(betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, completion: @escaping(String) -> Void) {
+    static func createBet(userID: String, betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, typeOfGame: String, createBet: Int, completion: @escaping(String) -> Void) {
         
         let timestamp = Date().millisecondsSince1970
         let timestampString = String(timestamp)
@@ -120,11 +120,22 @@ struct BetService {
         updatedData["isActive"] = 1
         updatedData["rightAnswer"] = -1
         updatedData["secondBetOption"] = secondBetOption
-        updatedData["typeOfGame"] = "Custom Bet"
-        updatedData["createBet"] = 1
+        updatedData["typeOfGame"] = typeOfGame
+        updatedData["createBet"] = createBet
         updatedData["otherUsername"] = otherUsername
         
         ref.child(timestampString).updateChildValues(updatedData)
+        
+        let profileRef = Database.database().reference().child("Profile").child(userID).child("createdBets")
+        
+        var profileData = [String: Any]()
+        
+        profileData["betQuestion"] = betQuestion
+        profileData["firstOption"] = firstBetOption
+        profileData["secondOption"] = secondBetOption
+        
+        profileRef.child(timestampString).updateChildValues(profileData)
+        
         completion(timestampString)
     }
     
@@ -187,6 +198,39 @@ struct BetService {
         }
     }
     
+    static func getUsersCreatedBets(userID: String, completion: @escaping([ConfirmBet]) -> Void) {
+        let profileRef = Database.database().reference().child("Profile").child(userID).child("createdBets")
+        
+        profileRef.observeSingleEvent(of: .value) { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else {completion([]); return}
+            
+            
+            var bets = [ConfirmBet]()
+            for snap in snapshot {
+                let bet = ConfirmBet(snapshot: snap)
+                bet?.betKey = snap.key
+                bets.append(bet!)
+            }
+            completion(bets)
+        }
+    }
+    
+    static func confirmResultsOfBet(betKey: String, userID: String, rightAnswer: Int, completion: @escaping(Bool) -> Void) {
+        //Update bets reference
+        let ref = Database.database().reference().child("Bets").child(betKey)
+        
+        var updatedData = [String: Any]()
+        updatedData["isActive"] = 0
+        updatedData["rightAnswer"] = rightAnswer
+
+        ref.updateChildValues(updatedData)
+        
+        //Delete the bet from the user's created bets
+        let profileRef = Database.database().reference().child("Profile").child(userID).child("createdBets").child(betKey)
+        profileRef.removeValue()
+        completion(true)
+    }
     
     static func getInfoOfBet(betKey: String, completion: @escaping(String, String, String, String, Int, Int, String, Int) -> Void) {
         

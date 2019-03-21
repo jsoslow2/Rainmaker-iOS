@@ -349,6 +349,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIM-JC-hQH">
+                                <rect key="frame" x="325" y="88" width="50" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="adminGoToNext:" destination="Hi9-OD-mkS" eventType="touchUpInside" id="Afu-R8-gHa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gnF-Ws-udg"/>
@@ -508,6 +516,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9k6-qX-5Pm">
+                                <rect key="frame" x="48" y="660" width="283" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ZZ4-Om-hmX"/>
@@ -522,6 +537,7 @@
                         <outlet property="secondBetButton" destination="ONN-sY-p0g" id="f3V-Hp-ybs"/>
                         <outlet property="secondBetText" destination="DA0-tg-ffg" id="Ji2-mn-GOG"/>
                         <outlet property="subTitle" destination="4ak-m9-Qha" id="21e-xL-5AB"/>
+                        <outlet property="subtitleTextField" destination="9k6-qX-5Pm" id="mJZ-ps-HCz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UAv-LD-5l7" userLabel="First Responder" sceneMemberID="firstResponder"/>

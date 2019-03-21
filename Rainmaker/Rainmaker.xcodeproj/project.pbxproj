@@ -13,6 +13,7 @@
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
 		292D7454219F925400414217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D7452219F925400414217 /* LaunchScreen.storyboard */; };
+		2937D6BB2243190F0028AC3C /* ConfirmBet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937D6BA2243190F0028AC3C /* ConfirmBet.swift */; };
 		29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */; };
 		29D160CC2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */; };
 		29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */; };
@@ -28,6 +29,7 @@
 		29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6021AC8BB200C87EC3 /* UserService.swift */; };
 		29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6221ADE79D00C87EC3 /* Constants.swift */; };
 		29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */; };
+		29DC70F022429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DC70EF22429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift */; };
 		3D31ACB4903358DBA23EE191 /* Pods_Rainmaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */; };
 		F03B53D821AF259D00F5306D /* ProfileBet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B53D721AF259D00F5306D /* ProfileBet.swift */; };
 		F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */; };
@@ -52,6 +54,7 @@
 		292D7450219F925400414217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		292D7453219F925400414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		292D7455219F925400414217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2937D6BA2243190F0028AC3C /* ConfirmBet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBet.swift; sourceTree = "<group>"; };
 		29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateABetTableViewCell.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 		29D73F6021AC8BB200C87EC3 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		29D73F6221ADE79D00C87EC3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
+		29DC70EF22429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBetResultConfirmationTableViewCell.swift; sourceTree = "<group>"; };
 		AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.release.xcconfig"; sourceTree = "<group>"; };
 		F03B53D721AF259D00F5306D /* ProfileBet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBet.swift; sourceTree = "<group>"; };
 		F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				29D73F5821A9A4BB00C87EC3 /* User.swift */,
 				F0D7A9EF21AB344C0069EF16 /* HomePost.swift */,
 				F0D7A9F121AB35F80069EF16 /* Bet.swift */,
+				2937D6BA2243190F0028AC3C /* ConfirmBet.swift */,
 				29D160D1222F311500604D71 /* UsableUser.swift */,
 			);
 			path = Models;
@@ -203,6 +208,7 @@
 				29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */,
 				29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */,
 				29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */,
+				29DC70EF22429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -385,6 +391,7 @@
 			files = (
 				29D160CC2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift in Sources */,
 				F0D7A9F021AB344C0069EF16 /* HomePost.swift in Sources */,
+				29DC70F022429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift in Sources */,
 				F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */,
 				F0D7A9EE21AB338D0069EF16 /* HomeFeedTableViewCell.swift in Sources */,
 				29D160D0222B784600604D71 /* CreateABetViewController.swift in Sources */,
@@ -402,6 +409,7 @@
 				29D160D42230D5F300604D71 /* CompleteCreateABetViewController.swift in Sources */,
 				29D73F5F21AC813100C87EC3 /* CreateUsernameViewController.swift in Sources */,
 				292D744A219F925000414217 /* AppDelegate.swift in Sources */,
+				2937D6BB2243190F0028AC3C /* ConfirmBet.swift in Sources */,
 				29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */,
 				F0D7A9F221AB35F80069EF16 /* Bet.swift in Sources */,
 				F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */,
