@@ -51,7 +51,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
             
             //if ok, you do the bet
-            BetService.bet(withBetKey: bet.betKey!, chosenBet: button, withBetAmount: 5) { (bool) in
+            BetService.bet(withBetKey: bet.betKey!, chosenBet: button, withBetAmount: 5) { (bool, postID) in
                 if !bool {
                     self.present(dialogMessage2, animated: true, completion: nil)
                 } else {

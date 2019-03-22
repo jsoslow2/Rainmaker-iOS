@@ -46,6 +46,9 @@ class HomeViewController: UIViewController {
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
         
+        tabBarController?.delegate = self
+
+        
         BetService.getCurrentMoney { (money) in
             if let money = money {
                 User.currentMoney = money
@@ -91,7 +94,7 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate, UIGestureRecognizerDelegate {
+extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate, UIGestureRecognizerDelegate, UITabBarControllerDelegate {
     
     
     func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell) {
@@ -117,11 +120,15 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
             
             //if ok, you do the bet
-            BetService.bet(withBetKey: bet.betKey, chosenBet: button, withBetAmount: 5) { (bool) in
+            BetService.bet(withBetKey: bet.betKey, chosenBet: button, withBetAmount: 5) { (bool, postID) in
                 if !bool {
                     self.present(dialogMessage2, animated: true, completion: nil)
                 } else {
                     self.tableView.reloadData()
+                    BetService.getPost(postID: postID, completion: { (newBet) in
+                        self.homePosts?.insert(newBet, at: 0)
+                    })
+                    self.tableView.setContentOffset(.zero, animated: true)
                 }
             }
             
@@ -266,6 +273,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
 
     @IBAction func unwindToHome (_ sender: UIStoryboardSegue) {}
-
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        tableView.setContentOffset(.zero, animated: true)
+    }
 }
 

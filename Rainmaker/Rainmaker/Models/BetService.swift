@@ -37,7 +37,7 @@ struct BetService {
     
     
     
-    static func bet(withBetKey: String, chosenBet: Int, withBetAmount: Int, completion: @escaping (Bool) -> Void) {
+    static func bet(withBetKey: String, chosenBet: Int, withBetAmount: Int, completion: @escaping (Bool, String) -> Void) {
         let userID = Auth.auth().currentUser!.uid
         
         //needed for ordering data
@@ -51,7 +51,7 @@ struct BetService {
         ref.observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.hasChild(withBetKey) {
                 //bet is already made
-                completion(false)
+                completion(false, "")
                 return
             } else {
                 //increase your bet count
@@ -96,13 +96,39 @@ struct BetService {
                     let UIDBetCombo = String(timestampString) + String(userID)
                     
                     ref2.child(UIDBetCombo).updateChildValues(updatedData)
-                    completion(true)
+                    completion(true, UIDBetCombo)
                     
                 }
             }
         }
         
         
+    }
+    
+    static func getPost(postID: String, completion: @escaping(HomePost) -> Void) {
+        let ref = Database.database().reference().child("HomeFeed").child(postID)
+        
+        let group = DispatchGroup()
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            let bet = HomePost(snapshot: snapshot)
+            group.enter()
+            getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, otherUsername, createBet) in
+                bet?.betQuestion = betQuestion
+                bet?.typeOfGame = typeOfGame
+                bet?.firstOption = firstBetOption
+                bet?.secondOption = secondBetOption
+                bet?.isActive = isActive
+                bet?.rightAnswer = rightAnswer
+                bet?.otherUsername = otherUsername
+                bet?.createBet = createBet
+            
+                UserService.getUsername(userUID: bet!.UID, completion: { (username) in
+                    bet?.username = username
+                    group.leave()
+                })
+            })
+           completion(bet!)
+        }
     }
     
     static func createBet(userID: String, betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, typeOfGame: String, createBet: Int, completion: @escaping(String) -> Void) {

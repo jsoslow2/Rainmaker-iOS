@@ -130,7 +130,7 @@ class ConfirmCreateABetViewController : UIViewController {
             }
             
             //3. Update users bets
-            BetService.bet(withBetKey: betID!, chosenBet: chosenOption!, withBetAmount: 0) { (Boolean) in
+            BetService.bet(withBetKey: betID!, chosenBet: chosenOption!, withBetAmount: 0) { (Boolean, postID) in
                 if !Boolean {
                     print("no worky")
                 }
