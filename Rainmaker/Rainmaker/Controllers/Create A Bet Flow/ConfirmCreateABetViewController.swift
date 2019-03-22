@@ -135,8 +135,6 @@ class ConfirmCreateABetViewController : UIViewController {
                     print("no worky")
                 }
                 
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-                
             }
             
             
@@ -145,6 +143,15 @@ class ConfirmCreateABetViewController : UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! HomeViewController
+        
+        let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
+        newPost.isActive = 1
+        newPost.rightAnswer = -1
+        newPost.otherUsername = username!
+        newPost.createBet = 1
+        
+        destinationVC.createdBet = newPost
+
     }
     
 }

@@ -259,13 +259,11 @@ struct BetService {
             
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
                 else {completion([]); return}
-            print(snapshot)
             
             
             
             var bets = [HomePost]()
             for snap in snapshot {
-                print(snap)
                 let bet = HomePost(snapshot: snap)
                 group.enter()
                 BetService.getInfoOfBet(betKey: bet!.betKey, completion: { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, otherUsername, createBet) in

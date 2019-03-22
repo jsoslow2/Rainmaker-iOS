@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     
     var homePosts: [HomePost]?
     var passingUID: String?
+    var createdBet: HomePost?
 
     @IBOutlet weak var moneyButton: UIBarButtonItem!
     
@@ -73,17 +74,17 @@ class HomeViewController: UIViewController {
             self.tableView.reloadData()
         }
         
+        print("viewDidLoad")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
-
-        tableView.reloadData()
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
 
     }
     
     @objc func loadList(notification: NSNotification){
         //load data here
         //delay the loading of data by a second lol
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
             self.tableView.reloadData()
         })
     }
@@ -152,7 +153,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if let createdBet = createdBet {
+            homePosts?.insert(createdBet, at: 0)
+        }
         if let homePosts = homePosts {
             return homePosts.count
         } else {
@@ -161,7 +164,6 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeFeedCell")! as! HomeFeedTableViewCell
         
         cell.delegate = self

@@ -239,9 +239,26 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
         }
         
     func resultsConfirmed(which button: Int, on cell: CustomBetResultConfirmationTableViewCell) {
-        BetService.confirmResultsOfBet(betKey: cell.betKey!, userID: userID, rightAnswer: button) { (bool) in
-            print(bool)
-        }
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to confirm the results of this bet", preferredStyle: .alert)
+        let ok2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            BetService.confirmResultsOfBet(betKey: cell.betKey!, userID: self.userID, rightAnswer: button) { (bool) in
+                print(bool)
+                
+                var betIndex : Int?
+                for (index, bet) in self.createdBets!.enumerated() {
+                    if bet.betKey == cell.betKey {
+                        betIndex = index
+                    }
+                }
+                self.createdBets?.remove(at: betIndex!)
+                self.tableView.reloadData()
+            }
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        dialogMessage.addAction(ok2)
+        dialogMessage.addAction(cancel)
+        present(dialogMessage, animated: true, completion: nil)
         print("this function has been called")
     }
         
