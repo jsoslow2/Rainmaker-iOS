@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController {
     var username: String?
     var profileImage: UIImage?
     var imageURL: String?
+    var numberOfCorrectBets = 0
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
@@ -92,6 +93,7 @@ class ProfileViewController: UIViewController {
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
                 self.bets = allBets.reversed()
                 self.tableView.reloadData()
+                self.changeMoney(allBets: allBets)
             }
         
         //load created bets
@@ -131,6 +133,25 @@ class ProfileViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func countWins(allbets: [ProfileBet]) {
+        for bet in allbets {
+            if bet.rightAnswer == bet.chosenBet {
+                numberOfCorrectBets += 1
+            }
+        }
+    }
+    
+    func changeMoney(allBets: [ProfileBet]) {
+        countWins(allbets: allBets)
+        let wonMoney = numberOfCorrectBets * 5
+        let allMoney = User.currentMoney + wonMoney
+        User.currentMoney = allMoney
+        totalMoney.text = "$" + String(allMoney)
+        BetService.changeBetMoney(withAmount: allMoney) { (bool) in
+            print(bool)
+        }
     }
     
     
