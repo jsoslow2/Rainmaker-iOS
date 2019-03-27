@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
                 User.currentMoney = money
             }
             
-            self.moneyButton.title = "$" + String(User.currentMoney)
+            self.moneyButton.title = "$" + String(User.currentMoney) 
         }
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in

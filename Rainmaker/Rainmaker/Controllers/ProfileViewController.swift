@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController {
     var profileImage: UIImage?
     var imageURL: String?
     var numberOfCorrectBets = 0
+    var numberOfIncorrectBets = 0
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
@@ -139,14 +140,18 @@ class ProfileViewController: UIViewController {
         for bet in allbets {
             if bet.rightAnswer == bet.chosenBet {
                 numberOfCorrectBets += 1
+            } else {
+                numberOfIncorrectBets += 1
             }
         }
     }
     
     func changeMoney(allBets: [ProfileBet]) {
         countWins(allbets: allBets)
+        var allMoney = 0
         let wonMoney = numberOfCorrectBets * 5
-        let allMoney = User.currentMoney + wonMoney
+        let lostMoney = numberOfIncorrectBets * 5
+        allMoney = 100 + wonMoney - lostMoney
         User.currentMoney = allMoney
         totalMoney.text = "$" + String(allMoney)
         BetService.changeBetMoney(withAmount: allMoney) { (bool) in
@@ -250,16 +255,10 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
                 }
             }
             
-            if bet.rightAnswer == bet.chosenBet {
-                cell.winLoss.text = "W"
-            } else if bet.isActive == 1 {
-                cell.winLoss.text = "NA"
-                cell.winLoss.textColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-            } else {
-                cell.winLoss.text = "L"
-                cell.winLoss.textColor = #colorLiteral(red: 1, green: 0.356, blue: 0.192, alpha: 1)
-            }
-            
+            cell.rightAnswer = bet.rightAnswer
+            cell.chosenOption = bet.chosenBet
+
+            cell.awakeFromNib()
             
             return cell
         }
