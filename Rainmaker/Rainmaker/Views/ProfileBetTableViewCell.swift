@@ -42,7 +42,6 @@ class ProfileBetTableViewCell: UITableViewCell {
         }
     }
     
-    
     func setState() {
         if rightAnswer == -1 {
             betState = -1

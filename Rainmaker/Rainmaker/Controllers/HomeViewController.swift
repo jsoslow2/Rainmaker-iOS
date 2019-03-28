@@ -221,22 +221,17 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
             cell.topLabel.attributedText = attributedUsername
         }
         
-        //load the profile picture
-        UserService.getImageURL(userUID: post.UID) { (imageURL) in
-            let url = URL(string: imageURL)
-            let session = URLSession.shared
+        
+        var url : URL?
+        UserService.getImageURL(userUID: cell.userID!) { (imageURL) in
+            url = URL(string: imageURL)
             
-            session.dataTask(with: url!, completionHandler: { (data, response, error) in
-                if let error = error {
-                    print(error)
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        cell.profilePicture.image = UIImage(data: data!)
-                    }
-                }
-            }).resume()
+            print(cell.userID)
+            cell.profilePicture.getImage(url: url!)
         }
+        
+        
+
         
         
         cell.subLabel.text = post.typeOfGame
