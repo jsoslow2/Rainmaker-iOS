@@ -136,8 +136,6 @@ class ConfirmCreateABetViewController : UIViewController {
                 }
                 
             }
-            
-            
         }
     }
     

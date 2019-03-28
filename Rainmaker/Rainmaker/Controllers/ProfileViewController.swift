@@ -15,6 +15,10 @@ class ProfileViewController: UIViewController {
     
     let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
     let badGrey = (UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0))
+    let combination = NSMutableAttributedString()
+    var yourAttributes : Any?
+    var yourOtherAttributes : Any?
+
     
     
     var bets : [ProfileBet]?
@@ -43,6 +47,17 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+
+        yourAttributes = [NSAttributedString.Key.foregroundColor: mintGreen, NSAttributedString.Key.font: UIFont(name: "Avenir", size: 25)]
+        yourOtherAttributes = [NSAttributedString.Key.foregroundColor: mintGreen, NSAttributedString.Key.font: UIFont(name: "Avenir", size: 10)]
+        let partOne = NSMutableAttributedString(string: String(User.currentMoney), attributes: yourAttributes as? [NSAttributedString.Key : Any])
+        let partTwo = NSMutableAttributedString(string: "drops", attributes: yourOtherAttributes as? [NSAttributedString.Key : Any])
+        
+        
+        combination.append(partOne)
+        combination.append(partTwo)
+
 
 
         
@@ -87,7 +102,10 @@ class ProfileViewController: UIViewController {
         
         //set the total bets and current money labels
         totalBetsLabel.text = String(User.numberOfBets)
-        totalMoney.text = "$" + String(User.currentMoney)
+        
+        //set the current money label
+        let attributedMoney = NSAttributedString(string: String(User.currentMoney))
+        totalMoney.attributedText = combination
         
         //LOAD THE DATA
         //load active bets
@@ -153,7 +171,7 @@ class ProfileViewController: UIViewController {
         let lostMoney = numberOfIncorrectBets * 5
         allMoney = 100 + wonMoney - lostMoney
         User.currentMoney = allMoney
-        totalMoney.text = "$" + String(allMoney)
+        totalMoney.attributedText = combination
         BetService.changeBetMoney(withAmount: allMoney) { (bool) in
             print(bool)
         }
@@ -244,7 +262,7 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
             let bet = bets[indexPath.row]
             
             cell.betQuestion.text = bet.betQuestion
-            cell.betAmount.text = "$" + String(bet.betAmount)
+            cell.betAmount.text = String(bet.betAmount)
             cell.typeOfGame.text = bet.typeOfGame
             
             BetService.getInfoOfBet(betKey: bet.betKey) { (a, b, firstBetOption, secondBetOption, c, d, e, f) in

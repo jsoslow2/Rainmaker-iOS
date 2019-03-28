@@ -12,6 +12,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    
     var homePosts: [HomePost]?
     var passingUID: String?
     var createdBet: HomePost?
@@ -43,6 +44,9 @@ class HomeViewController: UIViewController {
     }
     
     func viewLoadSetup() {
+
+        
+        
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
         
@@ -54,7 +58,6 @@ class HomeViewController: UIViewController {
                 User.currentMoney = money
             }
             
-            self.moneyButton.title = "$" + String(User.currentMoney) 
         }
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in

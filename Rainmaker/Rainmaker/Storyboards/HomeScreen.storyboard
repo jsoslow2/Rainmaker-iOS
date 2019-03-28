@@ -264,7 +264,7 @@
                         <viewLayoutGuide key="safeArea" id="J1O-TT-R0g"/>
                     </view>
                     <navigationItem key="navigationItem" title="Rainmaker" id="B16-Vv-YFn">
-                        <barButtonItem key="leftBarButtonItem" title="+$100" id="uHI-VE-EUN">
+                        <barButtonItem key="leftBarButtonItem" id="uHI-VE-EUN">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="bRg-s5-Snu">
