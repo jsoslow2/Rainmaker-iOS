@@ -31,7 +31,7 @@ class ProfileBetTableViewCell: UITableViewCell {
                 winLoss.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             } else if betState == 0 {
                 winLoss.text = "L"
-                winLoss.textColor = #colorLiteral(red: 0.9882352941, green: 0.3607843137, blue: 0.231372549, alpha: 1)
+                winLoss.textColor = #colorLiteral(red: 0.988, green: 0.3607843137, blue: 0.231372549, alpha: 1)
             } else {
                 winLoss.text = "W"
                 winLoss.textColor = #colorLiteral(red: 0.4941176471, green: 0.831372549, blue: 0.6823529412, alpha: 1)

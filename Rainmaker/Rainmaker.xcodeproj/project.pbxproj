@@ -10,6 +10,7 @@
 		29130C4721B835AF002E4B2D /* ProfileBetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */; };
 		29130C4921B83C68002E4B2D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C4821B83C68002E4B2D /* ProfileViewController.swift */; };
 		292018D1224BCB960064727C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D0224BCB960064727C /* UIImageView.swift */; };
+		292018D5224D3C720064727C /* betForFreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D4224D3C720064727C /* betForFreeViewController.swift */; };
 		292D744A219F925000414217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292D7449219F925000414217 /* AppDelegate.swift */; };
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBetTableViewCell.swift; sourceTree = "<group>"; };
 		29130C4821B83C68002E4B2D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		292018D0224BCB960064727C /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		292018D4224D3C720064727C /* betForFreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = betForFreeViewController.swift; sourceTree = "<group>"; };
 		292D7446219F925000414217 /* Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rainmaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		292D7449219F925000414217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		292D744E219F925000414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +106,16 @@
 				1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		292018D3224D3C510064727C /* Login Flow */ = {
+			isa = PBXGroup;
+			children = (
+				29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */,
+				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
+				292018D4224D3C720064727C /* betForFreeViewController.swift */,
+			);
+			path = "Login Flow";
 			sourceTree = "<group>";
 		};
 		292D743D219F925000414217 = {
@@ -219,12 +231,11 @@
 		29D73F4F21A7495100C87EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */,
 				F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */,
 				F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */,
-				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
 				29130C4821B83C68002E4B2D /* ProfileViewController.swift */,
 				29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */,
+				292018D3224D3C510064727C /* Login Flow */,
 				29D160D5223496D000604D71 /* Create A Bet Flow */,
 			);
 			path = Controllers;
@@ -412,6 +423,7 @@
 				29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */,
 				29D160D42230D5F300604D71 /* CompleteCreateABetViewController.swift in Sources */,
 				29D73F5F21AC813100C87EC3 /* CreateUsernameViewController.swift in Sources */,
+				292018D5224D3C720064727C /* betForFreeViewController.swift in Sources */,
 				292D744A219F925000414217 /* AppDelegate.swift in Sources */,
 				2937D6BB2243190F0028AC3C /* ConfirmBet.swift in Sources */,
 				29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */,
