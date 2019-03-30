@@ -14,8 +14,10 @@ class HomeViewController: UIViewController {
     
     
     var homePosts: [HomePost]?
+    var homePostsWithCreated: [HomePost]?
     var passingUID: String?
     var createdBet: HomePost?
+    var didComeFromConfirm = 0
 
     @IBOutlet weak var moneyButton: UIBarButtonItem!
     
@@ -77,6 +79,7 @@ class HomeViewController: UIViewController {
         //LOAD THE DATA
         BetService.getHomeFeedBets { (homepost) in
             self.homePosts = homepost.reversed()
+            self.homePostsWithCreated = homepost.reversed()
             self.tableView.reloadData()
         }
         
@@ -164,7 +167,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let createdBet = createdBet {
-            homePosts?.insert(createdBet, at: 0)
+            homePostsWithCreated?.insert(createdBet, at: 0)
+            self.createdBet = nil
+            return homePostsWithCreated!.count
         }
         if let homePosts = homePosts {
             return homePosts.count
@@ -180,8 +185,15 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
 
         guard let homePosts = homePosts else {return cell}
         
-        let post = homePosts[indexPath.row]
+        var thePost : HomePost?
         
+        if didComeFromConfirm == 1 {
+            thePost = homePostsWithCreated![indexPath.row]
+        } else {
+            thePost = homePosts[indexPath.row]
+        }
+        
+        var post = thePost!
         
         func chosenAnswer () -> String {
             if (post.chosenBet == 0) {

@@ -15,9 +15,7 @@ class ProfileViewController: UIViewController {
     
     let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
     let badGrey = (UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0))
-    let combination = NSMutableAttributedString()
-    var yourAttributes : Any?
-    var yourOtherAttributes : Any?
+
 
     
     
@@ -29,6 +27,7 @@ class ProfileViewController: UIViewController {
     var imageURL: String?
     var numberOfCorrectBets = 0
     var numberOfIncorrectBets = 0
+    var numberOfUnfinishedBets = 0
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
@@ -36,6 +35,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var createdBetsButton: UIButton!
     @IBOutlet weak var activeBetsButton: UIButton!
+    @IBOutlet weak var winsLabel: UILabel!
+    @IBOutlet weak var lossLabel: UILabel!
     
     
     var tableFilter : Int = 0
@@ -49,14 +50,6 @@ class ProfileViewController: UIViewController {
         
         
 
-        yourAttributes = [NSAttributedString.Key.foregroundColor: mintGreen, NSAttributedString.Key.font: UIFont(name: "Avenir", size: 25)]
-        yourOtherAttributes = [NSAttributedString.Key.foregroundColor: mintGreen, NSAttributedString.Key.font: UIFont(name: "Avenir", size: 10)]
-        let partOne = NSMutableAttributedString(string: String(User.currentMoney), attributes: yourAttributes as? [NSAttributedString.Key : Any])
-        let partTwo = NSMutableAttributedString(string: "drops", attributes: yourOtherAttributes as? [NSAttributedString.Key : Any])
-        
-        
-        combination.append(partOne)
-        combination.append(partTwo)
 
 
 
@@ -104,8 +97,7 @@ class ProfileViewController: UIViewController {
         totalBetsLabel.text = String(User.numberOfBets)
         
         //set the current money label
-        let attributedMoney = NSAttributedString(string: String(User.currentMoney))
-        totalMoney.attributedText = combination
+        totalMoney.text = String(User.currentMoney)
         
         //LOAD THE DATA
         //load active bets
@@ -156,10 +148,14 @@ class ProfileViewController: UIViewController {
     
     func countWins(allbets: [ProfileBet]) {
         for bet in allbets {
-            if bet.rightAnswer == bet.chosenBet {
+            if bet.isActive == 1 {
+                numberOfUnfinishedBets += 1
+            } else if bet.rightAnswer == bet.chosenBet {
                 numberOfCorrectBets += 1
+                winsLabel.text = String(numberOfCorrectBets)
             } else {
                 numberOfIncorrectBets += 1
+                lossLabel.text = String(numberOfIncorrectBets)
             }
         }
     }
@@ -168,10 +164,10 @@ class ProfileViewController: UIViewController {
         countWins(allbets: allBets)
         var allMoney = 0
         let wonMoney = numberOfCorrectBets * 5
-        let lostMoney = numberOfIncorrectBets * 5
+        let lostMoney = numberOfIncorrectBets * 5 + numberOfUnfinishedBets * 5
         allMoney = 100 + wonMoney - lostMoney
         User.currentMoney = allMoney
-        totalMoney.attributedText = combination
+        totalMoney.text = String(User.currentMoney)
         BetService.changeBetMoney(withAmount: allMoney) { (bool) in
             print(bool)
         }
@@ -296,6 +292,7 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
                 }
                 self.createdBets?.remove(at: betIndex!)
                 self.tableView.reloadData()
+                self.changeMoney(allBets: self.bets!)
             }
         })
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

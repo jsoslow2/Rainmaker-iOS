@@ -149,6 +149,7 @@ class ConfirmCreateABetViewController : UIViewController {
         newPost.createBet = 1
         
         destinationVC.createdBet = newPost
+        destinationVC.didComeFromConfirm = 1
 
     }
     
