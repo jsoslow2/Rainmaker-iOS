@@ -241,7 +241,6 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         UserService.getImageURL(userUID: cell.userID!) { (imageURL) in
             url = URL(string: imageURL)
             
-            print(cell.userID)
             cell.profilePicture.getImage(url: url!)
         }
         

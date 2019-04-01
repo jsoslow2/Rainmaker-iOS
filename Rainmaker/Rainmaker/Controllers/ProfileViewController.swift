@@ -147,6 +147,9 @@ class ProfileViewController: UIViewController {
     }
     
     func countWins(allbets: [ProfileBet]) {
+        numberOfUnfinishedBets = 0
+        numberOfIncorrectBets = 0
+        numberOfCorrectBets = 0
         for bet in allbets {
             if bet.isActive == 1 {
                 numberOfUnfinishedBets += 1

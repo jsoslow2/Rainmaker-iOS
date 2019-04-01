@@ -13,15 +13,23 @@ import FirebaseAuth
 class OtherUserProfileViewController: UIViewController {
     
     var transferText = ""
+    
+    let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
+    let badGrey = (UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0))
 
     var bets : [ProfileBet]?
     var userID = ""
     var imageURL : String?
+    var numberOfCorrectBets = 0
+    var numberOfIncorrectBets = 0
+    var numberOfUnfinishedBets = 0
     
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
     @IBOutlet weak var totalMoney: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
+    @IBOutlet weak var winsLabel: UILabel!
+    @IBOutlet weak var lossLabel: UILabel!
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -59,13 +67,14 @@ class OtherUserProfileViewController: UIViewController {
         
         //set the current money
         UserService.getMoney(userUID: userID) { (currentMoney) in
-            self.totalMoney.text = "$" + String(currentMoney)
+            self.totalMoney.text = String(currentMoney)
         }
         
         //Load the Data
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
             self.bets = allBets
             self.tableView.reloadData()
+            self.countWins(allbets: self.bets!)
         }
         
         //Load the Propic
@@ -90,6 +99,23 @@ class OtherUserProfileViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func countWins(allbets: [ProfileBet]) {
+        numberOfUnfinishedBets = 0
+        numberOfIncorrectBets = 0
+        numberOfCorrectBets = 0
+        for bet in allbets {
+            if bet.isActive == 1 {
+                numberOfUnfinishedBets += 1
+            } else if bet.rightAnswer == bet.chosenBet {
+                numberOfCorrectBets += 1
+                winsLabel.text = String(numberOfCorrectBets)
+            } else {
+                numberOfIncorrectBets += 1
+                lossLabel.text = String(numberOfIncorrectBets)
+            }
+        }
     }
 }
 
@@ -116,18 +142,20 @@ extension OtherUserProfileViewController: UITableViewDataSource {
         let bet = bets[indexPath.row]
         
         cell.betQuestion.text = bet.betQuestion
-        cell.betAmount.text = "$" + String(bet.betAmount)
-        cell.typeOfGame.text = bet.typeOfGame
+        cell.betAmount.text = String(bet.betAmount)
         
-        if bet.rightAnswer == bet.chosenBet {
-            cell.winLoss.text = "W"
-        } else if bet.isActive == 1 {
-            cell.winLoss.text = "NA"
-            cell.winLoss.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        } else {
-            cell.winLoss.text = "L"
-            cell.winLoss.textColor = #colorLiteral(red: 0.9882352941, green: 0.3607843137, blue: 0.231372549, alpha: 1)
+        BetService.getInfoOfBet(betKey: bet.betKey) { (a, b, firstBetOption, secondBetOption, c, d, e, f) in
+            if bet.chosenBet == 0 {
+                cell.typeOfGame.text = firstBetOption
+            } else {
+                cell.typeOfGame.text = secondBetOption
+            }
         }
+        
+        cell.rightAnswer = bet.rightAnswer
+        cell.chosenOption = bet.chosenBet
+        
+        cell.awakeFromNib()
         
         return cell
     }
