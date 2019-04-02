@@ -41,6 +41,7 @@ class ConfirmCreateABetViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         confirmBetButton.layer.cornerRadius = 10
         firstBetButton.layer.cornerRadius = 10
@@ -142,6 +143,8 @@ class ConfirmCreateABetViewController : UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! HomeViewController
         
+        checkBetTexts()
+        checkSubtitle()
         let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
         newPost.isActive = 1
         newPost.rightAnswer = -1

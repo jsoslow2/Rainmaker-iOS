@@ -15,6 +15,8 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
         
         BetService.getAvailableBets { (allBets) in
             self.bets = allBets.filter({ (bet) -> Bool in

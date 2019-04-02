@@ -22,6 +22,7 @@ class CreateUsernameViewController: UIViewController {
 
     
     override func viewDidLoad() {
+        self.hideKeyboardWhenTappedAround()
         continueButton.layer.cornerRadius = 20
         super.viewDidLoad()
         

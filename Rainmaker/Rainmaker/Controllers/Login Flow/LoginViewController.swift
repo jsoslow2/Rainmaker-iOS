@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         loginButton.layer.cornerRadius = 20
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
     }
     
     override func didReceiveMemoryWarning() {

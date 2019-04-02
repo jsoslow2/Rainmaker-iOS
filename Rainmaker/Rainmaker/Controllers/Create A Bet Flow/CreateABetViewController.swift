@@ -30,6 +30,8 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
         /* Setup delegates */
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
