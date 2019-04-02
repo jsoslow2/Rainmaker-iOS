@@ -18,7 +18,7 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var searchActive = false
-    var filtered : [String] = []
+    var filtered : [UsableUser] = []
     var usernames : [String] = []
     var allUsers : [UsableUser]?
     
@@ -28,8 +28,13 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     var currentUser = Auth.auth().currentUser!.uid
     var currentUsername : String?
     
+    var currentUsername: String?
+    var currentUID = Auth.auth().currentUser!.uid
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
         /* Setup delegates */
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
@@ -43,9 +48,13 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         
         UserService.getAllUsersData { (allUsers) in
             self.allUsers = allUsers
+            self.filtered = allUsers
             self.tableView.reloadData()
         }
         
+        UserService.getUsername(userUID: currentUID)  { (username) in
+            self.currentUsername = username
+        }
 
     }
     
@@ -55,45 +64,20 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {filtered = allUsers!
+            tableView.reloadData(); return}
         
-        filtered = usernames.filter({ (text) -> Bool in
-            let tmp: NSString = text as NSString
-            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            
-            return range.location != NSNotFound
-        })
-        if(filtered.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
-        }
-        self.tableView.reloadData()
+        filtered = (allUsers?.filter({ (UsableUser) -> Bool in
+            UsableUser.username.lowercased().contains(searchText.lowercased())
+        }))!
+        dump(allUsers)
+        tableView.reloadData()
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let allUsers = allUsers {
-            return allUsers.count
-        } else {
-            return 0
-        }
+        return filtered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,11 +85,8 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         
         cell.delegate = self
         
-        guard let allUsers = allUsers else {
-            return cell
-        }
         
-        let user = allUsers[indexPath.row]
+        let user = filtered[indexPath.row]
 
         var numberOfBets = ""
         
@@ -113,6 +94,23 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
             numberOfBets = "Has made " + String(user.numberOfBets!) + " bets"
         } else {
             numberOfBets = "The user has made no bets"
+        }
+        
+        //load the profile picture
+        UserService.getImageURL(userUID: user.uid) { (imageURL) in
+            let url = URL(string: imageURL)
+            let session = URLSession.shared
+            
+            session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        cell.profilePic.image = UIImage(data: data!)!
+                    }
+                }
+            }).resume()
         }
         
         
@@ -134,10 +132,15 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         destinationVC.username = passingUsername
     }
     
+    @IBAction func adminGoToNext(_ sender: Any) {
+        if currentUsername == "jsoslow2" {
+            passingUID = ""
+            passingUsername = ""
+            self.performSegue(withIdentifier: "toCompleteCreateABet", sender: self)
+        }
+    }
     
-//    func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
 
-//    }
     
     func goToCompleteCreateABet(on cell: CreateABetTableViewCell) {
                 passingUID = cell.uid!

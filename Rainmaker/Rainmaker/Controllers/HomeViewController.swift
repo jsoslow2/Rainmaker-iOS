@@ -12,8 +12,12 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    
     var homePosts: [HomePost]?
+    var homePostsWithCreated: [HomePost]?
     var passingUID: String?
+    var createdBet: HomePost?
+    var didComeFromConfirm = 0
 
     @IBOutlet weak var moneyButton: UIBarButtonItem!
     
@@ -42,15 +46,20 @@ class HomeViewController: UIViewController {
     }
     
     func viewLoadSetup() {
+
+        
+        
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
+        
+        tabBarController?.delegate = self
+
         
         BetService.getCurrentMoney { (money) in
             if let money = money {
                 User.currentMoney = money
             }
             
-            self.moneyButton.title = "$" + String(User.currentMoney)
         }
         
         UserService.getNumberOfBets(userUID: User.current.uid) { (num) in
@@ -70,24 +79,28 @@ class HomeViewController: UIViewController {
         //LOAD THE DATA
         BetService.getHomeFeedBets { (homepost) in
             self.homePosts = homepost.reversed()
+            self.homePostsWithCreated = homepost.reversed()
             self.tableView.reloadData()
         }
         
+        print("viewDidLoad")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
-
-        tableView.reloadData()
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
 
     }
     
     @objc func loadList(notification: NSNotification){
         //load data here
-        self.tableView.reloadData()
+        //delay the loading of data by a second lol
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+            self.tableView.reloadData()
+        })
     }
 
 }
 
-extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate, UIGestureRecognizerDelegate {
+extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelegate, UIGestureRecognizerDelegate, UITabBarControllerDelegate {
     
     
     func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell) {
@@ -113,11 +126,15 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
             
             //if ok, you do the bet
-            BetService.bet(withBetKey: bet.betKey, chosenBet: button, withBetAmount: 5) { (bool) in
+            BetService.bet(withBetKey: bet.betKey, chosenBet: button, withBetAmount: 5) { (bool, postID) in
                 if !bool {
                     self.present(dialogMessage2, animated: true, completion: nil)
                 } else {
                     self.tableView.reloadData()
+                    BetService.getPost(postID: postID, completion: { (newBet) in
+                        self.homePosts?.insert(newBet, at: 0)
+                    })
+                    self.tableView.setContentOffset(.zero, animated: true)
                 }
             }
             
@@ -149,8 +166,11 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        
+        if let createdBet = createdBet {
+            homePostsWithCreated?.insert(createdBet, at: 0)
+            self.createdBet = nil
+            return homePostsWithCreated!.count
+        }
         if let homePosts = homePosts {
             return homePosts.count
         } else {
@@ -159,15 +179,21 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeFeedCell")! as! HomeFeedTableViewCell
         
         cell.delegate = self
 
         guard let homePosts = homePosts else {return cell}
         
-        let post = homePosts[indexPath.row]
+        var thePost : HomePost?
         
+        if didComeFromConfirm == 1 {
+            thePost = homePostsWithCreated![indexPath.row]
+        } else {
+            thePost = homePosts[indexPath.row]
+        }
+        
+        var post = thePost!
         
         func chosenAnswer () -> String {
             if (post.chosenBet == 0) {
@@ -209,6 +235,19 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
             
             cell.topLabel.attributedText = attributedUsername
         }
+        
+        
+        var url : URL?
+        UserService.getImageURL(userUID: cell.userID!) { (imageURL) in
+            url = URL(string: imageURL)
+            
+            cell.profilePicture.getImage(url: url!)
+        }
+        
+        
+
+        
+        
         cell.subLabel.text = post.typeOfGame
         cell.betTitle.text = post.betQuestion
         cell.profilePicture.image = post.image
@@ -243,6 +282,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
     
 
     @IBAction func unwindToHome (_ sender: UIStoryboardSegue) {}
-
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        tableView.setContentOffset(.zero, animated: true)
+    }
 }
 

@@ -15,9 +15,13 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
         
         BetService.getAvailableBets { (allBets) in
-            self.bets = allBets
+            self.bets = allBets.filter({ (bet) -> Bool in
+                bet.isActive == 1
+            })
             self.tableView.reloadData()
         }
         
@@ -49,7 +53,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
             
             //if ok, you do the bet
-            BetService.bet(withBetKey: bet.betKey!, chosenBet: button, withBetAmount: 5) { (bool) in
+            BetService.bet(withBetKey: bet.betKey!, chosenBet: button, withBetAmount: 5) { (bool, postID) in
                 if !bool {
                     self.present(dialogMessage2, animated: true, completion: nil)
                 } else {

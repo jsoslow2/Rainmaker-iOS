@@ -28,6 +28,7 @@ struct UserService {
             
         userAttrs["username"] = usernameText
         userAttrs["currentMoney"] = 100
+        userAttrs["imageURL"] = "https://firebasestorage.googleapis.com/v0/b/rainmaker-62bdd.appspot.com/o/default%20copy.png?alt=media&token=7480c6f8-ba16-4933-b34d-5a97adf69e47"
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
         ref.setValue(userAttrs) { (error, ref) in
@@ -96,6 +97,28 @@ struct UserService {
         }
     }
     
+    static func getImageURL(userUID: String, completion: @escaping(String) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any],
+                let imageURL = dict["imageURL"] as? String
+                else {completion(""); return}
+            
+            completion(imageURL)
+        }
+    }
+    
+    static func adjustProfilePic(userUID: String, imageURL: String, completion: @escaping(Bool) -> Void) {
+        let ref = Database.database().reference().child("users").child(userUID)
+        
+        var newProfilePic = [String : String] ()
+        newProfilePic["imageURL"] = imageURL
+        
+        ref.updateChildValues(newProfilePic)
+        completion(true)
+    }
+    
     
     
     static func getAllUsers(completion: @escaping([String]) -> Void) {
@@ -132,5 +155,6 @@ struct UserService {
         }
     }
 }
+
 
 

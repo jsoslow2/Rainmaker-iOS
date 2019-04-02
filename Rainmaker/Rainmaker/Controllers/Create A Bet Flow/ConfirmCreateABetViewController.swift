@@ -24,7 +24,7 @@ class ConfirmCreateABetViewController : UIViewController {
     var chosenOption : Int?
     var otherOption : Int?
     var betID : String?
-    var betSubtitle: String?
+    var typeOfGame: String?
     
     
     @IBOutlet weak var betTitle: UILabel!
@@ -36,11 +36,12 @@ class ConfirmCreateABetViewController : UIViewController {
     @IBOutlet weak var secondBetText: UITextField!
     @IBOutlet weak var confirmBetButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var subTitleTextBox: UITextField!
+    @IBOutlet weak var subtitleTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         confirmBetButton.layer.cornerRadius = 10
         firstBetButton.layer.cornerRadius = 10
@@ -82,11 +83,11 @@ class ConfirmCreateABetViewController : UIViewController {
         }
     }
     
-    func checkCustomBet () {
-        if (subTitleTextBox.text?.isEmpty)! {
-            betSubtitle = "Custom Bet"
+    func checkSubtitle () {
+        if (subtitleTextField.text?.isEmpty)! {
+            typeOfGame = "Custom Bet"
         } else {
-            betSubtitle = subTitleTextBox.text
+            typeOfGame = subtitleTextField.text!
         }
     }
     
@@ -109,17 +110,13 @@ class ConfirmCreateABetViewController : UIViewController {
     
     @IBAction func confirmBet(_ sender: Any) {
         checkBetTexts()
-        checkCustomBet()
-        
-        
-        //admin check
-        if currentUsername == "jsoslow2" {
-            BetService.createBet(betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, subtitle: betSubtitle!, createBet: 0) { (theString) in
-                print(theString)
+        checkSubtitle()
+        // 1. Give Error if you haven't picked a bet option
+        if currentUsername == "jsoslow2" && chosenOption == nil {
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 5) { (uniqueID) in
+                self.betID = uniqueID
             }
-        }
-        // Give Error if you haven't picked a bet option
-        else if chosenOption == nil {
+        } else if chosenOption == nil {
             let dialogMessage2 = UIAlertController(title: "Error", message: "Choose one of the bet options to make the bet", preferredStyle: .alert)
             let ok2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             })
@@ -129,28 +126,36 @@ class ConfirmCreateABetViewController : UIViewController {
         //create that bet!
         else {
             // 2. Create a new bet in Bets tab
-            BetService.createBet(betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, subtitle: betSubtitle!, createBet: 1) { (uniqueID) in
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 1) { (uniqueID) in
                 print("yeet")
                 self.betID = uniqueID
                 
             }
             
             //3. Update users bets
-            BetService.bet(withBetKey: betID!, chosenBet: chosenOption!, withBetAmount: 0) { (Boolean) in
+            BetService.bet(withBetKey: betID!, chosenBet: chosenOption!, withBetAmount: 5) { (Boolean, postID) in
                 if !Boolean {
                     print("no worky")
                 }
                 
             }
-            
-            
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! HomeViewController
-        destinationVC.tableView.reloadData()
-        print("works?")
+        
+        checkBetTexts()
+        checkSubtitle()
+        let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
+        newPost.isActive = 1
+        newPost.rightAnswer = -1
+        newPost.otherUsername = username!
+        newPost.createBet = 1
+        
+        destinationVC.createdBet = newPost
+        destinationVC.didComeFromConfirm = 1
+
     }
     
 }

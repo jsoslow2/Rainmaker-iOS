@@ -15,7 +15,11 @@ protocol HomeFeedTableViewCellDelegate : class {
 
 class HomeFeedTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profilePicture: UIImageView! = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "default copy")
+        return imageView
+    }()
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
     @IBOutlet weak var betTitle: UILabel!
@@ -64,6 +68,25 @@ class HomeFeedTableViewCell: UITableViewCell {
         delegate!.didTapBetButton(which: 1, on: self)
     }
     
-    
+    func getPicture(uid: String, completion: @escaping(UIImage) -> Void) {
+        UserService.getImageURL(userUID: uid) { (imageURL) in
+            let url = URL(string: imageURL)
+            let session = URLSession.shared
+            
+            session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        let theImage = UIImage(data: data!)
+                        
+                        self.profilePicture.image = theImage
+                        completion(theImage!)
+                    }
+                }
+            }).resume()
+        }
+    }
     
 }

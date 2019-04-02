@@ -3,16 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		29130C4721B835AF002E4B2D /* ProfileBetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */; };
 		29130C4921B83C68002E4B2D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29130C4821B83C68002E4B2D /* ProfileViewController.swift */; };
+		292018D1224BCB960064727C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D0224BCB960064727C /* UIImageView.swift */; };
+		292018D5224D3C720064727C /* betForFreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D4224D3C720064727C /* betForFreeViewController.swift */; };
+		292018D7224FEEC80064727C /* FinalOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D6224FEEC80064727C /* FinalOnboardingViewController.swift */; };
+		292018D92252F2490064727C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D82252F2490064727C /* UIViewController.swift */; };
 		292D744A219F925000414217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292D7449219F925000414217 /* AppDelegate.swift */; };
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
 		292D7454219F925400414217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D7452219F925400414217 /* LaunchScreen.storyboard */; };
+		2937D6BB2243190F0028AC3C /* ConfirmBet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937D6BA2243190F0028AC3C /* ConfirmBet.swift */; };
 		29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */; };
 		29D160CC2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */; };
 		29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */; };
@@ -28,6 +33,7 @@
 		29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6021AC8BB200C87EC3 /* UserService.swift */; };
 		29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6221ADE79D00C87EC3 /* Constants.swift */; };
 		29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */; };
+		29DC70F022429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DC70EF22429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift */; };
 		3D31ACB4903358DBA23EE191 /* Pods_Rainmaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */; };
 		F03B53D821AF259D00F5306D /* ProfileBet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03B53D721AF259D00F5306D /* ProfileBet.swift */; };
 		F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */; };
@@ -46,12 +52,17 @@
 		20C0835644452D0E2B85263B /* Pods-Rainmaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.debug.xcconfig"; sourceTree = "<group>"; };
 		29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBetTableViewCell.swift; sourceTree = "<group>"; };
 		29130C4821B83C68002E4B2D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		292018D0224BCB960064727C /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		292018D4224D3C720064727C /* betForFreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = betForFreeViewController.swift; sourceTree = "<group>"; };
+		292018D6224FEEC80064727C /* FinalOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalOnboardingViewController.swift; sourceTree = "<group>"; };
+		292018D82252F2490064727C /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		292D7446219F925000414217 /* Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rainmaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		292D7449219F925000414217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		292D744E219F925000414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		292D7450219F925400414217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		292D7453219F925400414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		292D7455219F925400414217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2937D6BA2243190F0028AC3C /* ConfirmBet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBet.swift; sourceTree = "<group>"; };
 		29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateABetTableViewCell.swift; sourceTree = "<group>"; };
@@ -67,6 +78,7 @@
 		29D73F6021AC8BB200C87EC3 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		29D73F6221ADE79D00C87EC3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
+		29DC70EF22429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBetResultConfirmationTableViewCell.swift; sourceTree = "<group>"; };
 		AF553E494EEDD03AF41DB269 /* Pods-Rainmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainmaker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rainmaker/Pods-Rainmaker.release.xcconfig"; sourceTree = "<group>"; };
 		F03B53D721AF259D00F5306D /* ProfileBet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBet.swift; sourceTree = "<group>"; };
 		F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +110,17 @@
 				1EE1EE84E3723C7A936E23E0 /* Pods_Rainmaker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		292018D3224D3C510064727C /* Login Flow */ = {
+			isa = PBXGroup;
+			children = (
+				29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */,
+				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
+				292018D4224D3C720064727C /* betForFreeViewController.swift */,
+				292018D6224FEEC80064727C /* FinalOnboardingViewController.swift */,
+			);
+			path = "Login Flow";
 			sourceTree = "<group>";
 		};
 		292D743D219F925000414217 = {
@@ -151,6 +174,7 @@
 				29D73F5821A9A4BB00C87EC3 /* User.swift */,
 				F0D7A9EF21AB344C0069EF16 /* HomePost.swift */,
 				F0D7A9F121AB35F80069EF16 /* Bet.swift */,
+				2937D6BA2243190F0028AC3C /* ConfirmBet.swift */,
 				29D160D1222F311500604D71 /* UsableUser.swift */,
 			);
 			path = Models;
@@ -160,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				29D73F6421ADE81F00C87EC3 /* Storyboard+Utility.swift */,
+				292018D0224BCB960064727C /* UIImageView.swift */,
+				292018D82252F2490064727C /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -203,6 +229,7 @@
 				29130C4621B835AF002E4B2D /* ProfileBetTableViewCell.swift */,
 				29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */,
 				29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */,
+				29DC70EF22429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,12 +237,11 @@
 		29D73F4F21A7495100C87EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				29D73F5221A83FCB00C87EC3 /* LoginViewController.swift */,
 				F0D7A9E421AB0EB90069EF16 /* HomeViewController.swift */,
 				F0D7A9E621AB0EC60069EF16 /* SearchViewController.swift */,
-				29D73F5E21AC813100C87EC3 /* CreateUsernameViewController.swift */,
 				29130C4821B83C68002E4B2D /* ProfileViewController.swift */,
 				29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */,
+				292018D3224D3C510064727C /* Login Flow */,
 				29D160D5223496D000604D71 /* Create A Bet Flow */,
 			);
 			path = Controllers;
@@ -269,7 +295,7 @@
 				};
 			};
 			buildConfigurationList = 292D7441219F925000414217 /* Build configuration list for PBXProject "Rainmaker" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -384,7 +410,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				29D160CC2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift in Sources */,
+				292018D1224BCB960064727C /* UIImageView.swift in Sources */,
 				F0D7A9F021AB344C0069EF16 /* HomePost.swift in Sources */,
+				29DC70F022429FB60017B375 /* CustomBetResultConfirmationTableViewCell.swift in Sources */,
 				F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */,
 				F0D7A9EE21AB338D0069EF16 /* HomeFeedTableViewCell.swift in Sources */,
 				29D160D0222B784600604D71 /* CreateABetViewController.swift in Sources */,
@@ -395,18 +423,22 @@
 				29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */,
 				29D73F5321A83FCB00C87EC3 /* LoginViewController.swift in Sources */,
 				29130C4921B83C68002E4B2D /* ProfileViewController.swift in Sources */,
+				292018D92252F2490064727C /* UIViewController.swift in Sources */,
 				F03B53D821AF259D00F5306D /* ProfileBet.swift in Sources */,
 				29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */,
 				29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */,
 				29D73F6321ADE79D00C87EC3 /* Constants.swift in Sources */,
 				29D160D42230D5F300604D71 /* CompleteCreateABetViewController.swift in Sources */,
 				29D73F5F21AC813100C87EC3 /* CreateUsernameViewController.swift in Sources */,
+				292018D5224D3C720064727C /* betForFreeViewController.swift in Sources */,
 				292D744A219F925000414217 /* AppDelegate.swift in Sources */,
+				2937D6BB2243190F0028AC3C /* ConfirmBet.swift in Sources */,
 				29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */,
 				F0D7A9F221AB35F80069EF16 /* Bet.swift in Sources */,
 				F0D7A9E521AB0EB90069EF16 /* HomeViewController.swift in Sources */,
 				29D160D2222F311500604D71 /* UsableUser.swift in Sources */,
 				F0D7A9F421AB3C850069EF16 /* BetService.swift in Sources */,
+				292018D7224FEEC80064727C /* FinalOnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,7 +29,7 @@ class HomePost {
     init(chosenBet: Int, betKey: String, image: UIImage, betQuestion: String?, typeOfGame: String?, UID: String, username: String, firstOption: String, secondOption: String) {
         self.chosenBet = chosenBet
         self.betKey = betKey
-        self.image = #imageLiteral(resourceName: "default copy")
+        self.image = image
         self.betQuestion = betQuestion
         self.typeOfGame = typeOfGame
         self.UID = UID
@@ -44,7 +44,7 @@ class HomePost {
             let UID = dict["uidOfBettor"] as? String,
             let betKey = dict["betKey"] as? String
             else { return nil }
-        
+
         self.chosenBet = chosenBet
         self.betKey = betKey
         self.UID = UID
