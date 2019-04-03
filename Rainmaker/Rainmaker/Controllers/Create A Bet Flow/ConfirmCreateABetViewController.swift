@@ -145,15 +145,19 @@ class ConfirmCreateABetViewController : UIViewController {
         
         checkBetTexts()
         checkSubtitle()
-        let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
-        newPost.isActive = 1
-        newPost.rightAnswer = -1
-        newPost.otherUsername = username!
-        newPost.createBet = 1
         
-        destinationVC.createdBet = newPost
-        destinationVC.didComeFromConfirm = 1
-
+        if username == "" {
+            print("newbet created")
+        } else {
+            let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
+            newPost.isActive = 1
+            newPost.rightAnswer = -1
+            newPost.otherUsername = username!
+            newPost.createBet = 1
+            
+            destinationVC.createdBet = newPost
+            destinationVC.didComeFromConfirm = 1
+        }
     }
     
 }
