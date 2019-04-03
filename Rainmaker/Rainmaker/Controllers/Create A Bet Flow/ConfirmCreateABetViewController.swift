@@ -149,7 +149,7 @@ class ConfirmCreateABetViewController : UIViewController {
         checkBetTexts()
         checkSubtitle()
         
-        if username == "" {
+        if username == "" || chosenOption == nil {
             print("newbet created")
         } else {
             let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)

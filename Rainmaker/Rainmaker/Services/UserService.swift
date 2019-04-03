@@ -28,6 +28,7 @@ struct UserService {
             
         userAttrs["username"] = usernameText
         userAttrs["currentMoney"] = 100
+        userAttrs["numberOfBets"] = 0
         userAttrs["imageURL"] = "https://firebasestorage.googleapis.com/v0/b/rainmaker-62bdd.appspot.com/o/default%20copy.png?alt=media&token=7480c6f8-ba16-4933-b34d-5a97adf69e47"
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
