@@ -18,10 +18,14 @@ typealias FIRUser = FirebaseAuth.User
 class LoginViewController: UIViewController {
     
     
+    @IBOutlet weak var gifImage: UIImageView!
+    @IBOutlet weak var loginImage: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gifImage.loadGif(name: "rain white background")
         
         loginButton.layer.cornerRadius = 20
         loginButton.addShadowView()

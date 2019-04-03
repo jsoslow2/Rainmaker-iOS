@@ -14,6 +14,9 @@
 		292018D7224FEEC80064727C /* FinalOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D6224FEEC80064727C /* FinalOnboardingViewController.swift */; };
 		292018D92252F2490064727C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018D82252F2490064727C /* UIViewController.swift */; };
 		292018DB2255173B0064727C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018DA2255173B0064727C /* UIView.swift */; };
+		292018DD225526E90064727C /* Image + Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292018DC225526E90064727C /* Image + Gif.swift */; };
+		292018DF225527120064727C /* rain.gif in Resources */ = {isa = PBXBuildFile; fileRef = 292018DE225527120064727C /* rain.gif */; };
+		292018E1225529190064727C /* rain white background.gif in Resources */ = {isa = PBXBuildFile; fileRef = 292018E0225529190064727C /* rain white background.gif */; };
 		292D744A219F925000414217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292D7449219F925000414217 /* AppDelegate.swift */; };
 		292D744F219F925000414217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 292D744D219F925000414217 /* Main.storyboard */; };
 		292D7451219F925400414217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 292D7450219F925400414217 /* Assets.xcassets */; };
@@ -58,6 +61,9 @@
 		292018D6224FEEC80064727C /* FinalOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalOnboardingViewController.swift; sourceTree = "<group>"; };
 		292018D82252F2490064727C /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		292018DA2255173B0064727C /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		292018DC225526E90064727C /* Image + Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image + Gif.swift"; sourceTree = "<group>"; };
+		292018DE225527120064727C /* rain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rain.gif; sourceTree = "<group>"; };
+		292018E0225529190064727C /* rain white background.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "rain white background.gif"; sourceTree = "<group>"; };
 		292D7446219F925000414217 /* Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rainmaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		292D7449219F925000414217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		292D744E219F925000414217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 				292018D0224BCB960064727C /* UIImageView.swift */,
 				292018D82252F2490064727C /* UIViewController.swift */,
 				292018DA2255173B0064727C /* UIView.swift */,
+				292018DC225526E90064727C /* Image + Gif.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,6 +227,8 @@
 				292D7455219F925400414217 /* Info.plist */,
 				29D73F4421A704C900C87EC3 /* GoogleService-Info.plist */,
 				29D73F6221ADE79D00C87EC3 /* Constants.swift */,
+				292018DE225527120064727C /* rain.gif */,
+				292018E0225529190064727C /* rain white background.gif */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -322,10 +331,12 @@
 			files = (
 				292D7454219F925400414217 /* LaunchScreen.storyboard in Resources */,
 				29D73F4521A704C900C87EC3 /* GoogleService-Info.plist in Resources */,
+				292018E1225529190064727C /* rain white background.gif in Resources */,
 				292D7451219F925400414217 /* Assets.xcassets in Resources */,
 				F0D7A9EC21AB109C0069EF16 /* HomeScreen.storyboard in Resources */,
 				F0D7A9F621AB3F640069EF16 /* Search.storyboard in Resources */,
 				29D73F5521A8472C00C87EC3 /* Login.storyboard in Resources */,
+				292018DF225527120064727C /* rain.gif in Resources */,
 				292D744F219F925000414217 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +439,7 @@
 				29130C4921B83C68002E4B2D /* ProfileViewController.swift in Sources */,
 				292018D92252F2490064727C /* UIViewController.swift in Sources */,
 				F03B53D821AF259D00F5306D /* ProfileBet.swift in Sources */,
+				292018DD225526E90064727C /* Image + Gif.swift in Sources */,
 				29D73F6121AC8BB200C87EC3 /* UserService.swift in Sources */,
 				292018DB2255173B0064727C /* UIView.swift in Sources */,
 				29D73F6521ADE81F00C87EC3 /* Storyboard+Utility.swift in Sources */,
