@@ -116,7 +116,7 @@ class ConfirmCreateABetViewController : UIViewController {
         checkSubtitle()
         // 1. Give Error if you haven't picked a bet option
         if currentUsername == "jsoslow2" && chosenOption == nil {
-            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 5) { (uniqueID) in
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 0) { (uniqueID) in
                 self.betID = uniqueID
             }
         } else if chosenOption == nil {
