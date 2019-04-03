@@ -21,6 +21,7 @@ class FinalOnboardingViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         continueToHome.layer.cornerRadius = 20
+        continueToHome.addShadowView()
     }
     
     

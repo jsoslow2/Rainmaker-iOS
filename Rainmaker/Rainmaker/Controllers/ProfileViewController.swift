@@ -48,7 +48,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("view Loaded")
         
         var lineView = UIView(frame: CGRect(x: 0, y: createdBetsButton.frame.height - 1.0, width: createdBetsButton.frame.size.width, height: 1))
         lineView.backgroundColor = .black

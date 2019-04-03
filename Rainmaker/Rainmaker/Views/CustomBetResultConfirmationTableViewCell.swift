@@ -27,6 +27,9 @@ class CustomBetResultConfirmationTableViewCell : UITableViewCell {
         super.awakeFromNib()
         firstOption.layer.cornerRadius = 10
         secondOption.layer.cornerRadius = 10
+        
+        firstOption.addShadowView()
+        secondOption.addShadowView()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

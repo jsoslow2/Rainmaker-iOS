@@ -46,6 +46,9 @@ class ConfirmCreateABetViewController : UIViewController {
         confirmBetButton.layer.cornerRadius = 10
         firstBetButton.layer.cornerRadius = 10
         secondBetButton.layer.cornerRadius = 10
+        confirmBetButton.addShadowView()
+        firstBetButton.addShadowView()
+        secondBetButton.addShadowView()
         
         //Bet title code
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]

@@ -29,6 +29,8 @@ class SearchTableViewCell: UITableViewCell {
 
         firstBetOption.layer.cornerRadius = 10
         secondBetOption.layer.cornerRadius = 10
+        firstBetOption.addShadowView()
+        secondBetOption.addShadowView()
         
 //        firstBetOption.backgroundColor = .clear
 //        firstBetOption.layer.borderWidth = 1

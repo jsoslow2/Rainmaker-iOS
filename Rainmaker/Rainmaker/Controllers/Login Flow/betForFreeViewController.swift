@@ -23,6 +23,7 @@ class betForFreeViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         continueButton.layer.cornerRadius = 20
+        continueButton.addShadowView()
         
     }
     
