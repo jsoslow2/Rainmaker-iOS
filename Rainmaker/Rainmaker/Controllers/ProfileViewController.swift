@@ -49,8 +49,14 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         print("view Loaded")
+        
+        var lineView = UIView(frame: CGRect(x: 0, y: createdBetsButton.frame.height - 1.0, width: createdBetsButton.frame.size.width, height: 1))
+        lineView.backgroundColor = .black
+        createdBetsButton.addSubview(lineView)
 
-
+        var lineView2 = UIView(frame: CGRect(x: 0, y: activeBetsButton.frame.height - 1.0, width: activeBetsButton.frame.size.width, height: 1))
+        lineView2.backgroundColor = .black
+        activeBetsButton.addSubview(lineView2)
 
 
         
@@ -241,6 +247,17 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableFilter == 0 {
+            
+            let headerView: UIView = UIView.init(frame: CGRect(x: 1, y: 50, width: UIScreen.main.bounds.width, height: 30))
+            headerView.backgroundColor = badGrey
+            
+            let labelView: UILabel = UILabel.init(frame: CGRect(x: 4, y: 5, width: UIScreen.main.bounds.width, height: 24))
+            labelView.text = "Pick What Actually Happened"
+            labelView.textAlignment = .center
+            labelView.font = UIFont.init(name: "Avenir-Heavy", size: 14)
+            
+            headerView.addSubview(labelView)
+            self.tableView.tableHeaderView = headerView
             ///CREATED BETS
             let cell = tableView.dequeueReusableCell(withIdentifier: "customBetResultConfirmationCell")! as! CustomBetResultConfirmationTableViewCell
             
@@ -258,6 +275,7 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
             return cell
             
         } else {
+            self.tableView.tableHeaderView = nil
             ///ACTIVE BETS
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileBetCell")! as! ProfileBetTableViewCell
             
