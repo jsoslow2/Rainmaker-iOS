@@ -12,6 +12,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
+
     
     var homePosts: [HomePost]?
     var homePostsWithCreated: [HomePost]?
@@ -213,6 +215,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         
         
         
+        
         let boldUsername  = post.username!
         let boldAnswer = chosenAnswer()
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -232,6 +235,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         
         cell.betKey = post.betKey
         cell.userID = post.UID
+        
+
+
         
         if post.createBet == 0 {
             cell.topLabel.attributedText = attributedUsername

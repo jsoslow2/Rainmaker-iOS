@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
 
 protocol HomeFeedTableViewCellDelegate : class {
     func didTapBetButton(which button: Int, on cell: HomeFeedTableViewCell)
@@ -44,9 +46,7 @@ class HomeFeedTableViewCell: UITableViewCell {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(HomeFeedTableViewCell.goToProfile(sender:)))
         addGestureRecognizer(tapGesture)
-        
-        
-        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
