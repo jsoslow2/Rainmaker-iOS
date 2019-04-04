@@ -99,7 +99,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="L11-FV-Fg5"/>
                                 </constraints>
-                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
