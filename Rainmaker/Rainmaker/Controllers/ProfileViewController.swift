@@ -49,8 +49,13 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         
+        var lineView = UIView(frame: CGRect(x: 0, y: createdBetsButton.frame.height - 1.0, width: createdBetsButton.frame.size.width, height: 1))
+        lineView.backgroundColor = .black
+        createdBetsButton.addSubview(lineView)
 
-
+        var lineView2 = UIView(frame: CGRect(x: 0, y: activeBetsButton.frame.height - 1.0, width: activeBetsButton.frame.size.width, height: 1))
+        lineView2.backgroundColor = .black
+        activeBetsButton.addSubview(lineView2)
 
 
         
@@ -101,18 +106,7 @@ class ProfileViewController: UIViewController {
         
         //LOAD THE DATA
         //load active bets
-        BetService.getUsersActiveBets(userID: userID) { (allBets) in
-                self.bets = allBets.reversed()
-                self.tableView.reloadData()
-                self.changeMoney(allBets: allBets)
-            }
-        
-        //load created bets
-        BetService.getUsersCreatedBets(userID: userID) { (createdBets) in
-            self.createdBets = createdBets.reversed()
-            self.tableView.reloadData()
-            print(createdBets)
-        }
+
         ////
         
         //load the propic
@@ -138,6 +132,27 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        UserService.getNumberOfBets(userUID: userID) { (numberOfBets) in
+            User.numberOfBets = numberOfBets
+            self.totalBetsLabel.text = String(numberOfBets)
+        }
+
+        BetService.getUsersActiveBets(userID: userID) { (allBets) in
+            self.bets = allBets.reversed()
+            self.tableView.reloadData()
+            self.changeMoney(allBets: allBets)
+            self.countWins(allbets: self.bets!)
+        }
+        
+        //load created bets
+        BetService.getUsersCreatedBets(userID: userID) { (createdBets) in
+            self.createdBets = createdBets.reversed()
+            self.tableView.reloadData()
+            print(createdBets)
+        }
+        
+        totalBetsLabel.text = String(User.numberOfBets)
         
         tableView.reloadData()
     }
@@ -236,6 +251,17 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableFilter == 0 {
+            
+            let headerView: UIView = UIView.init(frame: CGRect(x: 1, y: 50, width: UIScreen.main.bounds.width, height: 30))
+            headerView.backgroundColor = badGrey
+            
+            let labelView: UILabel = UILabel.init(frame: CGRect(x: 4, y: 5, width: UIScreen.main.bounds.width, height: 24))
+            labelView.text = "Pick What Actually Happened"
+            labelView.textAlignment = .center
+            labelView.font = UIFont.init(name: "Avenir-Heavy", size: 14)
+            
+            headerView.addSubview(labelView)
+            self.tableView.tableHeaderView = headerView
             ///CREATED BETS
             let cell = tableView.dequeueReusableCell(withIdentifier: "customBetResultConfirmationCell")! as! CustomBetResultConfirmationTableViewCell
             
@@ -253,6 +279,7 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
             return cell
             
         } else {
+            self.tableView.tableHeaderView = nil
             ///ACTIVE BETS
             let cell = tableView.dequeueReusableCell(withIdentifier: "profileBetCell")! as! ProfileBetTableViewCell
             
@@ -293,9 +320,19 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
                         betIndex = index
                     }
                 }
+                var activeBetIndex : Int?
+                for (index, bet) in self.bets!.enumerated() {
+                    if bet.betKey == cell.betKey {
+                        activeBetIndex = index
+                    }
+                }
                 self.createdBets?.remove(at: betIndex!)
                 self.tableView.reloadData()
+                
+                self.bets![activeBetIndex!].isActive = 0
+                self.bets![activeBetIndex!].rightAnswer = button
                 self.changeMoney(allBets: self.bets!)
+                self.countWins(allbets: self.bets!)
             }
         })
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

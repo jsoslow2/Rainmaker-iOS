@@ -22,9 +22,12 @@ class CreateUsernameViewController: UIViewController {
 
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.hideKeyboardWhenTappedAround()
         continueButton.layer.cornerRadius = 20
-        super.viewDidLoad()
+        continueButton.addShadowView()
+
         
         username.tintColor = mintGreen
         username.tintColorDidChange()

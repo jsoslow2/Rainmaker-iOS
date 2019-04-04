@@ -18,13 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place simple, social sports bets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtU-Nd-VON">
-                                <rect key="frame" x="70" y="322" width="235.5" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bet with your friends for free" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtU-Nd-VON">
+                                <rect key="frame" x="79.5" y="322" width="216" height="23"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rainmaker logo" translatesAutoresizingMaskIntoConstraints="NO" id="IeL-ag-7lH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rainmaker text" translatesAutoresizingMaskIntoConstraints="NO" id="IeL-ag-7lH">
                                 <rect key="frame" x="60" y="204" width="255" height="75"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rN-ue-zZw">
@@ -42,24 +42,32 @@
                                     <segue destination="Qr0-t2-fXA" kind="show" identifier="toCreateUsername" id="AfU-5j-Ogu"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rain white background.gif" translatesAutoresizingMaskIntoConstraints="NO" id="gOf-Mb-qJc">
+                                <rect key="frame" x="-262" y="70" width="899" height="174"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OtU-Nd-VON" firstAttribute="top" secondItem="IeL-ag-7lH" secondAttribute="bottom" constant="43" id="It4-cj-RQ3"/>
                             <constraint firstItem="OtU-Nd-VON" firstAttribute="centerX" secondItem="UxM-0d-K5C" secondAttribute="centerX" id="QUw-RH-Qlo"/>
+                            <constraint firstItem="IeL-ag-7lH" firstAttribute="top" secondItem="gOf-Mb-qJc" secondAttribute="bottom" constant="-40" id="Sct-vH-und"/>
                             <constraint firstItem="HYd-Jv-Vdo" firstAttribute="bottom" secondItem="5rN-ue-zZw" secondAttribute="bottom" constant="60" id="UHs-zr-and"/>
                             <constraint firstItem="IeL-ag-7lH" firstAttribute="centerX" secondItem="OtU-Nd-VON" secondAttribute="centerX" id="ctk-Kq-2fd"/>
                             <constraint firstItem="HYd-Jv-Vdo" firstAttribute="trailing" secondItem="5rN-ue-zZw" secondAttribute="trailing" constant="20" id="hZX-cc-Wf9"/>
                             <constraint firstItem="IeL-ag-7lH" firstAttribute="top" secondItem="HYd-Jv-Vdo" secondAttribute="top" constant="184" id="iOu-BA-r7G"/>
                             <constraint firstItem="5rN-ue-zZw" firstAttribute="leading" secondItem="HYd-Jv-Vdo" secondAttribute="leading" constant="20" id="j8u-yJ-MUk"/>
                             <constraint firstItem="OtU-Nd-VON" firstAttribute="centerY" secondItem="UxM-0d-K5C" secondAttribute="centerY" id="ksw-UQ-lra"/>
+                            <constraint firstItem="gOf-Mb-qJc" firstAttribute="top" secondItem="UxM-0d-K5C" secondAttribute="top" constant="70" id="nsQ-wg-oAs"/>
+                            <constraint firstItem="gOf-Mb-qJc" firstAttribute="centerX" secondItem="UxM-0d-K5C" secondAttribute="centerX" id="oZm-yL-2cM"/>
                             <constraint firstItem="IeL-ag-7lH" firstAttribute="leading" secondItem="HYd-Jv-Vdo" secondAttribute="leading" constant="60" id="wkD-eo-RwB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HYd-Jv-Vdo"/>
                     </view>
                     <navigationItem key="navigationItem" id="IJJ-Pg-RrQ"/>
                     <connections>
+                        <outlet property="gifImage" destination="gOf-Mb-qJc" id="tFd-k5-Sqe"/>
                         <outlet property="loginButton" destination="5rN-ue-zZw" id="aQb-b6-b9A"/>
+                        <outlet property="loginImage" destination="IeL-ag-7lH" id="ExB-r5-nPu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sqS-H0-P8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -274,6 +282,7 @@
     <resources>
         <image name="create a bet" width="72" height="72"/>
         <image name="iCloudcloud" width="111" height="72"/>
-        <image name="rainmaker logo" width="678" height="164"/>
+        <image name="rain white background.gif" width="899" height="899"/>
+        <image name="rainmaker text" width="860" height="156"/>
     </resources>
 </document>

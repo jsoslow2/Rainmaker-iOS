@@ -26,6 +26,7 @@ class CompleteCreateABetViewController : UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        continueButton.addShadowView()
         
         UserService.getUsername(userUID: currentUser) { (theName) in
             self.currentUsername = theName

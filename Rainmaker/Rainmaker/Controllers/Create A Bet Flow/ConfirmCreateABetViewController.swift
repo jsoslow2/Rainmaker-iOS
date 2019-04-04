@@ -46,6 +46,9 @@ class ConfirmCreateABetViewController : UIViewController {
         confirmBetButton.layer.cornerRadius = 10
         firstBetButton.layer.cornerRadius = 10
         secondBetButton.layer.cornerRadius = 10
+        confirmBetButton.addShadowView()
+        firstBetButton.addShadowView()
+        secondBetButton.addShadowView()
         
         //Bet title code
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -113,7 +116,7 @@ class ConfirmCreateABetViewController : UIViewController {
         checkSubtitle()
         // 1. Give Error if you haven't picked a bet option
         if currentUsername == "jsoslow2" && chosenOption == nil {
-            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 5) { (uniqueID) in
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 0) { (uniqueID) in
                 self.betID = uniqueID
             }
         } else if chosenOption == nil {
@@ -147,15 +150,19 @@ class ConfirmCreateABetViewController : UIViewController {
         
         checkBetTexts()
         checkSubtitle()
-        let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
-        newPost.isActive = 1
-        newPost.rightAnswer = -1
-        newPost.otherUsername = username!
-        newPost.createBet = 1
         
-        destinationVC.createdBet = newPost
-        destinationVC.didComeFromConfirm = 1
-
+        if username == "" || chosenOption == nil {
+            print("newbet created")
+        } else {
+            let newPost = HomePost(chosenBet: chosenOption!, betKey: betID!, image: #imageLiteral(resourceName: "default copy"), betQuestion: betQuestion!, typeOfGame: typeOfGame!, UID: currentUser!, username: currentUsername!, firstOption: firstBetOption!, secondOption: secondBetOption!)
+            newPost.isActive = 1
+            newPost.rightAnswer = -1
+            newPost.otherUsername = username!
+            newPost.createBet = 1
+            
+            destinationVC.createdBet = newPost
+            destinationVC.didComeFromConfirm = 1
+        }
     }
     
 }
