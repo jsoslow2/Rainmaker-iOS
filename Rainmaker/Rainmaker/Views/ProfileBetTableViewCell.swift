@@ -15,6 +15,7 @@ class ProfileBetTableViewCell: UITableViewCell {
     @IBOutlet weak var betQuestion: UILabel!
     @IBOutlet weak var betAmount: UILabel!
     @IBOutlet weak var winLoss: UILabel!
+    @IBOutlet weak var drops: UILabel!
     var betState: Int?
     var chosenOption: Int?
     var rightAnswer: Int?
@@ -32,9 +33,13 @@ class ProfileBetTableViewCell: UITableViewCell {
             } else if betState == 0 {
                 winLoss.text = "L"
                 winLoss.textColor = #colorLiteral(red: 0.988, green: 0.3607843137, blue: 0.231372549, alpha: 1)
+                betAmount.textColor = #colorLiteral(red: 0.9764705882, green: 0.3647058824, blue: 0.262745098, alpha: 1)
+                drops.textColor = #colorLiteral(red: 0.9764705882, green: 0.3647058824, blue: 0.262745098, alpha: 1)
             } else {
                 winLoss.text = "W"
                 winLoss.textColor = #colorLiteral(red: 0.4941176471, green: 0.831372549, blue: 0.6823529412, alpha: 1)
+                betAmount.textColor = #colorLiteral(red: 0.4941176471, green: 0.831372549, blue: 0.6823529412, alpha: 1)
+                drops.textColor = #colorLiteral(red: 0.4941176471, green: 0.831372549, blue: 0.6823529412, alpha: 1)
             }
         } else {
             winLoss.text = "NA"

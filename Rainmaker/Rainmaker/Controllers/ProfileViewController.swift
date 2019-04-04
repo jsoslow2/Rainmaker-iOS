@@ -133,8 +133,11 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UserService.getNumberOfBets(userUID: userID) { (numberOfBets) in
+            User.numberOfBets = numberOfBets
+            self.totalBetsLabel.text = String(numberOfBets)
+        }
 
-        print("view will appear")
         BetService.getUsersActiveBets(userID: userID) { (allBets) in
             self.bets = allBets.reversed()
             self.tableView.reloadData()
@@ -148,6 +151,8 @@ class ProfileViewController: UIViewController {
             self.tableView.reloadData()
             print(createdBets)
         }
+        
+        totalBetsLabel.text = String(User.numberOfBets)
         
         tableView.reloadData()
     }

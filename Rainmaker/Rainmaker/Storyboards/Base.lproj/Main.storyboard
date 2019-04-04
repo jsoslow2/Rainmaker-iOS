@@ -102,6 +102,7 @@
                                         <connections>
                                             <outlet property="betAmount" destination="eHO-Cs-oIt" id="04d-Dl-Rdo"/>
                                             <outlet property="betQuestion" destination="i1m-PO-Rmx" id="XjH-6c-Q6i"/>
+                                            <outlet property="drops" destination="ltd-E9-FSa" id="8ib-2L-OaI"/>
                                             <outlet property="typeOfGame" destination="toJ-f6-fWp" id="Wmw-TM-P56"/>
                                             <outlet property="winLoss" destination="b9L-LY-RSl" id="yTI-Cf-rtN"/>
                                         </connections>
