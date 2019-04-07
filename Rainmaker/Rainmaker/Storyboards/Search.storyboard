@@ -18,9 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All icons are made by Gregory Cresnar from www.flaticon.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-cd-OKb">
-                                <rect key="frame" x="16" y="333" width="343" height="147"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-cd-OKb">
+                                <rect key="frame" x="20" y="333" width="335" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="vLa-g7-ox0"/>
+                                </constraints>
+                                <string key="text">Search, Home, and Profile Icons are made by Gregory Cresnar from www.flaticon.com Raindrop icon is made by Chanut from flaticon.com</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -28,6 +31,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Mcd-cd-OKb" secondAttribute="trailing" constant="20" id="9lK-1V-RFp"/>
+                            <constraint firstItem="Mcd-cd-OKb" firstAttribute="centerX" secondItem="bgW-4M-90o" secondAttribute="centerX" id="KyH-UV-gN0"/>
+                            <constraint firstItem="Mcd-cd-OKb" firstAttribute="centerY" secondItem="bgW-4M-90o" secondAttribute="centerY" id="VTb-VF-2MO"/>
+                            <constraint firstItem="Mcd-cd-OKb" firstAttribute="leading" secondItem="xMg-ZP-TSd" secondAttribute="leading" constant="20" id="nBA-FY-kM6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bgW-4M-90o"/>
                     </view>
                 </viewController>
@@ -43,9 +52,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-yW-8Bg">
-                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-yW-8Bg">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchViewCell" rowHeight="141" id="6cf-i8-2fk" customClass="SearchTableViewCell" customModule="Rainmaker" customModuleProvider="target">
@@ -90,7 +98,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-fm-fKX">
-                                                    <rect key="frame" x="20.000000000000004" y="21" width="35.333333333333343" height="19.333333333333329"/>
+                                                    <rect key="frame" x="20" y="21" width="340" height="19"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -103,6 +111,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="6qG-fm-fKX" secondAttribute="trailing" constant="15" id="3G7-yI-zuG"/>
                                                 <constraint firstItem="6qG-fm-fKX" firstAttribute="top" secondItem="ejf-f7-R7E" secondAttribute="topMargin" constant="10" id="5cA-XW-gvt"/>
                                                 <constraint firstItem="qRa-kU-JmH" firstAttribute="top" secondItem="dBW-Od-Uc4" secondAttribute="bottom" constant="13" id="5mH-hJ-3h6"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="qRa-kU-JmH" secondAttribute="bottom" constant="13" id="C8K-iG-Uyt"/>
@@ -128,6 +137,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PBX-yW-8Bg" firstAttribute="leading" secondItem="NEk-hp-vR0" secondAttribute="leading" id="NkU-uD-ikZ"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="top" secondItem="PBX-yW-8Bg" secondAttribute="top" id="raO-nr-Qf7"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="trailing" secondItem="PBX-yW-8Bg" secondAttribute="trailing" id="vkh-MF-svH"/>
+                            <constraint firstItem="PBX-yW-8Bg" firstAttribute="bottom" secondItem="NEk-hp-vR0" secondAttribute="bottom" id="wfJ-C5-xcf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="NEk-hp-vR0"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="HtB-Z7-WDK">

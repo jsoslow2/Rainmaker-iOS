@@ -12,6 +12,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
+
     
     var homePosts: [HomePost]?
     var homePostsWithCreated: [HomePost]?
@@ -122,6 +124,8 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         
+        let dialogMessage3 = UIAlertController(title: "Bet No Longer Active", message: "The result of this bet has already finished so you cannot place a bet on it", preferredStyle: .alert)
+        
         // Create OK button with action handler
         let ok = UIAlertAction(title: "OK",  style: .default, handler: { (action) -> Void in
             
@@ -158,9 +162,14 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         dialogMessage.preferredAction = ok
         dialogMessage2.addAction(ok2)
         
+        dialogMessage3.addAction(ok2)
         
         // Present dialog message to user
-        self.present(dialogMessage, animated: true, completion: nil)
+        if bet.isActive == 1 {
+            self.present(dialogMessage, animated: true, completion: nil)
+        } else {
+            self.present(dialogMessage3, animated: true, completion: nil)
+        }
     }
     
     
@@ -206,6 +215,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         
         
         
+        
         let boldUsername  = post.username!
         let boldAnswer = chosenAnswer()
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -225,6 +235,9 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
         
         cell.betKey = post.betKey
         cell.userID = post.UID
+        
+
+
         
         if post.createBet == 0 {
             cell.topLabel.attributedText = attributedUsername

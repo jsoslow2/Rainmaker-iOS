@@ -17,12 +17,16 @@ class CreateUsernameViewController: UIViewController {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var gifImage: UIImageView!
+    @IBOutlet weak var topView: UIView!
     
     let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gifImage.loadGif(name: "rain white background")
         
         self.hideKeyboardWhenTappedAround()
         continueButton.layer.cornerRadius = 20
