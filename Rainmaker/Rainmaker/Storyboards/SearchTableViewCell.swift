@@ -25,7 +25,6 @@ class SearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // Initialization code
-        let mintGreen = (UIColor(red: 0.184, green: 0.788, blue: 0.588, alpha: 1.0))
 
         firstBetOption.layer.cornerRadius = 10
         secondBetOption.layer.cornerRadius = 10

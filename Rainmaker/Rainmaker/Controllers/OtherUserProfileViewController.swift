@@ -42,7 +42,7 @@ class OtherUserProfileViewController: UIViewController {
         
         //allocate delegate and datasource
         tableView.delegate = self as? UITableViewDelegate
-        tableView.dataSource = self as? UITableViewDataSource
+        tableView.dataSource = self
         
         //make profile pic rounded
         profilePic.layer.cornerRadius = profilePic.layer.bounds.height / 2
@@ -110,12 +110,12 @@ class OtherUserProfileViewController: UIViewController {
                 numberOfUnfinishedBets += 1
             } else if bet.rightAnswer == bet.chosenBet {
                 numberOfCorrectBets += 1
-                winsLabel.text = String(numberOfCorrectBets)
             } else {
                 numberOfIncorrectBets += 1
-                lossLabel.text = String(numberOfIncorrectBets)
             }
         }
+        lossLabel.text = String(numberOfIncorrectBets)
+        winsLabel.text = String(numberOfCorrectBets)
     }
 }
 
