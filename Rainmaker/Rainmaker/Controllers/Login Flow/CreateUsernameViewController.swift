@@ -37,7 +37,7 @@ class CreateUsernameViewController: UIViewController {
         username.tintColorDidChange()
         
         username.attributedPlaceholder = NSAttributedString(string: "Choose Username",
-                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont(name: "Avenir", size: 14)])
+                                                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont(name: "Avenir", size: 14) as Any])
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,7 +46,7 @@ class CreateUsernameViewController: UIViewController {
 
     
     @IBAction func continueButtonPressed(_ sender: UIButton) {
-        guard let firUser = Auth.auth().currentUser,
+        guard let _ = Auth.auth().currentUser,
             let usernameText = username.text,
             !usernameText.isEmpty else { return }
     }

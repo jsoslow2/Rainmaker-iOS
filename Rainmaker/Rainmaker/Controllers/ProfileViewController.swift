@@ -380,7 +380,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                 
                 if error != nil {
-                    print(error)
+                    print(error as Any)
                     return
                 }
                 
