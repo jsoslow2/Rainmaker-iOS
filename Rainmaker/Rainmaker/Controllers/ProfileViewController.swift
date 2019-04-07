@@ -314,17 +314,17 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
                         betIndex = index
                     }
                 }
-                var activeBetIndex : Int?
-                for (index, bet) in self.bets!.enumerated() {
-                    if bet.betKey == cell.betKey {
-                        activeBetIndex = index
-                    }
-                }
+//                var activeBetIndex : Int?
+//                for (index, bet) in self.bets!.enumerated() {
+//                    if bet.betKey == cell.betKey {
+//                        activeBetIndex = index
+//                    }
+//                }
                 self.createdBets?.remove(at: betIndex!)
                 self.tableView.reloadData()
                 
-                self.bets![activeBetIndex!].isActive = 0
-                self.bets![activeBetIndex!].rightAnswer = button
+                self.bets![betIndex!].isActive = 0
+                self.bets![betIndex!].rightAnswer = button
                 self.changeMoney(allBets: self.bets!)
                 self.countWins(allbets: self.bets!)
             }
