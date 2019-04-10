@@ -10,12 +10,18 @@ import UIKit
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var betsButton: UIButton!
+    @IBOutlet weak var usersButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var bets: [Bet]?
+    
+    var tableFilter : Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        changeFilters()
 
         
         BetService.getAvailableBets { (allBets) in
@@ -26,6 +32,35 @@ class SearchViewController: UIViewController {
         }
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        changeFilters()
+    }
+    
+    func changeFilters () {
+        if tableFilter == 0 {
+            betsButton.backgroundColor = Constants.mintGreen
+            betsButton.titleLabel?.textColor = UIColor.white
+            usersButton.backgroundColor = Constants.badGrey
+            usersButton.titleLabel?.textColor = UIColor.darkText
+        } else if tableFilter == 1 {
+            betsButton.backgroundColor = Constants.badGrey
+            betsButton.titleLabel?.textColor = UIColor.darkText
+            usersButton.backgroundColor = Constants.mintGreen
+            usersButton.titleLabel?.textColor = UIColor.white
+        }
+    }
+    
+    @IBAction func betsButtonPressed(_ sender: Any) {
+        tableFilter = 0
+        changeFilters()
+    }
+    
+    @IBAction func usersButtonPressed(_ sender: Any) {
+        tableFilter = 1
+        changeFilters()
+    }
+    
 }
 
 extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {

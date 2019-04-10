@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constants {
     
@@ -17,5 +18,8 @@ struct Constants {
     struct UserDefaults {
         static let currentUser = "currentUser"
     }
+    
+    static let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
+    static let badGrey = (UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0))
     
 }
