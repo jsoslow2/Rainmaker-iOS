@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var betsButton: UIButton!
@@ -15,6 +15,8 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var bets: [Bet]?
+    var searchActive = false
+    var filtered : [Bet] = []
     
     var tableFilter : Int = 0
 
@@ -23,11 +25,13 @@ class SearchViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         changeFilters()
 
+        searchBar.delegate = self as UISearchBarDelegate
         
         BetService.getAvailableBets { (allBets) in
             self.bets = allBets.filter({ (bet) -> Bool in
                 bet.isActive == 1
             })
+            self.filtered = self.bets!
             self.tableView.reloadData()
         }
         
@@ -61,6 +65,16 @@ class SearchViewController: UIViewController {
         changeFilters()
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {filtered = bets!
+            tableView.reloadData(); return}
+        
+        filtered = (bets?.filter({ (Bet) -> Bool in
+            Bet.betQuestion.lowercased().contains(searchText.lowercased())
+        }))!
+        
+        tableView.reloadData()
+    }
 }
 
 extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {
@@ -125,13 +139,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if let bets = bets {
-            return bets.count
-        } else {
-            return 0
-        }
-    
+        return filtered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -139,9 +147,8 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
 
         cell.delegate = self
         
-        guard let bets = bets else {return cell}
         
-        let bet = bets[indexPath.row]
+        let bet = filtered[indexPath.row]
         
         cell.betQuestion.text = bet.betQuestion
         
