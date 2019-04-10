@@ -13,7 +13,7 @@
         <!--Other User Profile View Controller-->
         <scene sceneID="WZQ-KV-MIT">
             <objects>
-                <viewController id="xFY-Le-zhK" customClass="OtherUserProfileViewController" customModule="Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="otherUserProfile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xFY-Le-zhK" customClass="OtherUserProfileViewController" customModule="Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e4J-qp-gFB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,7 +93,7 @@
                                 <rect key="frame" x="90" y="88" width="285" height="135"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hzb-4d-C8g">
-                                        <rect key="frame" x="44" y="40" width="195.66666666666663" height="53.666666666666657"/>
+                                        <rect key="frame" x="44.666666666666671" y="40.666666666666657" width="195.66666666666663" height="53.666666666666657"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6Im-hM-TOF">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="53.666666666666664"/>

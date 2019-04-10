@@ -13,11 +13,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var betsButton: UIButton!
     @IBOutlet weak var usersButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
+    
     var searchActive = false
     var bets: [Bet]?
     var allUsers : [UsableUser]?
     var filtered : [Bet] = []
     var filteredUsers : [UsableUser] = []
+    
+    var passingUID : String?
+    
     
     var tableFilter : Int = 0
 
@@ -97,7 +101,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {
+extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate, UserSearchTableViewCellDelegate {
     func didTapBetButton(which button: Int, on cell: SearchTableViewCell) {
         
         
@@ -156,6 +160,8 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         
     }
     
+
+    
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -188,6 +194,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "userSearchCell")! as! UserSearchTableViewCell
             
             let user = filteredUsers[indexPath.row]
+            cell.delegate = self
             
             var subTitleText = ""
             
@@ -213,6 +220,8 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
                 }).resume()
             }
             
+            cell.uid = user.uid
+            
             cell.profilePic.image = #imageLiteral(resourceName: "default copy")
             cell.username.text = user.username
             cell.subTitle.text = subTitleText
@@ -221,6 +230,20 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         }
         
     
+    }
+    
+    
+    func goToProfile(on cell: UserSearchTableViewCell) {
+        passingUID = cell.uid
+        
+        let mainStoryboard = UIStoryboard(name: "HomeScreen", bundle: nil)
+        
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "otherUserProfile") as? OtherUserProfileViewController else {
+            print("no vC found"); return}
+        
+        destinationVC.transferText = passingUID!
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
 }
