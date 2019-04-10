@@ -17,6 +17,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var bets: [Bet]?
     var searchActive = false
     var filtered : [Bet] = []
+    var filteredUsers : [UsableUser] = []
     
     var tableFilter : Int = 0
 
@@ -58,11 +59,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBAction func betsButtonPressed(_ sender: Any) {
         tableFilter = 0
         changeFilters()
+        tableView.reloadData()
+        tableView.rowHeight = 141
     }
     
     @IBAction func usersButtonPressed(_ sender: Any) {
         tableFilter = 1
         changeFilters()
+        tableView.reloadData()
+        tableView.rowHeight = 65
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -139,25 +144,42 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtered.count
+        if tableFilter == 0 {
+            return filtered.count
+        } else {
+            return 5
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchViewCell")! as! SearchTableViewCell
-
-        cell.delegate = self
         
+        if tableFilter == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "searchViewCell")! as! SearchTableViewCell
+            
+            cell.delegate = self
+            
+            
+            let bet = filtered[indexPath.row]
+            
+            cell.betQuestion.text = bet.betQuestion
+            
+            cell.firstBetOption.setTitle(bet.firstBetOption, for: .normal)
+            cell.secondBetOption.setTitle(bet.secondBetOption, for: .normal)
+            cell.typeOfGame.text = bet.typeOfGame
+            
+            print(bet)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "userSearchCell")! as! UserSearchTableViewCell
+            
+            cell.profilePic.image = #imageLiteral(resourceName: "default copy")
+            cell.username.text = "spoop"
+            cell.subTitle.text = "spoopy smoop"
+            
+            return cell
+        }
         
-        let bet = filtered[indexPath.row]
-        
-        cell.betQuestion.text = bet.betQuestion
-        
-        cell.firstBetOption.setTitle(bet.firstBetOption, for: .normal)
-        cell.secondBetOption.setTitle(bet.secondBetOption, for: .normal)
-        cell.typeOfGame.text = bet.typeOfGame
-        
-        print(bet)
-        return cell
+    
     }
     
 }
