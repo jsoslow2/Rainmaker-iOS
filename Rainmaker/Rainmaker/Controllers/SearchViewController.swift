@@ -13,9 +13,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var betsButton: UIButton!
     @IBOutlet weak var usersButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    var bets: [Bet]?
     var searchActive = false
+    var bets: [Bet]?
+    var allUsers : [UsableUser]?
     var filtered : [Bet] = []
     var filteredUsers : [UsableUser] = []
     
@@ -36,6 +36,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             self.tableView.reloadData()
         }
         
+        
+        UserService.getAllUsersData { (allUsers) in
+            self.allUsers = allUsers
+            self.filteredUsers = allUsers
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,14 +50,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     func changeFilters () {
         if tableFilter == 0 {
             betsButton.backgroundColor = Constants.mintGreen
-            betsButton.titleLabel?.textColor = UIColor.white
             usersButton.backgroundColor = Constants.badGrey
             usersButton.titleLabel?.textColor = UIColor.darkText
         } else if tableFilter == 1 {
             betsButton.backgroundColor = Constants.badGrey
             betsButton.titleLabel?.textColor = UIColor.darkText
             usersButton.backgroundColor = Constants.mintGreen
-            usersButton.titleLabel?.textColor = UIColor.white
         }
     }
     
@@ -147,7 +150,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         if tableFilter == 0 {
             return filtered.count
         } else {
-            return 5
+            return filteredUsers.count
         }
     }
     
@@ -172,9 +175,35 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "userSearchCell")! as! UserSearchTableViewCell
             
+            let user = filteredUsers[indexPath.row]
+            
+            var subTitleText = ""
+            
+            if user.numberOfBets != nil {
+                subTitleText = "Has made " + String(user.numberOfBets!) + " bets"
+            } else {
+                subTitleText = "The user has made no bets"
+            }
+            
+            UserService.getImageURL(userUID: user.uid) { (imageURL) in
+                let url = URL(string: imageURL)
+                let session = URLSession.shared
+                
+                session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        
+                        DispatchQueue.main.async {
+                            cell.profilePic.image = UIImage(data: data!)!
+                        }
+                    }
+                }).resume()
+            }
+            
             cell.profilePic.image = #imageLiteral(resourceName: "default copy")
-            cell.username.text = "spoop"
-            cell.subTitle.text = "spoopy smoop"
+            cell.username.text = user.username
+            cell.subTitle.text = subTitleText
             
             return cell
         }
