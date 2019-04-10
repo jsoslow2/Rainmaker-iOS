@@ -74,14 +74,26 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard !searchText.isEmpty else {filtered = bets!
-            tableView.reloadData(); return}
         
-        filtered = (bets?.filter({ (Bet) -> Bool in
-            Bet.betQuestion.lowercased().contains(searchText.lowercased())
-        }))!
+        if tableFilter == 0 {
+            guard !searchText.isEmpty else {filtered = bets!
+                tableView.reloadData(); return}
+            
+            filtered = (bets?.filter({ (Bet) -> Bool in
+                Bet.betQuestion.lowercased().contains(searchText.lowercased())
+            }))!
+            
+            tableView.reloadData()
+        } else {
+            guard !searchText.isEmpty else {filteredUsers = allUsers!
+                tableView.reloadData(); return}
+            
+            filteredUsers = (allUsers!.filter({ (User) -> Bool in
+                User.username.lowercased().contains(searchText.lowercased())
+            }))
+            tableView.reloadData()
+        }
         
-        tableView.reloadData()
     }
 }
 
