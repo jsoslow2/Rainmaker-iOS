@@ -29,6 +29,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         changeFilters()
+        
+        Constants.refresher.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
+        tableView.refreshControl = Constants.refresher
 
         searchBar.delegate = self as UISearchBarDelegate
         
@@ -49,6 +52,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         changeFilters()
+    }
+    
+    @objc func reloadTable() {
+        print("refreshing data")
+        
+        Constants.reloadTable(table: tableView)
     }
     
     func changeFilters () {

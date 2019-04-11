@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+
         
 
 
@@ -127,6 +127,9 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        Constants.refresher.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
+        tableView.refreshControl = Constants.refresher
+        
         UserService.getNumberOfBets(userUID: userID) { (numberOfBets) in
             User.numberOfBets = numberOfBets
             self.totalBetsLabel.text = String(numberOfBets)
@@ -153,6 +156,12 @@ class ProfileViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @objc func reloadTable() {
+        print("refreshing data")
+        
+        Constants.reloadTable(table: tableView)
     }
     
     func countWins(allbets: [ProfileBet]) {

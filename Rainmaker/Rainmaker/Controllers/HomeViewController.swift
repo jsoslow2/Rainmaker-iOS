@@ -54,6 +54,11 @@ class HomeViewController: UIViewController {
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
         
+        Constants.refresher.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
+        tableView.refreshControl = Constants.refresher
+        
+        
+        
         tabBarController?.delegate = self
 
         
@@ -88,7 +93,7 @@ class HomeViewController: UIViewController {
         print("viewDidLoad")
         
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
+
 
     }
     
@@ -98,6 +103,12 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
             self.tableView.reloadData()
         })
+    }
+    
+    @objc func reloadTable() {
+        print("refreshing data")
+        
+        Constants.reloadTable(table: tableView)
     }
 
 }

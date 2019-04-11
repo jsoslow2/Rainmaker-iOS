@@ -22,4 +22,20 @@ struct Constants {
     static let mintGreen = (UIColor(red: 0.494, green: 0.831, blue: 0.682, alpha: 1.0))
     static let badGrey = (UIColor(red: 0.937, green: 0.937, blue: 0.957, alpha: 1.0))
     
+    
+    static var refresher : UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = Constants.mintGreen
+        
+        return refreshControl
+    }()
+    
+    
+    static func reloadTable (table: UITableView) {
+        let deadline = DispatchTime.now() + .milliseconds(700)
+        DispatchQueue.main.asyncAfter(deadline: deadline) {
+            table.reloadData()
+            Constants.refresher.endRefreshing()
+        }
+    }
 }
