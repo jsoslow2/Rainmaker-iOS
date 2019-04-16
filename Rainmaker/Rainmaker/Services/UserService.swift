@@ -155,6 +155,18 @@ struct UserService {
             completion(allUsers)
         }
     }
+    
+    static func addFollower(currentUID: String, otherUID: String, completion: @escaping(Bool) -> Void) {
+        let ref = Database.database().reference().child("users").child(currentUID).child("following")
+        
+        var updatedData = [String: Any]()
+        
+        updatedData["isFollowing"] = 1
+        
+        ref.child(otherUID).updateChildValues(updatedData)
+        
+        completion(true)
+    }
 }
 
 

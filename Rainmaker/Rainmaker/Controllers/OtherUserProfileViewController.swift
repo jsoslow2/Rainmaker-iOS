@@ -19,6 +19,7 @@ class OtherUserProfileViewController: UIViewController {
 
     var bets : [ProfileBet]?
     var userID = ""
+    var currentUID = Auth.auth().currentUser?.uid
     var imageURL : String?
     var numberOfCorrectBets = 0
     var numberOfIncorrectBets = 0
@@ -30,6 +31,7 @@ class OtherUserProfileViewController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var winsLabel: UILabel!
     @IBOutlet weak var lossLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,6 +41,10 @@ class OtherUserProfileViewController: UIViewController {
         super.viewDidLoad()
         username.text = transferText
         userID = transferText
+        
+        followButton.backgroundColor = Constants.badGrey
+        followButton.layer.cornerRadius = 10
+        followButton.addShadowView()
         
         //allocate delegate and datasource
         tableView.delegate = self as? UITableViewDelegate
@@ -117,6 +123,22 @@ class OtherUserProfileViewController: UIViewController {
         lossLabel.text = String(numberOfIncorrectBets)
         winsLabel.text = String(numberOfCorrectBets)
     }
+    
+    @IBAction func followButtonPressed(_ sender: Any) {
+        UserService.addFollower(currentUID: currentUID!, otherUID: userID) { (bool) in
+            if bool {
+                let dialogMessage = UIAlertController(title: "Followed", message: "You have just followed \(self.username.text!)", preferredStyle: .alert)
+                
+                let ok =  UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                })
+                
+                dialogMessage.addAction(ok)
+                
+                self.present(dialogMessage, animated: true, completion: nil)
+            }
+        }
+    }
+    
 }
 
 
