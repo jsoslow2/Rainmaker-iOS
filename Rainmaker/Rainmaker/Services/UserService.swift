@@ -197,6 +197,19 @@ struct UserService {
         }
         
     }
+    
+    static func getAllFollowers(currentUID: String, completion: @escaping([String]) -> Void) {
+        let ref = Database.database().reference().child("users").child(currentUID).child("following")
+        var keys : [String] = []
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            for snap in snapshot.children {
+                let child = snap as! DataSnapshot
+                let key = child.key
+                keys.append(key)
+            }
+            completion(keys)
+        }
+    }
 }
 
 

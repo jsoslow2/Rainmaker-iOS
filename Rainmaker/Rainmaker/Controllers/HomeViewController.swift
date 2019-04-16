@@ -48,6 +48,9 @@ class HomeViewController: UIViewController {
     }
     
     func viewLoadSetup() {
+        UserService.getAllFollowers(currentUID: Constants.currentUID, completion: { (keys) in
+            print(keys)
+        })
 
         
         

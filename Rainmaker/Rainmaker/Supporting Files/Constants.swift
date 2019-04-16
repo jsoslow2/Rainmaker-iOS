@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 struct Constants {
     
@@ -38,4 +39,6 @@ struct Constants {
             Constants.refresher.endRefreshing()
         }
     }
+    
+    static let currentUID = Auth.auth().currentUser!.uid
 }
