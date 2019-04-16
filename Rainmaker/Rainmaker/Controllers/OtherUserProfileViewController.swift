@@ -42,13 +42,7 @@ class OtherUserProfileViewController: UIViewController {
         username.text = transferText
         userID = transferText
         
-        UserService.checkIfFollowing(currentUID: currentUID!, otherUID: userID) { (bool) in
-            if bool {
-                self.followButton.setTitle("Unfollow", for: .normal)
-            } else {
-                self.followButton.setTitle("Follow", for: .normal)
-            }
-        }
+
         
         followButton.backgroundColor = Constants.badGrey
         followButton.layer.cornerRadius = 10
@@ -68,6 +62,14 @@ class OtherUserProfileViewController: UIViewController {
         let line = UIView(frame: frame)
         self.tableView.tableHeaderView = line
         line.backgroundColor = self.tableView.separatorColor
+        
+        UserService.checkIfFollowing(currentUID: currentUID!, otherUID: userID) { (bool) in
+            if bool {
+                self.followButton.setTitle("Unfollow", for: .normal)
+            } else {
+                self.followButton.setTitle("Follow", for: .normal)
+            }
+        }
         
         //get the username and set the username
         UserService.getUsername(userUID: userID, completion: ({ (theName) in
@@ -134,15 +136,21 @@ class OtherUserProfileViewController: UIViewController {
     
     @IBAction func followButtonPressed(_ sender: Any) {
         UserService.addFollower(currentUID: currentUID!, otherUID: userID) { (bool) in
+            let dialogMessage = UIAlertController(title: "Followed", message: "You have just followed \(self.username.text!)", preferredStyle: .alert)
+            let dialogMessage2 = UIAlertController(title: "Unfollowed", message: "You have just unfollowed \(self.username.text!)", preferredStyle: .alert)
+            let ok =  UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            })
+            
+            dialogMessage.addAction(ok)
+            dialogMessage2.addAction(ok)
+
+            
             if bool {
-                let dialogMessage = UIAlertController(title: "Followed", message: "You have just followed \(self.username.text!)", preferredStyle: .alert)
-                
-                let ok =  UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-                })
-                
-                dialogMessage.addAction(ok)
-                
                 self.present(dialogMessage, animated: true, completion: nil)
+                self.followButton.setTitle("Unfollow", for: .normal)
+            } else {
+                self.present(dialogMessage2, animated: true, completion: nil)
+                self.followButton.setTitle("Follow", for: .normal)
             }
         }
     }
