@@ -19,7 +19,7 @@ class OtherUserProfileViewController: UIViewController {
 
     var bets : [ProfileBet]?
     var userID = ""
-    var currentUID = Auth.auth().currentUser?.uid
+    var currentUID = Constants.currentUID
     var imageURL : String?
     var numberOfCorrectBets = 0
     var numberOfIncorrectBets = 0
@@ -63,7 +63,7 @@ class OtherUserProfileViewController: UIViewController {
         self.tableView.tableHeaderView = line
         line.backgroundColor = self.tableView.separatorColor
         
-        UserService.checkIfFollowing(currentUID: currentUID!, otherUID: userID) { (bool) in
+        UserService.checkIfFollowing(currentUID: currentUID, otherUID: userID) { (bool) in
             if bool {
                 self.followButton.setTitle("Unfollow", for: .normal)
             } else {
@@ -135,7 +135,7 @@ class OtherUserProfileViewController: UIViewController {
     }
     
     @IBAction func followButtonPressed(_ sender: Any) {
-        UserService.addFollower(currentUID: currentUID!, otherUID: userID) { (bool) in
+        UserService.addFollower(currentUID: currentUID, otherUID: userID) { (bool) in
             let dialogMessage = UIAlertController(title: "Followed", message: "You have just followed \(self.username.text!)", preferredStyle: .alert)
             let dialogMessage2 = UIAlertController(title: "Unfollowed", message: "You have just unfollowed \(self.username.text!)", preferredStyle: .alert)
             let ok =  UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in

@@ -30,6 +30,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.hideKeyboardWhenTappedAround()
         changeFilters()
         
+        navigationController?.navigationBar.barTintColor = Constants.mintGreen
+        betsButton.backgroundColor = Constants.mintGreen
+        betsButton.setTitleColor(UIColor.white, for: .normal)
+
+        
         Constants.refresher.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
         tableView.refreshControl = Constants.refresher
 
@@ -63,12 +68,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     func changeFilters () {
         if tableFilter == 0 {
             betsButton.backgroundColor = Constants.mintGreen
+            betsButton.setTitleColor(UIColor.groupTableViewBackground, for: .normal)
             usersButton.backgroundColor = Constants.badGrey
-            usersButton.titleLabel?.textColor = UIColor.darkText
+            usersButton.setTitleColor(UIColor.darkText, for: .normal)
         } else if tableFilter == 1 {
             betsButton.backgroundColor = Constants.badGrey
-            betsButton.titleLabel?.textColor = UIColor.darkText
+            betsButton.setTitleColor(UIColor.darkText, for: .normal)
             usersButton.backgroundColor = Constants.mintGreen
+            usersButton.setTitleColor(UIColor.groupTableViewBackground, for: .normal)
         }
     }
     
