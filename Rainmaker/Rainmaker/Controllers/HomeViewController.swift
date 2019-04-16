@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     var passingUID: String?
     var createdBet: HomePost?
     var didComeFromConfirm = 0
+    var following : [String]?
 
     @IBOutlet weak var moneyButton: UIBarButtonItem!
     
@@ -86,10 +87,25 @@ class HomeViewController: UIViewController {
             print(num)
         }
         
+        //Load the following
+        UserService.getAllFollowers(currentUID: Constants.currentUID) { (keys) in
+            self.following = keys
+        }
+        
+        
         //LOAD THE DATA
         BetService.getHomeFeedBets { (homepost) in
             self.homePosts = homepost.reversed()
             self.homePostsWithCreated = homepost.reversed()
+            
+            //filter to followers, yourself, and jsoslow2
+            self.homePosts = self.homePosts?.filter({ (HomePost) -> Bool in
+                self.following!.contains(HomePost.UID) || HomePost.UID == Constants.currentUID || HomePost.UID == "vOykcO8f81bkvrLnIZUOiFgwwnI3"
+            })
+            
+            self.homePostsWithCreated = self.homePostsWithCreated?.filter({ (HomePost) -> Bool in
+                self.following!.contains(HomePost.UID) || HomePost.UID == Constants.currentUID || HomePost.UID == "vOykcO8f81bkvrLnIZUOiFgwwnI3"
+            })
             self.tableView.reloadData()
         }
         
