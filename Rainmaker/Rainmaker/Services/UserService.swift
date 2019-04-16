@@ -159,6 +159,7 @@ struct UserService {
     static func addFollower(currentUID: String, otherUID: String, completion: @escaping(Bool) -> Void) {
         let ref = Database.database().reference().child("users").child(currentUID).child("following")
         
+        
         var updatedData = [String: Any]()
         
         updatedData["isFollowing"] = 1
@@ -166,6 +167,27 @@ struct UserService {
         ref.child(otherUID).updateChildValues(updatedData)
         
         completion(true)
+    }
+    
+    static func checkIfFollowing(currentUID: String, otherUID: String, completion: @escaping(Bool)-> Void){
+        let ref = Database.database().reference().child("users").child(currentUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChild("following") {
+                let newRef = ref.child("following")
+                
+                newRef.observeSingleEvent(of: .value, with: { (snap) in
+                    if snap.hasChild(otherUID) {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            } else {
+                completion(false)
+            }
+        }
+        
     }
 }
 

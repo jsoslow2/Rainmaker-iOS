@@ -42,6 +42,14 @@ class OtherUserProfileViewController: UIViewController {
         username.text = transferText
         userID = transferText
         
+        UserService.checkIfFollowing(currentUID: currentUID!, otherUID: userID) { (bool) in
+            if bool {
+                self.followButton.setTitle("Unfollow", for: .normal)
+            } else {
+                self.followButton.setTitle("Follow", for: .normal)
+            }
+        }
+        
         followButton.backgroundColor = Constants.badGrey
         followButton.layer.cornerRadius = 10
         followButton.addShadowView()
