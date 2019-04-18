@@ -19,8 +19,7 @@ class Notification {
         self.image = image
     }
     
-    init?(snapshot: DataSnapshot) {
-        print(snapshot.value)
+    init?(snapshot: DataSnapshot, group: DispatchGroup) {
         guard let dict = snapshot.value as? [String: Any],
         let betKey = dict["betKey"] as? String,
         let isBet = dict["isBet"] as? Int,
@@ -29,7 +28,11 @@ class Notification {
         let otherUsername = dict["otherUsername"] as? String
             else {return nil}
         
+        
+        
+        
         if isBet == 1 {
+            group.enter()
             BetService.getInfoOfBet(betKey: betKey) { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, magoo, createBet) in
                 
                 let chosenBet = self.chosenOption(chosenOption: otherChosenBet, firstBetOption: firstBetOption, secondBetOption: secondBetOption)
@@ -37,9 +40,11 @@ class Notification {
                 self.notificationLabel = "\(otherUsername) made a new bet with you: '\(betQuestion). He bet \(chosenBet). Click here to bet against him"
                 
                 self.image = #imageLiteral(resourceName: "Single Arrow")
+                group.leave()
             }
         }
     }
+    
     
     func chosenOption(chosenOption: Int, firstBetOption: String, secondBetOption: String) -> String {
         if chosenOption == 0 {

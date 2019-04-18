@@ -29,6 +29,7 @@ struct NotificationService {
     
     
     static func loadNotifications(currentUID: String, completion: @escaping([Notification]) -> Void) {
+        let group = DispatchGroup()
         let ref = Database.database().reference().child("Notifications").child(currentUID)
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -38,11 +39,13 @@ struct NotificationService {
             var notifications = [Notification]()
             
             for snap in snapshot {
-                let notification = Notification(snapshot: snap)
+                let notification = Notification(snapshot: snap, group: group)
                 notifications.append(notification!)
             }
+            group.notify(queue: .main, execute: {
+                completion(notifications)
+            })
             
-            completion(notifications)
         }
     }
 }

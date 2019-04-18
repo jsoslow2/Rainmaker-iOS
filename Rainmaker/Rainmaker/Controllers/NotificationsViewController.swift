@@ -12,6 +12,7 @@ import UIKit
 class NotificationsViewController : UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    var notifications : [Notification]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,9 @@ class NotificationsViewController : UIViewController, UITableViewDataSource {
         tableView.dataSource = self
         
         NotificationService.loadNotifications(currentUID: Constants.currentUID) { (notifications) in
-            print(notifications)
+            self.notifications = notifications
+            
+            self.tableView.reloadData()
         }
     }
     
@@ -29,11 +32,20 @@ class NotificationsViewController : UIViewController, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let notifications = notifications {
+            return notifications.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationsCell")! as! NotificationsTableViewCell
+        
+        var notification = notifications![indexPath.row]
+        
+        cell.notificationLabel.text = notification.notificationLabel
+        cell.imageView?.image = notification.image
         
         return cell
     }
