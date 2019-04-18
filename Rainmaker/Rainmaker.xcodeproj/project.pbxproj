@@ -26,6 +26,8 @@
 		298BC1392268C9EB00D5AC84 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC1382268C9EB00D5AC84 /* NotificationsTableViewCell.swift */; };
 		298BC13B2268D06100D5AC84 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC13A2268D06100D5AC84 /* NotificationService.swift */; };
 		298BC13D2268D95000D5AC84 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC13C2268D95000D5AC84 /* Notification.swift */; };
+		298BC13F2268EF7C00D5AC84 /* Bet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 298BC13E2268EF7C00D5AC84 /* Bet.storyboard */; };
+		298BC1412268EFA500D5AC84 /* BetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC1402268EFA500D5AC84 /* BetViewController.swift */; };
 		29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */; };
 		29D160CC2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */; };
 		29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */; };
@@ -82,6 +84,8 @@
 		298BC1382268C9EB00D5AC84 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		298BC13A2268D06100D5AC84 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		298BC13C2268D95000D5AC84 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		298BC13E2268EF7C00D5AC84 /* Bet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bet.storyboard; sourceTree = "<group>"; };
+		298BC1402268EFA500D5AC84 /* BetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetViewController.swift; sourceTree = "<group>"; };
 		29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateABetTableViewCell.swift; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				29D73F5421A8472C00C87EC3 /* Login.storyboard */,
 				29F0161E22668B6B00523503 /* Notifications.storyboard */,
 				F0D7A9EB21AB109C0069EF16 /* HomeScreen.storyboard */,
+				298BC13E2268EF7C00D5AC84 /* Bet.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				29130C4821B83C68002E4B2D /* ProfileViewController.swift */,
 				29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */,
 				29F0162022668F0C00523503 /* NotificationsViewController.swift */,
+				298BC1402268EFA500D5AC84 /* BetViewController.swift */,
 				292018D3224D3C510064727C /* Login Flow */,
 				29D160D5223496D000604D71 /* Create A Bet Flow */,
 			);
@@ -354,6 +360,7 @@
 				29F0161F22668B6B00523503 /* Notifications.storyboard in Resources */,
 				29D73F4521A704C900C87EC3 /* GoogleService-Info.plist in Resources */,
 				292018E1225529190064727C /* rain white background.gif in Resources */,
+				298BC13F2268EF7C00D5AC84 /* Bet.storyboard in Resources */,
 				292D7451219F925400414217 /* Assets.xcassets in Resources */,
 				F0D7A9EC21AB109C0069EF16 /* HomeScreen.storyboard in Resources */,
 				F0D7A9F621AB3F640069EF16 /* Search.storyboard in Resources */,
@@ -483,6 +490,7 @@
 				29D160D2222F311500604D71 /* UsableUser.swift in Sources */,
 				F0D7A9F421AB3C850069EF16 /* BetService.swift in Sources */,
 				292018D7224FEEC80064727C /* FinalOnboardingViewController.swift in Sources */,
+				298BC1412268EFA500D5AC84 /* BetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
