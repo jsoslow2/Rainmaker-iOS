@@ -11,10 +11,10 @@ import UIKit
 import FirebaseDatabase.FIRDataSnapshot
 
 class Notification {
-    var notificationLabel: String = ""
+    var notificationLabel: NSAttributedString = NSAttributedString(string: "")
     var image: UIImage = UIImage()
     
-    init(notificationLabel: String, image:UIImage) {
+    init(notificationLabel: NSAttributedString, image:UIImage) {
         self.notificationLabel = notificationLabel
         self.image = image
     }
@@ -37,7 +37,40 @@ class Notification {
                 
                 let chosenBet = self.chosenOption(chosenOption: otherChosenBet, firstBetOption: firstBetOption, secondBetOption: secondBetOption)
                 
-                self.notificationLabel = "\(otherUsername) made a new bet with you: '\(betQuestion). He bet \(chosenBet). Click here to bet against him"
+                
+                let boldUsername  = otherUsername
+                let boldQuestion = betQuestion
+                let boldChosenOption = chosenBet
+                
+                let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
+                
+                let attributedUsername = NSMutableAttributedString(string:boldUsername, attributes:attrs)
+                let attributedQuestion = NSMutableAttributedString(string:boldQuestion, attributes:attrs)
+                let attributedChosenOption = NSMutableAttributedString(string:boldChosenOption, attributes:attrs)
+                
+                let normalText = " made a new bet with you: '"
+                let normalString = NSMutableAttributedString(string:normalText)
+                
+                let extraText = "' They bet "
+                let extraString = NSMutableAttributedString(string: extraText)
+                
+                let moreText = " Click the arrow to bet against them"
+                let moreString = NSMutableAttributedString(string: moreText)
+                
+                
+                
+                attributedUsername.append(normalString)
+                attributedUsername.append(attributedQuestion)
+                attributedUsername.append(extraString)
+                attributedUsername.append(attributedChosenOption)
+                attributedUsername.append(moreString)
+                
+                
+                
+                
+                
+                
+                self.notificationLabel = attributedUsername
                 
                 self.image = #imageLiteral(resourceName: "Single Arrow")
                 group.leave()

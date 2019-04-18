@@ -42,10 +42,10 @@ class NotificationsViewController : UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationsCell")! as! NotificationsTableViewCell
         
-        var notification = notifications![indexPath.row]
+        let notification = notifications![indexPath.row]
         
-        cell.notificationLabel.text = notification.notificationLabel
-        cell.imageView?.image = notification.image
+        cell.notificationLabel.attributedText = notification.notificationLabel
+        cell.expandButton.setImage(notification.image, for: .normal)
         
         return cell
     }
