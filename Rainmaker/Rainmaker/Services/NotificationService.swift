@@ -28,7 +28,21 @@ struct NotificationService {
     }
     
     
-    static func loadNotifications(currentUID: String, completion: @escaping(String) -> Void) {
-        completion("bop")
+    static func loadNotifications(currentUID: String, completion: @escaping([Notification]) -> Void) {
+        let ref = Database.database().reference().child("Notifications").child(currentUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else {completion([]); return}
+            
+            var notifications = [Notification]()
+            
+            for snap in snapshot {
+                let notification = Notification(snapshot: snap)
+                notifications.append(notification!)
+            }
+            
+            completion(notifications)
+        }
     }
 }

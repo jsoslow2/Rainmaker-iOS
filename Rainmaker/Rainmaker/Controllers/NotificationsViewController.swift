@@ -17,6 +17,10 @@ class NotificationsViewController : UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
+        
+        NotificationService.loadNotifications(currentUID: Constants.currentUID) { (notifications) in
+            print(notifications)
+        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -20,6 +20,7 @@ class Notification {
     }
     
     init?(snapshot: DataSnapshot) {
+        print(snapshot.value)
         guard let dict = snapshot.value as? [String: Any],
         let betKey = dict["betKey"] as? String,
         let isBet = dict["isBet"] as? Int,
