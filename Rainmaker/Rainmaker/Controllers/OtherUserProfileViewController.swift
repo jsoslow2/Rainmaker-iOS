@@ -24,6 +24,7 @@ class OtherUserProfileViewController: UIViewController {
     var numberOfCorrectBets = 0
     var numberOfIncorrectBets = 0
     var numberOfUnfinishedBets = 0
+    var currentUsername : String?
     
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
@@ -75,6 +76,10 @@ class OtherUserProfileViewController: UIViewController {
         UserService.getUsername(userUID: userID, completion: ({ (theName) in
             self.username.text = theName
         }))
+        
+        UserService.getUsername(userUID: Constants.currentUID) { (username) in
+            self.currentUsername = username
+        }
         
         //set the total bets
         UserService.getBets(userUID: userID) { (totalBets) in
@@ -148,6 +153,11 @@ class OtherUserProfileViewController: UIViewController {
             if bool {
                 self.present(dialogMessage, animated: true, completion: nil)
                 self.followButton.setTitle("Unfollow", for: .normal)
+                
+                // INSERT ADD FOLLOW NOTIFICATION HERE
+                NotificationService.followNotification(currentUsername: self.currentUsername!, otherUID: self.userID, completion: { (bool) in
+                })
+                
             } else {
                 self.present(dialogMessage2, animated: true, completion: nil)
                 self.followButton.setTitle("Follow", for: .normal)

@@ -26,6 +26,9 @@ class NotificationsTableViewCell : UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(NotificationsTableViewCell.goToBet(sender:)))
+        addGestureRecognizer(tapGesture)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +36,10 @@ class NotificationsTableViewCell : UITableViewCell {
     }
     
     @IBAction func expandButtonPressed(_ sender: Any) {
+        delegate?.goToBet(on: self)
+    }
+    
+    @objc func goToBet(sender: UITapGestureRecognizer) {
         delegate?.goToBet(on: self)
     }
     
