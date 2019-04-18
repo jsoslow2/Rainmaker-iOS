@@ -30,7 +30,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.hideKeyboardWhenTappedAround()
         changeFilters()
         
-        navigationController?.navigationBar.barTintColor = Constants.mintGreen
         betsButton.backgroundColor = Constants.mintGreen
         betsButton.setTitleColor(UIColor.white, for: .normal)
 
