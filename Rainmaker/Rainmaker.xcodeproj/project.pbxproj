@@ -24,6 +24,8 @@
 		2937D6BB2243190F0028AC3C /* ConfirmBet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2937D6BA2243190F0028AC3C /* ConfirmBet.swift */; };
 		2954CF352256A47C00945CC8 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2954CF342256A47C00945CC8 /* LoadingScreenViewController.swift */; };
 		298BC1392268C9EB00D5AC84 /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC1382268C9EB00D5AC84 /* NotificationsTableViewCell.swift */; };
+		298BC13B2268D06100D5AC84 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC13A2268D06100D5AC84 /* NotificationService.swift */; };
+		298BC13D2268D95000D5AC84 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298BC13C2268D95000D5AC84 /* Notification.swift */; };
 		29D160CA2228BD7A00604D71 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */; };
 		29D160CC2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */; };
 		29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */; };
@@ -78,6 +80,8 @@
 		2937D6BA2243190F0028AC3C /* ConfirmBet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBet.swift; sourceTree = "<group>"; };
 		2954CF342256A47C00945CC8 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		298BC1382268C9EB00D5AC84 /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
+		298BC13A2268D06100D5AC84 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		298BC13C2268D95000D5AC84 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		29D160C92228BD7A00604D71 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		29D160CB2228CB5C00604D71 /* OtherUserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		29D160CD222B770400604D71 /* CreateABetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateABetTableViewCell.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				F03B53D721AF259D00F5306D /* ProfileBet.swift */,
 				29D73F5821A9A4BB00C87EC3 /* User.swift */,
 				F0D7A9EF21AB344C0069EF16 /* HomePost.swift */,
+				298BC13C2268D95000D5AC84 /* Notification.swift */,
 				F0D7A9F121AB35F80069EF16 /* Bet.swift */,
 				2937D6BA2243190F0028AC3C /* ConfirmBet.swift */,
 				29D160D1222F311500604D71 /* UsableUser.swift */,
@@ -216,6 +221,7 @@
 			children = (
 				F0D7A9F321AB3C850069EF16 /* BetService.swift */,
 				29D73F6021AC8BB200C87EC3 /* UserService.swift */,
+				298BC13A2268D06100D5AC84 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -446,10 +452,12 @@
 				F0D7A9E721AB0EC60069EF16 /* SearchViewController.swift in Sources */,
 				29F0162122668F0C00523503 /* NotificationsViewController.swift in Sources */,
 				2954CF352256A47C00945CC8 /* LoadingScreenViewController.swift in Sources */,
+				298BC13B2268D06100D5AC84 /* NotificationService.swift in Sources */,
 				F0D7A9EE21AB338D0069EF16 /* HomeFeedTableViewCell.swift in Sources */,
 				29D160D0222B784600604D71 /* CreateABetViewController.swift in Sources */,
 				29D160D722349C3500604D71 /* ConfirmCreateABetViewController.swift in Sources */,
 				29130C4721B835AF002E4B2D /* ProfileBetTableViewCell.swift in Sources */,
+				298BC13D2268D95000D5AC84 /* Notification.swift in Sources */,
 				F0D7A9F821AB40780069EF16 /* SearchTableViewCell.swift in Sources */,
 				29D73F5921A9A4BB00C87EC3 /* User.swift in Sources */,
 				29D160CE222B770400604D71 /* CreateABetTableViewCell.swift in Sources */,

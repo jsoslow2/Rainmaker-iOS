@@ -116,7 +116,7 @@ class ConfirmCreateABetViewController : UIViewController {
         checkSubtitle()
         // 1. Give Error if you haven't picked a bet option
         if currentUsername == "jsoslow2" && chosenOption == nil {
-            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 0) { (uniqueID) in
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, currentUsername: currentUsername!, otherUsername: username!, otherUID: uid!, typeOfGame: typeOfGame!, createBet: 0, chosenOption: -1) { (uniqueID) in
                 self.betID = uniqueID
             }
         } else if chosenOption == nil {
@@ -127,7 +127,7 @@ class ConfirmCreateABetViewController : UIViewController {
             self.present(dialogMessage2, animated: true, completion: nil)
         } else {
             // 2. Create a new bet in Bets tab
-            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, otherUsername: username!, typeOfGame: typeOfGame!, createBet: 1) { (uniqueID) in
+            BetService.createBet(userID: currentUser!, betQuestion: betQuestion!, firstBetOption: firstBetOption!, secondBetOption: secondBetOption!, currentUsername: currentUsername!, otherUsername: username!, otherUID: uid!, typeOfGame: typeOfGame!, createBet: 1, chosenOption: chosenOption!) { (uniqueID) in
                 print("yeet")
                 self.betID = uniqueID
                 
