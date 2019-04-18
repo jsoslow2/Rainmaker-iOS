@@ -71,10 +71,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BHK-QT-nVA" firstAttribute="leading" secondItem="0hA-9t-4cr" secondAttribute="trailing" constant="20" id="9p1-2L-xIX"/>
                                                 <constraint firstAttribute="trailing" secondItem="4mX-ao-cLC" secondAttribute="trailing" constant="20" id="Kmx-2f-oYs"/>
                                                 <constraint firstItem="0hA-9t-4cr" firstAttribute="leading" secondItem="jGW-Ec-bBq" secondAttribute="leading" constant="18" id="PWW-hk-Amr"/>
                                                 <constraint firstItem="0hA-9t-4cr" firstAttribute="top" secondItem="jGW-Ec-bBq" secondAttribute="top" constant="30" id="a6J-BL-jGh"/>
+                                                <constraint firstItem="BHK-QT-nVA" firstAttribute="leading" secondItem="jGW-Ec-bBq" secondAttribute="leading" constant="55" id="hFp-el-dPI"/>
                                                 <constraint firstItem="BHK-QT-nVA" firstAttribute="top" secondItem="jGW-Ec-bBq" secondAttribute="top" constant="13" id="ufP-2e-hAc"/>
                                                 <constraint firstItem="26i-E2-D5c" firstAttribute="width" secondItem="jGW-Ec-bBq" secondAttribute="width" constant="-150" id="vix-Cx-pj3"/>
                                                 <constraint firstItem="4mX-ao-cLC" firstAttribute="top" secondItem="jGW-Ec-bBq" secondAttribute="top" constant="30" id="xx5-58-xpe"/>
