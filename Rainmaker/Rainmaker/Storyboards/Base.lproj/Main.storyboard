@@ -376,6 +376,7 @@
                     <connections>
                         <segue destination="pcF-qo-9ff" kind="relationship" relationship="viewControllers" id="SVr-dL-tjn"/>
                         <segue destination="5oK-Sz-GwX" kind="relationship" relationship="viewControllers" id="7Cd-eV-gq4"/>
+                        <segue destination="r6b-ck-3pm" kind="relationship" relationship="viewControllers" id="qwQ-cp-WZ3"/>
                         <segue destination="8fT-2b-Sdt" kind="relationship" relationship="viewControllers" id="KeP-EQ-Uce"/>
                     </connections>
                 </tabBarController>
@@ -402,6 +403,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7w-eb-pyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="316" y="-261"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="mjR-QE-Qv1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Notifications" id="r6b-ck-3pm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Notifications" image="bell" selectedImage="bellOnClick" id="08P-8i-VFE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lmv-UK-r3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="451" y="-403"/>
         </scene>
         <!--Profile-->
         <scene sceneID="cA6-bh-UR7">
@@ -433,6 +444,7 @@
         <image name="Profile" width="30" height="30"/>
         <image name="SearchOnClick" width="24" height="24"/>
         <image name="bell" width="30" height="30"/>
+        <image name="bellOnClick" width="22" height="26"/>
         <image name="default copy" width="1524" height="976"/>
         <image name="home" width="30" height="30"/>
         <image name="homeOnClick" width="24" height="24"/>

@@ -134,7 +134,7 @@ struct BetService {
         }
     }
     
-    static func createBet(userID: String, betQuestion: String, firstBetOption: String, secondBetOption: String, otherUsername: String, typeOfGame: String, createBet: Int, completion: @escaping(String) -> Void) {
+    static func createBet(userID: String, betQuestion: String, firstBetOption: String, secondBetOption: String, currentUsername: String, otherUsername: String, otherUID: String, typeOfGame: String, createBet: Int, chosenOption: Int, completion: @escaping(String) -> Void) {
         
         let timestamp = Date().millisecondsSince1970
         let timestampString = String(timestamp)
@@ -164,6 +164,14 @@ struct BetService {
         profileData["secondOption"] = secondBetOption
         
         profileRef.child(timestampString).updateChildValues(profileData)
+        
+        
+        if chosenOption != -1 {
+            
+            NotificationService.createBetNotification(currentUsername: currentUsername, currentUID: userID, otherUID: otherUID, betKey: timestampString, chosenOption: chosenOption, timeStamp: timestampString) { (bool) in
+            }
+        }
+        
         
         completion(timestampString)
     }

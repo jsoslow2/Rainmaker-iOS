@@ -19,10 +19,12 @@ class OtherUserProfileViewController: UIViewController {
 
     var bets : [ProfileBet]?
     var userID = ""
+    var currentUID = Constants.currentUID
     var imageURL : String?
     var numberOfCorrectBets = 0
     var numberOfIncorrectBets = 0
     var numberOfUnfinishedBets = 0
+    var currentUsername : String?
     
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
@@ -30,6 +32,7 @@ class OtherUserProfileViewController: UIViewController {
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var winsLabel: UILabel!
     @IBOutlet weak var lossLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -39,6 +42,12 @@ class OtherUserProfileViewController: UIViewController {
         super.viewDidLoad()
         username.text = transferText
         userID = transferText
+        
+
+        
+        followButton.backgroundColor = Constants.badGrey
+        followButton.layer.cornerRadius = 10
+        followButton.addShadowView()
         
         //allocate delegate and datasource
         tableView.delegate = self as? UITableViewDelegate
@@ -55,10 +64,22 @@ class OtherUserProfileViewController: UIViewController {
         self.tableView.tableHeaderView = line
         line.backgroundColor = self.tableView.separatorColor
         
+        UserService.checkIfFollowing(currentUID: currentUID, otherUID: userID) { (bool) in
+            if bool {
+                self.followButton.setTitle("Unfollow", for: .normal)
+            } else {
+                self.followButton.setTitle("Follow", for: .normal)
+            }
+        }
+        
         //get the username and set the username
         UserService.getUsername(userUID: userID, completion: ({ (theName) in
             self.username.text = theName
         }))
+        
+        UserService.getUsername(userUID: Constants.currentUID) { (username) in
+            self.currentUsername = username
+        }
         
         //set the total bets
         UserService.getBets(userUID: userID) { (totalBets) in
@@ -117,6 +138,33 @@ class OtherUserProfileViewController: UIViewController {
         lossLabel.text = String(numberOfIncorrectBets)
         winsLabel.text = String(numberOfCorrectBets)
     }
+    
+    @IBAction func followButtonPressed(_ sender: Any) {
+        UserService.addFollower(currentUID: currentUID, otherUID: userID) { (bool) in
+            let dialogMessage = UIAlertController(title: "Followed", message: "You have just followed \(self.username.text!)", preferredStyle: .alert)
+            let dialogMessage2 = UIAlertController(title: "Unfollowed", message: "You have just unfollowed \(self.username.text!)", preferredStyle: .alert)
+            let ok =  UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            })
+            
+            dialogMessage.addAction(ok)
+            dialogMessage2.addAction(ok)
+
+            
+            if bool {
+                self.present(dialogMessage, animated: true, completion: nil)
+                self.followButton.setTitle("Unfollow", for: .normal)
+                
+                // INSERT ADD FOLLOW NOTIFICATION HERE
+                NotificationService.followNotification(currentUsername: self.currentUsername!, currentUID: self.currentUID, otherUID: self.userID, completion: { (bool) in
+                })
+                
+            } else {
+                self.present(dialogMessage2, animated: true, completion: nil)
+                self.followButton.setTitle("Follow", for: .normal)
+            }
+        }
+    }
+    
 }
 
 

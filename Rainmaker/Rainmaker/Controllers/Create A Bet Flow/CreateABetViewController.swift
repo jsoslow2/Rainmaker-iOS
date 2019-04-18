@@ -70,7 +70,6 @@ class CreateABetViewController: UIViewController, UITableViewDataSource, UITable
         filtered = (allUsers?.filter({ (UsableUser) -> Bool in
             UsableUser.username.lowercased().contains(searchText.lowercased())
         }))!
-        dump(allUsers)
         tableView.reloadData()
     }
     

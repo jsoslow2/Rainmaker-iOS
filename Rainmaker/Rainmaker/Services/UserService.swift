@@ -155,6 +155,61 @@ struct UserService {
             completion(allUsers)
         }
     }
+    
+    static func addFollower(currentUID: String, otherUID: String, completion: @escaping(Bool) -> Void) {
+        let ref = Database.database().reference().child("users").child(currentUID).child("following")
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChild(otherUID) {
+                
+                ref.child(otherUID).removeValue()
+                completion(false)
+            } else {
+                
+                var updatedData = [String: Any]()
+                updatedData["isFollowing"] = 1
+                ref.child(otherUID).updateChildValues(updatedData)
+                completion(true)
+            }
+        }
+        
+        
+        
+    }
+    
+    static func checkIfFollowing(currentUID: String, otherUID: String, completion: @escaping(Bool)-> Void){
+        let ref = Database.database().reference().child("users").child(currentUID)
+        
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChild("following") {
+                let newRef = ref.child("following")
+                
+                newRef.observeSingleEvent(of: .value, with: { (snap) in
+                    if snap.hasChild(otherUID) {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            } else {
+                completion(false)
+            }
+        }
+        
+    }
+    
+    static func getAllFollowers(currentUID: String, completion: @escaping([String]) -> Void) {
+        let ref = Database.database().reference().child("users").child(currentUID).child("following")
+        var keys : [String] = []
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            for snap in snapshot.children {
+                let child = snap as! DataSnapshot
+                let key = child.key
+                keys.append(key)
+            }
+            completion(keys)
+        }
+    }
 }
 
 

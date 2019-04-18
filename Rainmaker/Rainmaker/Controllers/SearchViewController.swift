@@ -7,28 +7,119 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var betsButton: UIButton!
+    @IBOutlet weak var usersButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var topLabel: UILabel!
     
+    var searchActive = false
     var bets: [Bet]?
+    var allUsers : [UsableUser]?
+    var filtered : [Bet] = []
+    var filteredUsers : [UsableUser] = []
+    
+    var passingUID : String?
+    
+    
+    var tableFilter : Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        changeFilters()
+        
+        betsButton.backgroundColor = Constants.mintGreen
+        betsButton.setTitleColor(UIColor.white, for: .normal)
 
+        
+        Constants.refresher.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
+        tableView.refreshControl = Constants.refresher
+
+        searchBar.delegate = self as UISearchBarDelegate
         
         BetService.getAvailableBets { (allBets) in
             self.bets = allBets.filter({ (bet) -> Bool in
                 bet.isActive == 1
             })
+            self.filtered = self.bets!
             self.tableView.reloadData()
+        }
+        
+        
+        UserService.getAllUsersData { (allUsers) in
+            self.allUsers = allUsers
+            self.filteredUsers = allUsers
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        changeFilters()
+    }
+    
+    @objc func reloadTable() {
+        print("refreshing data")
+        
+        Constants.reloadTable(table: tableView)
+    }
+    
+    func changeFilters () {
+        if tableFilter == 0 {
+            betsButton.backgroundColor = Constants.mintGreen
+            betsButton.setTitleColor(UIColor.groupTableViewBackground, for: .normal)
+            usersButton.backgroundColor = Constants.badGrey
+            usersButton.setTitleColor(UIColor.darkText, for: .normal)
+            topLabel.text = "Search for a specific bet!"
+        } else if tableFilter == 1 {
+            betsButton.backgroundColor = Constants.badGrey
+            betsButton.setTitleColor(UIColor.darkText, for: .normal)
+            usersButton.backgroundColor = Constants.mintGreen
+            usersButton.setTitleColor(UIColor.groupTableViewBackground, for: .normal)
+            topLabel.text = "Search for users to follow!"
+        }
+    }
+    
+    @IBAction func betsButtonPressed(_ sender: Any) {
+        tableFilter = 0
+        changeFilters()
+        tableView.reloadData()
+        tableView.rowHeight = 141
+    }
+    
+    @IBAction func usersButtonPressed(_ sender: Any) {
+        tableFilter = 1
+        changeFilters()
+        tableView.reloadData()
+        tableView.rowHeight = 65
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if tableFilter == 0 {
+            guard !searchText.isEmpty else {filtered = bets!
+                tableView.reloadData(); return}
+            
+            filtered = (bets?.filter({ (Bet) -> Bool in
+                Bet.betQuestion.lowercased().contains(searchText.lowercased())
+            }))!
+            
+            tableView.reloadData()
+        } else {
+            guard !searchText.isEmpty else {filteredUsers = allUsers!
+                tableView.reloadData(); return}
+            
+            filteredUsers = (allUsers!.filter({ (User) -> Bool in
+                User.username.lowercased().contains(searchText.lowercased())
+            }))
+            tableView.reloadData()
         }
         
     }
 }
 
-extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate {
+extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelegate, UserSearchTableViewCellDelegate {
     func didTapBetButton(which button: Int, on cell: SearchTableViewCell) {
         
         
@@ -45,7 +136,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
             }
         }
         
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + chosenOption() + " ?", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet 5 drops on " + chosenOption() + " ?", preferredStyle: .alert)
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         
@@ -87,35 +178,90 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
         
     }
     
+
+    
    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if let bets = bets {
-            return bets.count
+        if tableFilter == 0 {
+            return filtered.count
         } else {
-            return 0
+            return filteredUsers.count
         }
-    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchViewCell")! as! SearchTableViewCell
-
-        cell.delegate = self
         
-        guard let bets = bets else {return cell}
+        if tableFilter == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "searchViewCell")! as! SearchTableViewCell
+            
+            cell.delegate = self
+            
+            
+            let bet = filtered[indexPath.row]
+            
+            cell.betQuestion.text = bet.betQuestion
+            
+            cell.firstBetOption.setTitle(bet.firstBetOption, for: .normal)
+            cell.secondBetOption.setTitle(bet.secondBetOption, for: .normal)
+            cell.typeOfGame.text = bet.typeOfGame
+            
+            print(bet)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "userSearchCell")! as! UserSearchTableViewCell
+            
+            let user = filteredUsers[indexPath.row]
+            cell.delegate = self
+            
+            var subTitleText = ""
+            
+            if user.numberOfBets != nil {
+                subTitleText = "Has made " + String(user.numberOfBets!) + " bets"
+            } else {
+                subTitleText = "The user has made no bets"
+            }
+            
+            UserService.getImageURL(userUID: user.uid) { (imageURL) in
+                let url = URL(string: imageURL)
+                let session = URLSession.shared
+                
+                session.dataTask(with: url!, completionHandler: { (data, response, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        
+                        DispatchQueue.main.async {
+                            cell.profilePic.image = UIImage(data: data!)!
+                        }
+                    }
+                }).resume()
+            }
+            
+            cell.uid = user.uid
+            
+            cell.profilePic.image = #imageLiteral(resourceName: "default copy")
+            cell.username.text = user.username
+            cell.subTitle.text = subTitleText
+            
+            return cell
+        }
         
-        let bet = bets[indexPath.row]
+    
+    }
+    
+    
+    func goToProfile(on cell: UserSearchTableViewCell) {
+        passingUID = cell.uid
         
-        cell.betQuestion.text = bet.betQuestion
+        let mainStoryboard = UIStoryboard(name: "HomeScreen", bundle: nil)
         
-        cell.firstBetOption.setTitle(bet.firstBetOption, for: .normal)
-        cell.secondBetOption.setTitle(bet.secondBetOption, for: .normal)
-        cell.typeOfGame.text = bet.typeOfGame
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "otherUserProfile") as? OtherUserProfileViewController else {
+            print("no vC found"); return}
         
-        print(bet)
-        return cell
+        destinationVC.transferText = passingUID!
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
 }

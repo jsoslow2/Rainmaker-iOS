@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-yW-8Bg">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <rect key="frame" x="0.0" y="234" width="375" height="544"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchViewCell" rowHeight="141" id="6cf-i8-2fk" customClass="SearchTableViewCell" customModule="Rainmaker" customModuleProvider="target">
@@ -98,7 +98,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-fm-fKX">
-                                                    <rect key="frame" x="20" y="21" width="340" height="19"/>
+                                                    <rect key="frame" x="20" y="21" width="340" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -129,19 +129,106 @@
                                             <outlet property="typeOfGame" destination="dBW-Od-Uc4" id="GEk-cK-gA3"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userSearchCell" rowHeight="65" id="YNK-yT-9wU" customClass="UserSearchTableViewCell" customModule="Rainmaker">
+                                        <rect key="frame" x="0.0" y="169" width="375" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YNK-yT-9wU" id="o8F-u9-uo6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.666666666666671"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default copy" translatesAutoresizingMaskIntoConstraints="NO" id="0qA-ZC-7NT">
+                                                    <rect key="frame" x="16" y="7.3333333333333357" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="391-26-qHs"/>
+                                                        <constraint firstAttribute="width" secondItem="0qA-ZC-7NT" secondAttribute="height" multiplier="1:1" id="S5X-PP-F7K"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agL-tQ-vT5">
+                                                    <rect key="frame" x="76" y="9.9999999999999982" width="43" height="23.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff3-vc-WxD">
+                                                    <rect key="frame" x="76" y="33.333333333333336" width="275" height="19.333333333333336"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ff3-vc-WxD" firstAttribute="leading" secondItem="0qA-ZC-7NT" secondAttribute="trailing" constant="10" id="BSm-uo-09x"/>
+                                                <constraint firstItem="0qA-ZC-7NT" firstAttribute="leading" secondItem="o8F-u9-uo6" secondAttribute="leading" constant="16" id="BVi-k1-jRM"/>
+                                                <constraint firstItem="agL-tQ-vT5" firstAttribute="leading" secondItem="0qA-ZC-7NT" secondAttribute="trailing" constant="10" id="NEG-JS-T2L"/>
+                                                <constraint firstItem="ff3-vc-WxD" firstAttribute="top" secondItem="agL-tQ-vT5" secondAttribute="bottom" id="PUI-eI-Hta"/>
+                                                <constraint firstItem="0qA-ZC-7NT" firstAttribute="centerY" secondItem="o8F-u9-uo6" secondAttribute="centerY" id="jKr-HZ-old"/>
+                                                <constraint firstItem="ff3-vc-WxD" firstAttribute="width" secondItem="o8F-u9-uo6" secondAttribute="width" constant="-100" id="mad-jn-DA0"/>
+                                                <constraint firstItem="agL-tQ-vT5" firstAttribute="top" secondItem="o8F-u9-uo6" secondAttribute="top" constant="10" id="mgr-n1-1if"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="profilePic" destination="0qA-ZC-7NT" id="Fcl-uF-4S1"/>
+                                            <outlet property="subTitle" destination="ff3-vc-WxD" id="0PY-qY-VrH"/>
+                                            <outlet property="username" destination="agL-tQ-vT5" id="dMC-Kc-ZYe"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="RvS-T1-ga8" id="4hd-iN-se2"/>
                                     <outlet property="delegate" destination="RvS-T1-ga8" id="WX6-Hp-7Ql"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpm-rX-TqX">
+                                <rect key="frame" x="0.0" y="138" width="187.66666666666666" height="40"/>
+                                <color key="backgroundColor" red="0.4941176471" green="0.83137254900000002" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="Bets">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="betsButtonPressed:" destination="RvS-T1-ga8" eventType="touchUpInside" id="Kzv-yw-72W"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRY-dS-lGx">
+                                <rect key="frame" x="187.66666666666663" y="138" width="187.33333333333337" height="40"/>
+                                <color key="backgroundColor" red="0.86515177539999999" green="0.86515177539999999" blue="0.86515177539999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="Users">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="usersButtonPressed:" destination="RvS-T1-ga8" eventType="touchUpInside" id="f0O-mk-mev"/>
+                                </connections>
+                            </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uQ7-D5-fSK">
+                                <rect key="frame" x="0.0" y="178" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a specific bet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfE-Rt-WzX">
+                                <rect key="frame" x="16" y="104" width="343" height="24"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="PBX-yW-8Bg" firstAttribute="leading" secondItem="NEk-hp-vR0" secondAttribute="leading" id="NkU-uD-ikZ"/>
-                            <constraint firstItem="NEk-hp-vR0" firstAttribute="top" secondItem="PBX-yW-8Bg" secondAttribute="top" id="raO-nr-Qf7"/>
-                            <constraint firstItem="NEk-hp-vR0" firstAttribute="trailing" secondItem="PBX-yW-8Bg" secondAttribute="trailing" id="vkh-MF-svH"/>
-                            <constraint firstItem="PBX-yW-8Bg" firstAttribute="bottom" secondItem="NEk-hp-vR0" secondAttribute="bottom" id="wfJ-C5-xcf"/>
+                            <constraint firstItem="Gpm-rX-TqX" firstAttribute="top" secondItem="NEk-hp-vR0" secondAttribute="top" constant="50" id="4Tg-AD-d9K"/>
+                            <constraint firstItem="JfE-Rt-WzX" firstAttribute="top" secondItem="NEk-hp-vR0" secondAttribute="top" constant="16" id="50D-3c-Wnp"/>
+                            <constraint firstItem="xRY-dS-lGx" firstAttribute="leading" secondItem="Gpm-rX-TqX" secondAttribute="trailing" id="9Rd-Aj-pP0"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="trailing" secondItem="uQ7-D5-fSK" secondAttribute="trailing" id="JXW-pf-GII"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="trailing" secondItem="xRY-dS-lGx" secondAttribute="trailing" id="M8u-5b-psn"/>
+                            <constraint firstItem="Gpm-rX-TqX" firstAttribute="leading" secondItem="NEk-hp-vR0" secondAttribute="leading" id="MSr-9f-jm2"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="trailing" secondItem="PBX-yW-8Bg" secondAttribute="trailing" id="PZO-V2-uuc"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="trailing" secondItem="JfE-Rt-WzX" secondAttribute="trailing" constant="16" id="REx-ib-nHc"/>
+                            <constraint firstItem="JfE-Rt-WzX" firstAttribute="leading" secondItem="NEk-hp-vR0" secondAttribute="leading" constant="16" id="V1p-lP-bvo"/>
+                            <constraint firstItem="PBX-yW-8Bg" firstAttribute="top" secondItem="uQ7-D5-fSK" secondAttribute="bottom" id="ZPL-gq-4st"/>
+                            <constraint firstItem="Gpm-rX-TqX" firstAttribute="width" secondItem="xRY-dS-lGx" secondAttribute="width" id="Zud-Fw-ruP"/>
+                            <constraint firstItem="NEk-hp-vR0" firstAttribute="bottom" secondItem="PBX-yW-8Bg" secondAttribute="bottom" id="fj6-K3-hDF"/>
+                            <constraint firstItem="uQ7-D5-fSK" firstAttribute="top" secondItem="Gpm-rX-TqX" secondAttribute="bottom" id="hXV-o4-npQ"/>
+                            <constraint firstItem="xRY-dS-lGx" firstAttribute="top" secondItem="NEk-hp-vR0" secondAttribute="top" constant="50" id="khf-pi-F8q"/>
+                            <constraint firstItem="PBX-yW-8Bg" firstAttribute="leading" secondItem="NEk-hp-vR0" secondAttribute="leading" id="kzI-cL-18X"/>
+                            <constraint firstItem="uQ7-D5-fSK" firstAttribute="leading" secondItem="NEk-hp-vR0" secondAttribute="leading" id="qDy-mm-VNy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NEk-hp-vR0"/>
                     </view>
@@ -154,7 +241,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="betsButton" destination="Gpm-rX-TqX" id="SeI-gO-kpe"/>
+                        <outlet property="searchBar" destination="uQ7-D5-fSK" id="Qx8-6n-y6k"/>
                         <outlet property="tableView" destination="PBX-yW-8Bg" id="FEO-zS-HvX"/>
+                        <outlet property="topLabel" destination="JfE-Rt-WzX" id="ouX-2l-KCx"/>
+                        <outlet property="usersButton" destination="xRY-dS-lGx" id="atU-ox-wl2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNs-q6-mwb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -189,6 +280,7 @@
     </scenes>
     <resources>
         <image name="SearchOnClick" width="24" height="24"/>
+        <image name="default copy" width="1524" height="976"/>
         <image name="search" width="30" height="30"/>
     </resources>
 </document>

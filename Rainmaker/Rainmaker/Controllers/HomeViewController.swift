@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     var passingUID: String?
     var createdBet: HomePost?
     var didComeFromConfirm = 0
+    var following : [String]?
 
     @IBOutlet weak var moneyButton: UIBarButtonItem!
     
@@ -48,11 +49,19 @@ class HomeViewController: UIViewController {
     }
     
     func viewLoadSetup() {
+        UserService.getAllFollowers(currentUID: Constants.currentUID, completion: { (keys) in
+            print(keys)
+        })
 
         
         
         tableView.delegate = self as? UITableViewDelegate
         tableView.dataSource = self
+        
+        Constants.refresher.addTarget(self, action: #selector(reloadTable), for: .valueChanged)
+        tableView.refreshControl = Constants.refresher
+        
+        
         
         tabBarController?.delegate = self
 
@@ -78,17 +87,32 @@ class HomeViewController: UIViewController {
             print(num)
         }
         
+        //Load the following
+        UserService.getAllFollowers(currentUID: Constants.currentUID) { (keys) in
+            self.following = keys
+        }
+        
+        
         //LOAD THE DATA
         BetService.getHomeFeedBets { (homepost) in
             self.homePosts = homepost.reversed()
             self.homePostsWithCreated = homepost.reversed()
+            
+            //filter to followers, yourself, and jsoslow2
+            self.homePosts = self.homePosts?.filter({ (HomePost) -> Bool in
+                self.following!.contains(HomePost.UID) || HomePost.UID == Constants.currentUID || HomePost.UID == "vOykcO8f81bkvrLnIZUOiFgwwnI3"
+            })
+            
+            self.homePostsWithCreated = self.homePostsWithCreated?.filter({ (HomePost) -> Bool in
+                self.following!.contains(HomePost.UID) || HomePost.UID == Constants.currentUID || HomePost.UID == "vOykcO8f81bkvrLnIZUOiFgwwnI3"
+            })
             self.tableView.reloadData()
         }
         
         print("viewDidLoad")
         
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
+
 
     }
     
@@ -98,6 +122,12 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
             self.tableView.reloadData()
         })
+    }
+    
+    @objc func reloadTable() {
+        print("refreshing data")
+        
+        Constants.reloadTable(table: tableView)
     }
 
 }
@@ -120,7 +150,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
             }
         }
         
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + chosenOption() + " ?", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet 5 drops on " + chosenOption() + " ?", preferredStyle: .alert)
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         
