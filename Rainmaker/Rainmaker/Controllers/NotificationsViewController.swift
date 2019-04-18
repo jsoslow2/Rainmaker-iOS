@@ -47,6 +47,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, Not
         
         cell.notificationLabel.attributedText = notification.notificationLabel
         cell.expandButton.setImage(notification.image, for: .normal)
+        cell.betKey = notification.betKey
         
         return cell
     }
@@ -57,6 +58,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, Not
         guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
             print("no vC found"); return}
         
+        destinationVC.transferText = cell.betKey
         
         navigationController?.pushViewController(destinationVC, animated: true)
     }

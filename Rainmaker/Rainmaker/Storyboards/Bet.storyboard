@@ -72,4 +72,5 @@
             <point key="canvasLocation" x="0.80000000000000004" y="151.57421289355324"/>
         </scene>
     </scenes>
+    <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
 </document>

@@ -106,4 +106,5 @@
         <image name="Leaderboards" width="30" height="30"/>
         <image name="bell" width="30" height="30"/>
     </resources>
+    <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
 </document>

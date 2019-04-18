@@ -13,10 +13,12 @@ import FirebaseDatabase.FIRDataSnapshot
 class Notification {
     var notificationLabel: NSAttributedString = NSAttributedString(string: "")
     var image: UIImage = UIImage()
+    var betKey : String = ""
     
-    init(notificationLabel: NSAttributedString, image:UIImage) {
+    init(notificationLabel: NSAttributedString, image:UIImage, betKey: String) {
         self.notificationLabel = notificationLabel
         self.image = image
+        self.betKey = betKey
     }
     
     init?(snapshot: DataSnapshot, group: DispatchGroup) {
@@ -33,7 +35,7 @@ class Notification {
         
         if isBet == 1 {
             group.enter()
-            BetService.getInfoOfBet(betKey: betKey) { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, magoo, createBet) in
+            BetService.getInfoOfBet(betKey: betKey)  { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, magoo, createBet) in
                 
                 let chosenBet = self.chosenOption(chosenOption: otherChosenBet, firstBetOption: firstBetOption, secondBetOption: secondBetOption)
                 
@@ -54,7 +56,7 @@ class Notification {
                 let extraText = "' They bet "
                 let extraString = NSMutableAttributedString(string: extraText)
                 
-                let moreText = " Click the arrow to bet against them"
+                let moreText = ". Click the arrow to bet against them"
                 let moreString = NSMutableAttributedString(string: moreText)
                 
                 
@@ -71,7 +73,7 @@ class Notification {
                 
                 
                 self.notificationLabel = attributedUsername
-                
+                self.betKey = betKey
                 self.image = #imageLiteral(resourceName: "Single Arrow")
                 group.leave()
             }

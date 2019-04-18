@@ -17,6 +17,9 @@ class BetViewController : UIViewController {
     @IBOutlet weak var firstBetOption: UIButton!
     @IBOutlet weak var secondBetOption: UIButton!
     
+    var transferText : String?
+    var betKey : String?
+    
     
     
     override func viewDidLoad() {
@@ -28,6 +31,17 @@ class BetViewController : UIViewController {
         secondBetOption.layer.cornerRadius = 20
         secondBetOption.backgroundColor = Constants.badGrey
         secondBetOption.addShadowView()
+        
+        betKey = transferText
+        print(betKey)
+        
+        
+        BetService.getInfoOfBet(betKey: betKey!) { (betQuestion, typeOfGame, firstBetOption, secondBetOption, isActive, rightAnswer, otherUsername, createBet) in
+            self.betQuestion.text = betQuestion
+            self.typeOfGame.text = typeOfGame
+            self.firstBetOption.setTitle(firstBetOption, for: .normal)
+            self.secondBetOption.setTitle(secondBetOption, for: .normal)
+        }
     }
     
     override func didReceiveMemoryWarning() {
