@@ -150,7 +150,7 @@ extension HomeViewController: UITableViewDataSource, HomeFeedTableViewCellDelega
             }
         }
         
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + chosenOption() + " ?", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet 5 drops on " + chosenOption() + " ?", preferredStyle: .alert)
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         

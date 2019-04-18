@@ -13,6 +13,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var betsButton: UIButton!
     @IBOutlet weak var usersButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var topLabel: UILabel!
     
     var searchActive = false
     var bets: [Bet]?
@@ -70,11 +71,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             betsButton.setTitleColor(UIColor.groupTableViewBackground, for: .normal)
             usersButton.backgroundColor = Constants.badGrey
             usersButton.setTitleColor(UIColor.darkText, for: .normal)
+            topLabel.text = "Search for a specific bet!"
         } else if tableFilter == 1 {
             betsButton.backgroundColor = Constants.badGrey
             betsButton.setTitleColor(UIColor.darkText, for: .normal)
             usersButton.backgroundColor = Constants.mintGreen
             usersButton.setTitleColor(UIColor.groupTableViewBackground, for: .normal)
+            topLabel.text = "Search for users to follow!"
         }
     }
     
@@ -133,7 +136,7 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
             }
         }
         
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet $5 on " + chosenOption() + " ?", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to bet 5 drops on " + chosenOption() + " ?", preferredStyle: .alert)
         
         let dialogMessage2 = UIAlertController(title: "Error", message: "You have already placed a bet on this!", preferredStyle: .alert)
         
