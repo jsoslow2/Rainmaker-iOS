@@ -48,6 +48,9 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, Not
         cell.notificationLabel.attributedText = notification.notificationLabel
         cell.expandButton.setImage(notification.image, for: .normal)
         cell.betKey = notification.betKey
+        cell.isBet = notification.isBet
+        cell.isFollower = notification.isFollow
+        cell.otherUID = notification.otherUID
         
         return cell
     }
@@ -61,5 +64,17 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, Not
         destinationVC.transferText = cell.betKey
         
         navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    func goToProfile(on cell: NotificationsTableViewCell) {
+        let mainStoryboard = UIStoryboard(name: "HomeScreen", bundle: nil)
+        
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "otherUserProfile") as? OtherUserProfileViewController else {
+            print("no VC found"); return}
+        
+        destinationVC.transferText = cell.otherUID!
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
+        
     }
 }

@@ -14,6 +14,9 @@ class Notification {
     var notificationLabel: NSAttributedString = NSAttributedString(string: "")
     var image: UIImage = UIImage()
     var betKey : String = ""
+    var isBet : Int = 0
+    var isFollow : Int = 0
+    var otherUID : String = ""
     
     init(notificationLabel: NSAttributedString, image:UIImage, betKey: String) {
         self.notificationLabel = notificationLabel
@@ -24,6 +27,7 @@ class Notification {
     init?(snapshot: DataSnapshot, group: DispatchGroup) {
         guard let dict = snapshot.value as? [String: Any],
         let betKey = dict["betKey"] as? String,
+        let otherUID = dict["otherUID"] as? String,
         let isBet = dict["isBet"] as? Int,
         let isFollow = dict["isFollow"] as? Int,
         let otherChosenBet = dict["otherChosenBet"] as? Int,
@@ -68,16 +72,34 @@ class Notification {
                 attributedUsername.append(moreString)
                 
                 
-                
-                
-                
-                
                 self.notificationLabel = attributedUsername
                 self.betKey = betKey
                 self.image = #imageLiteral(resourceName: "Single Arrow")
+                self.isBet = 1
+                self.otherUID = otherUID
                 group.leave()
             }
+        } else if isFollow == 1 {
+            group.enter()
+            
+            let boldUsername = otherUsername
+            let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
+            
+            let moreText = " just followed you! Click to see their profile"
+            let moreString = NSMutableAttributedString(string: moreText)
+            
+            let attributedUsername = NSMutableAttributedString(string:boldUsername, attributes:attrs)
+            
+            attributedUsername.append(moreString)
+            
+            self.notificationLabel = attributedUsername
+            self.betKey = betKey
+            self.image = #imageLiteral(resourceName: "Single Arrow")
+            self.isFollow = 1
+            self.otherUID = otherUID
+            group.leave()
         }
+        
     }
     
     

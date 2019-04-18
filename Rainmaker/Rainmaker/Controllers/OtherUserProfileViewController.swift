@@ -155,7 +155,7 @@ class OtherUserProfileViewController: UIViewController {
                 self.followButton.setTitle("Unfollow", for: .normal)
                 
                 // INSERT ADD FOLLOW NOTIFICATION HERE
-                NotificationService.followNotification(currentUsername: self.currentUsername!, otherUID: self.userID, completion: { (bool) in
+                NotificationService.followNotification(currentUsername: self.currentUsername!, currentUID: self.currentUID, otherUID: self.userID, completion: { (bool) in
                 })
                 
             } else {

@@ -165,7 +165,7 @@ struct BetService {
         
         if chosenOption != -1 {
             
-            NotificationService.createBetNotification(currentUsername: currentUsername, otherUID: otherUID, betKey: timestampString, chosenOption: chosenOption, timeStamp: timestampString) { (bool) in
+            NotificationService.createBetNotification(currentUsername: currentUsername, currentUID: userID, otherUID: otherUID, betKey: timestampString, chosenOption: chosenOption, timeStamp: timestampString) { (bool) in
             }
         }
         

@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 struct NotificationService {
-    static func createBetNotification(currentUsername: String, otherUID: String, betKey: String, chosenOption: Int, timeStamp: String, completion: @escaping(Bool) -> Void) {
+    static func createBetNotification(currentUsername: String, currentUID: String, otherUID: String, betKey: String, chosenOption: Int, timeStamp: String, completion: @escaping(Bool) -> Void) {
         
         let ref = Database.database().reference().child("Notifications").child(otherUID)
         
@@ -22,12 +22,13 @@ struct NotificationService {
         updatedData["isFollow"] = 0
         updatedData["otherChosenBet"] = chosenOption
         updatedData["otherUsername"] = currentUsername
+        updatedData["otherUID"] = currentUID
         
         ref.child(timeStamp).updateChildValues(updatedData)
         completion(true)
     }
     
-    static func followNotification(currentUsername: String, otherUID: String, completion: @escaping(Bool) -> Void) {
+    static func followNotification(currentUsername: String, currentUID: String, otherUID: String, completion: @escaping(Bool) -> Void) {
         //Implement
         let timestamp = Date().millisecondsSince1970
         let timestampString = String(timestamp)
@@ -41,6 +42,7 @@ struct NotificationService {
         updatedData["isFollow"] = 1
         updatedData["otherChosenBet"] = -1
         updatedData["otherUsername"] = currentUsername
+        updatedData["otherUID"] = currentUID
         
         ref.child(timestampString).updateChildValues(updatedData)
         completion(true)

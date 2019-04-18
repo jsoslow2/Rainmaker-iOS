@@ -11,6 +11,7 @@ import UIKit
 
 protocol NotificationsTableViewCellDelegate : class {
     func goToBet(on cell: NotificationsTableViewCell)
+    func goToProfile(on cell: NotificationsTableViewCell)
 }
 
 class NotificationsTableViewCell : UITableViewCell {
@@ -21,6 +22,7 @@ class NotificationsTableViewCell : UITableViewCell {
     var isBet : Int = 0
     var isFollower : Int = 0
     var betKey : String?
+    var otherUID : String?
     
     var delegate : NotificationsTableViewCellDelegate?
     
@@ -40,7 +42,12 @@ class NotificationsTableViewCell : UITableViewCell {
     }
     
     @objc func goToBet(sender: UITapGestureRecognizer) {
-        delegate?.goToBet(on: self)
+        if self.isBet == 1 {
+            delegate?.goToBet(on: self)
+        } else if self.isFollower == 1 {
+            delegate?.goToProfile(on: self)
+        }
+
     }
     
 }
