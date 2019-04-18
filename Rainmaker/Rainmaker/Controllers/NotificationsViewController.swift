@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NotificationsViewController : UIViewController, UITableViewDataSource {
+class NotificationsViewController : UIViewController, UITableViewDataSource, NotificationsTableViewCellDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var notifications : [Notification]?
@@ -41,6 +41,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationsCell")! as! NotificationsTableViewCell
+        cell.delegate = self
         
         let notification = notifications![indexPath.row]
         
@@ -48,5 +49,15 @@ class NotificationsViewController : UIViewController, UITableViewDataSource {
         cell.expandButton.setImage(notification.image, for: .normal)
         
         return cell
+    }
+    
+    func goToBet(on cell: NotificationsTableViewCell) {
+        let mainStoryboard = UIStoryboard(name: "Bet", bundle: nil)
+        
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
+            print("no vC found"); return}
+        
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

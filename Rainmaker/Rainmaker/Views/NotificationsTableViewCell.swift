@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol NotificationsTableViewCellDelegate : class {
+    func goToBet(on cell: NotificationsTableViewCell)
+}
+
 class NotificationsTableViewCell : UITableViewCell {
     
     @IBOutlet weak var notificationLabel: UILabel!
@@ -17,6 +21,8 @@ class NotificationsTableViewCell : UITableViewCell {
     var isBet : Int = 0
     var isFollower : Int = 0
     var betKey : String?
+    
+    var delegate : NotificationsTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +33,7 @@ class NotificationsTableViewCell : UITableViewCell {
     }
     
     @IBAction func expandButtonPressed(_ sender: Any) {
+        delegate?.goToBet(on: self)
     }
     
 }
