@@ -42,6 +42,7 @@ class NotificationsTableViewCell : UITableViewCell {
     }
     
     @objc func goToBet(sender: UITapGestureRecognizer) {
+        print(self)
         if self.isBet == 1 {
             delegate?.goToBet(on: self)
         } else if self.isFollower == 1 {

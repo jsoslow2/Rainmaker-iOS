@@ -56,14 +56,20 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, Not
     }
     
     func goToBet(on cell: NotificationsTableViewCell) {
-        let mainStoryboard = UIStoryboard(name: "Bet", bundle: nil)
-        
-        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
-            print("no vC found"); return}
-        
-        destinationVC.transferText = cell.betKey
-        
-        navigationController?.pushViewController(destinationVC, animated: true)
+        if cell.isFollower == 1 {
+            goToProfile(on: cell)
+        } else {
+            let mainStoryboard = UIStoryboard(name: "Bet", bundle: nil)
+            
+            
+            
+            guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
+                print("no vC found"); return}
+            
+            destinationVC.transferText = cell.betKey
+            
+            navigationController?.pushViewController(destinationVC, animated: true)
+        }
     }
     
     func goToProfile(on cell: NotificationsTableViewCell) {
