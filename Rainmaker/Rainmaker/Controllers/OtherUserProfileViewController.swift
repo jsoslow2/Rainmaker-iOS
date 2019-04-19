@@ -168,7 +168,7 @@ class OtherUserProfileViewController: UIViewController {
 }
 
 
-extension OtherUserProfileViewController: UITableViewDataSource {
+extension OtherUserProfileViewController: UITableViewDataSource, OtherUseProfileTableViewCellDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -202,12 +202,23 @@ extension OtherUserProfileViewController: UITableViewDataSource {
         
         cell.rightAnswer = bet.rightAnswer
         cell.chosenOption = bet.chosenBet
+        cell.betKey = bet.betKey
         
         cell.awakeFromNib()
         
         return cell
     }
     
-    
+    func goToBet(on cell: OtherUserProfileTableViewCell) {
+        let mainStoryboard = UIStoryboard(name: "Bet", bundle: nil)
+        
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
+            print("no VC found"); return
+        }
+        
+        destinationVC.transferText = cell.betKey
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
 }
 

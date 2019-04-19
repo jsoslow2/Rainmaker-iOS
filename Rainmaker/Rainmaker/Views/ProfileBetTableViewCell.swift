@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol ProfileBetTableViewCellDelegate : class {
+    func goToBet(on cell: ProfileBetTableViewCell)
+}
+
 class ProfileBetTableViewCell: UITableViewCell {
     
     @IBOutlet weak var typeOfGame: UILabel!
@@ -19,10 +23,16 @@ class ProfileBetTableViewCell: UITableViewCell {
     var betState: Int?
     var chosenOption: Int?
     var rightAnswer: Int?
+    var betKey : String?
+    
+    var delegate : ProfileBetTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProfileBetTableViewCell.goToBet(sender:)))
+        addGestureRecognizer(tapGesture)
+        
         
         setState()
         
@@ -63,4 +73,7 @@ class ProfileBetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @objc func goToBet(sender: UITapGestureRecognizer) {
+        delegate?.goToBet(on: self)
+    }
 }

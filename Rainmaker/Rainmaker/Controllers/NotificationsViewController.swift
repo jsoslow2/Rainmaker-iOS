@@ -20,7 +20,7 @@ class NotificationsViewController : UIViewController, UITableViewDataSource, Not
         tableView.dataSource = self
         
         NotificationService.loadNotifications(currentUID: Constants.currentUID) { (notifications) in
-            self.notifications = notifications
+            self.notifications = notifications.reversed()
             
             self.tableView.reloadData()
         }

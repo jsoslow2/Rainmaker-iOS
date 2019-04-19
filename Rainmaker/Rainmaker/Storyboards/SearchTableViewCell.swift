@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchTableViewCellDelegate : class {
     func didTapBetButton(which button: Int, on cell: SearchTableViewCell)
+    func goToBet(on cell: SearchTableViewCell)
 }
 
 class SearchTableViewCell: UITableViewCell {
@@ -18,6 +19,8 @@ class SearchTableViewCell: UITableViewCell {
     @IBOutlet weak var betQuestion: UILabel!
     @IBOutlet weak var firstBetOption: UIButton!
     @IBOutlet weak var secondBetOption: UIButton!
+    
+    var betKey : String?
 
     var delegate: SearchTableViewCellDelegate?
     
@@ -31,13 +34,9 @@ class SearchTableViewCell: UITableViewCell {
         firstBetOption.addShadowView()
         secondBetOption.addShadowView()
         
-//        firstBetOption.backgroundColor = .clear
-//        firstBetOption.layer.borderWidth = 1
-//        firstBetOption.layer.borderColor = mintGreen.cgColor
-//        
-//        secondBetOption.backgroundColor = .clear
-//        secondBetOption.layer.borderWidth = 1
-//        secondBetOption.layer.borderColor = mintGreen.cgColor
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToBet(sender:)))
+        addGestureRecognizer(tapGesture)
+
            }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,5 +52,9 @@ class SearchTableViewCell: UITableViewCell {
         delegate?.didTapBetButton(which: 1, on: self)
     }
     
+    
+    @objc func goToBet(sender: UITapGestureRecognizer) {
+        delegate?.goToBet(on: self)
+    }
     
 }

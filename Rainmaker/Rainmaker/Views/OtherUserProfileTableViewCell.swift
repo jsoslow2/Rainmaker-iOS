@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol OtherUseProfileTableViewCellDelegate : class {
+    func goToBet(on cell: OtherUserProfileTableViewCell)
+}
+
 class OtherUserProfileTableViewCell : UITableViewCell {
     
     @IBOutlet weak var winLoss: UILabel!
@@ -18,10 +22,16 @@ class OtherUserProfileTableViewCell : UITableViewCell {
     var betState: Int?
     var chosenOption: Int?
     var rightAnswer: Int?
+    var betKey : String?
+    
+    var delegate : OtherUseProfileTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(OtherUserProfileTableViewCell.goToBet(sender:)))
+        addGestureRecognizer(tapGesture)
         
         setState()
         
@@ -56,6 +66,10 @@ class OtherUserProfileTableViewCell : UITableViewCell {
         } else {
             betState = 0
         }
+    }
+    
+    @objc func goToBet(sender: UITapGestureRecognizer) {
+        delegate?.goToBet(on: self)
     }
     
 }

@@ -205,8 +205,9 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
             cell.firstBetOption.setTitle(bet.firstBetOption, for: .normal)
             cell.secondBetOption.setTitle(bet.secondBetOption, for: .normal)
             cell.typeOfGame.text = bet.typeOfGame
+            cell.betKey = bet.betKey
             
-            print(bet)
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "userSearchCell")! as! UserSearchTableViewCell
@@ -250,6 +251,17 @@ extension SearchViewController: UITableViewDataSource, SearchTableViewCellDelega
     
     }
     
+    func goToBet(on cell: SearchTableViewCell) {
+        let mainStoryboard = UIStoryboard(name: "Bet", bundle: nil)
+        
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
+            print("no VC found"); return
+        }
+        
+        destinationVC.transferText = cell.betKey
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
     
     func goToProfile(on cell: UserSearchTableViewCell) {
         passingUID = cell.uid
