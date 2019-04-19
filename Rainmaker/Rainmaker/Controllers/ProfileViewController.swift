@@ -227,7 +227,7 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDelegate {
+extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDelegate, ProfileBetTableViewCellDelegate {
     
 
     
@@ -304,6 +304,7 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
             
             cell.rightAnswer = bet.rightAnswer
             cell.chosenOption = bet.chosenBet
+            cell.betKey = bet.betKey
 
             cell.awakeFromNib()
             
@@ -344,6 +345,17 @@ extension ProfileViewController: UITableViewDataSource, CustomBetConfirmationDel
         dialogMessage.addAction(cancel)
         present(dialogMessage, animated: true, completion: nil)
         print("this function has been called")
+    }
+    
+    func goToBet(on cell: ProfileBetTableViewCell) {
+        let mainStoryboard = UIStoryboard(name: "Bet", bundle: nil)
+        
+        guard let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "betViewController") as? BetViewController else {
+            print("no VC found"); return}
+        
+        destinationVC.transferText =  cell.betKey!
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
         
 

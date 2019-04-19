@@ -18,46 +18,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mH-nw-p9l">
-                                <rect key="frame" x="16" y="158" width="343" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mH-nw-p9l">
+                                <rect key="frame" x="16" y="185" width="343" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnA-Xp-Ba9">
-                                <rect key="frame" x="16" y="190" width="343" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnA-Xp-Ba9">
+                                <rect key="frame" x="16" y="258.5" width="343" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="3kY-zM-3oP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzN-Lk-mAf">
-                                <rect key="frame" x="16" y="341" width="153" height="163"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="firstBetPressed:" destination="Q2n-09-hmF" eventType="touchUpInside" id="ecg-5A-myc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrP-rr-tXk">
-                                <rect key="frame" x="206" y="341" width="153" height="163"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="secondBetPressed:" destination="Q2n-09-hmF" eventType="touchUpInside" id="2sP-eX-qzK"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jNU-DR-KvO">
+                                <rect key="frame" x="16" y="368.5" width="343" height="278.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzN-Lk-mAf">
+                                        <rect key="frame" x="0.0" y="0.0" width="161.5" height="278.5"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="firstBetPressed:" destination="Q2n-09-hmF" eventType="touchUpInside" id="ecg-5A-myc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrP-rr-tXk">
+                                        <rect key="frame" x="181.5" y="0.0" width="161.5" height="278.5"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="secondBetPressed:" destination="Q2n-09-hmF" eventType="touchUpInside" id="2sP-eX-qzK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="yzN-Lk-mAf" firstAttribute="width" secondItem="JrP-rr-tXk" secondAttribute="width" id="KTd-0p-hto"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fnA-Xp-Ba9" firstAttribute="leading" secondItem="YNb-iV-yYg" secondAttribute="leading" constant="16" id="Oix-8s-xoY"/>
+                            <constraint firstItem="jNU-DR-KvO" firstAttribute="top" secondItem="fnA-Xp-Ba9" secondAttribute="bottom" constant="20" id="f36-vb-O5e"/>
+                            <constraint firstItem="YNb-iV-yYg" firstAttribute="bottom" secondItem="jNU-DR-KvO" secondAttribute="bottom" constant="20" id="gCI-N3-fM6"/>
+                            <constraint firstItem="YNb-iV-yYg" firstAttribute="trailing" secondItem="jNU-DR-KvO" secondAttribute="trailing" constant="16" id="gEx-ZI-mXg"/>
+                            <constraint firstItem="1mH-nw-p9l" firstAttribute="leading" secondItem="YNb-iV-yYg" secondAttribute="leading" constant="16" id="hDk-rS-oag"/>
+                            <constraint firstItem="fnA-Xp-Ba9" firstAttribute="top" secondItem="1mH-nw-p9l" secondAttribute="bottom" constant="50" id="meh-lC-ZRd"/>
+                            <constraint firstItem="YNb-iV-yYg" firstAttribute="trailing" secondItem="1mH-nw-p9l" secondAttribute="trailing" constant="16" id="naE-MK-9aD"/>
+                            <constraint firstItem="fnA-Xp-Ba9" firstAttribute="centerX" secondItem="YNb-iV-yYg" secondAttribute="centerX" id="qs9-Hl-iHz"/>
+                            <constraint firstItem="jNU-DR-KvO" firstAttribute="leading" secondItem="YNb-iV-yYg" secondAttribute="leading" constant="16" id="rh8-Xo-fyt"/>
+                            <constraint firstItem="fnA-Xp-Ba9" firstAttribute="centerY" secondItem="YNb-iV-yYg" secondAttribute="centerY" constant="-40" id="uGV-Ku-lFW"/>
+                            <constraint firstItem="YNb-iV-yYg" firstAttribute="trailing" secondItem="fnA-Xp-Ba9" secondAttribute="trailing" constant="16" id="yja-sI-Mu9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YNb-iV-yYg"/>
                     </view>
                     <connections>
